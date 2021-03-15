@@ -1,4 +1,4 @@
-![Logo](https://gastrocoin.net/wp-content/uploads/2021/03/GC-Blue.png)
+![Logo](https://avatars.githubusercontent.com/u/80650691?s=460&u=de5c8bf68d03e1ab1368bbb304b7c5194bef98b2&v=4)
 
 
 ### Links
