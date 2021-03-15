@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=GastroCoin
+Comment=GastroCoin P2P Cryptocurrency
+Comment[fr]=GastroCoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=GastroCoin, eşten eşe kriptografik sanal para birimi
+Exec=gastrocoin-qt %u
+Terminal=false
+Type=Application
+Icon=gastrocoin128
+MimeType=x-scheme-handler/gastrocoin;
+Categories=Office;Finance;
