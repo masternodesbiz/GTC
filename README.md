@@ -5,5 +5,5 @@
 - [Official Website](https://www.gastrocoin.net) 
 - [Discord](https://discord.gg/srjhtZvAtY)
 - [Twitter](https://twitter.com/CoinGastro )
-- [BitcoinTalk]()
+- [BitcoinTalk](https://bitcointalk.org/index.php?topic=5325925)
 - [Explorer](http://45.89.26.10:3001/)
