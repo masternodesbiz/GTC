@@ -54,7 +54,7 @@
 
 ### MASTERNODE SERVICES:
 
-- [IhostMN](https://ihostmn.com/
+- [IhostMN](https://ihostmn.com/)
 - [Shared Nodes at IHostMN](https://ihostmn.com/sharemn.php?id=170)
 - [Pecunia](https://pecuniaplatform.io/coin-details/GastroCoin) (Full node only, no shared)
 - [Crypos](https://crypos.io/ )
