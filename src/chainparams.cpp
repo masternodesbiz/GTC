@@ -55,11 +55,19 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0, uint256("0x00000f49b5e18705a724580d471916ec1dd93de55452d0ef837496ec43c6fee7"));
+    (0, uint256("0x00000f49b5e18705a724580d471916ec1dd93de55452d0ef837496ec43c6fee7"))
+    (1000, uint256("0c47059104f193a20c25b24506e0f027f9b40f7f7d58397213cf21024c63c8ad3"))
+    (50000, uint256("0x14d4ac06e16c0f16fe190ba4d83004a13cd0f546804fbf1cc95945a0cd07903c"))
+    (100000, uint256("0x93bf254462e5c0e6c480f4c80355c85de4ea17284a3493aec59c644de1eed973"))
+    (200000, uint256("0xef36157b1c3d18d782c7cb38046b222495831c37eabd211bde89a7113e69fd8f"))
+    (300000, uint256("0x66504adea3552326fed7bcb2a30d6e3a81b4d926b120ad2c1d1f3b32303220df"))  
+    (400000, uint256("0xa4045ab3d025b519f718bf832b3dafb55e8169c8148defd33b9cc68f6d370a1d"))  
+    (500000, uint256("0xe63da29a4284f8004d19570d839ecf69babbbb0a24c56d9921fd88f7578325ac"))  
+    (512270, uint256("0x0a3e21bf260b6373481cbc90f4060676c702ec3d5ba567cf932e00b8dcd8d53c"));
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1615728970, // * UNIX timestamp of last checkpoint block
-    0,		// * total number of transactions between genesis and last checkpoint
+    1646928740, // * UNIX timestamp of last checkpoint block
+    1315100,		// * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2000        // * estimated number of transactions per day after checkpoint
 };
@@ -127,7 +135,7 @@ public:
         nTargetSpacing = 1 * 60;  // GTC: 1 minute
         nMaturity = 100;
         nMasternodeCountDrift = 20;
-        nMaxMoneyOut = 52000000 * COIN;
+        nMaxMoneyOut = 1500000000 * COIN;
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 200;
@@ -172,8 +180,9 @@ public:
         assert(hashGenesisBlock == uint256("0x00000f49b5e18705a724580d471916ec1dd93de55452d0ef837496ec43c6fee7"));
         assert(genesis.hashMerkleRoot == uint256("0x732725f60864eec40677b8efe695076290dea4be2aab9f32268a0e09e290201d"));
 
-        vSeeds.push_back(CDNSSeedData("1", "45.89.26.10"));
-        vSeeds.push_back(CDNSSeedData("2", "88.198.95.105"));
+        vSeeds.push_back(CDNSSeedData("1", "136.243.77.62"));
+        vSeeds.push_back(CDNSSeedData("2", "[2a01:4f8:212:2b15::61]"));
+		vSeeds.push_back(CDNSSeedData("3", "[2a01:4f8:212:2b15::62]"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 38);     //starts with 'G'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 39);    //starts with 'G'

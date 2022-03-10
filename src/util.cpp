@@ -533,7 +533,8 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
             strHeader += rpc_user;
             strHeader += "\nrpcpassword=";
             strHeader += rpc_passwd;
-			strHeader += "\nrpcport=8888\naddnode=88.198.95.105\naddnode=45.89.26.10\n";
+	        strHeader += "\nrpcport=8888\naddnode=[2a02:c207:2069:2700::7]:8887\naddnode=194.163.137.92:8887\naddnode=[2a02:c206:2069:4896::7]:8887\naddnode=62.171.128.168:8887:8887\naddnode=[2a02:c206:2069:2061::20]:8887\naddnode=75.119.150.129:8887\naddnode=[2a02:c206:2069:2061::27]:8887\naddnode=164.68.112.109:8887\naddnode=[2a02:c207:2069:2700::48]:8887\naddnode=75.119.150.130:8887\naddnode=161.97.170.91:8887\naddnode=194.163.129.153:8887\naddnode=185.239.208.60:8887\naddnode=144.91.82.144:8887\naddnode=207.180.252.195:8887\naddnode=178.18.242.207:8887\naddnode=173.249.33.186:8887\naddnode=185.211.5.5:8887\naddnode=167.86.90.225:8887\naddnode=193.187.129.163:8887\naddnode=161.97.167.190:8887\naddnode=62.171.151.115:8887\naddnode=161.97.169.27:8887\naddnode=75.119.146.19:8887\naddnode=194.163.155.218:8887\naddnode=136.243.77.62:8887\naddnode=[2a01:4f8:212:2b15::61]:8887\naddnode=[2a01:4f8:212:2b15::62]:8887\n";
+		
             fwrite(strHeader.c_str(), std::strlen(strHeader.c_str()), 1, configFile);
             fclose(configFile);
         }
