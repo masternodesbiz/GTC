@@ -18,6 +18,10 @@
 - [Explorer 2](https://gtc.flitswallet.app/)
 - [Explorer 3](https://ihostmn.com/explorerinfo.php?coin=GTC)
 
+### NFTs:
+
+- [OpenSea](https://opensea.io/collection/gtc-apple)
+
 ###  EXCHANGES:
 
 - [xt.com GTC/USDT](https://www.xt.com/tradePro/gtc_usdt)
