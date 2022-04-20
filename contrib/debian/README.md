@@ -1,21 +1,21 @@
 
 Debian
 ====================
-This directory contains files used to package gastrocoind/gastrocoin-qt
-for Debian-based Linux systems. If you compile gastrocoind/gastrocoin-qt yourself, there are some useful files here.
+This directory contains files used to package gtcd/gtc-qt
+for Debian-based Linux systems. If you compile gtcd/gtc-qt yourself, there are some useful files here.
 
-## gastrocoin: URI support ##
+## pivx: URI support ##
 
 
-gastrocoin-qt.desktop  (Gnome / Open Desktop)
+gtc-qt.desktop  (Gnome / Open Desktop)
 To install:
 
-	sudo desktop-file-install gastrocoin-qt.desktop
+	sudo desktop-file-install gtc-qt.desktop
 	sudo update-desktop-database
 
 If you build yourself, you will either need to modify the paths in
-the .desktop file or copy or symlink your gastrocoinqt binary to `/usr/bin`
-and the `../../share/pixmaps/gastrocoin128.png` to `/usr/share/pixmaps`
+the .desktop file or copy or symlink your gtc-qt binary to `/usr/bin`
+and the `../../share/pixmaps/pivx128.png` to `/usr/share/pixmaps`
 
-gastrocoin-qt.protocol (KDE)
+gtc-qt.protocol (KDE)
 

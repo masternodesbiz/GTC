@@ -229,7 +229,7 @@ salsa20_8(uint32_t B[16])
     blkcpy(x, B, 64);
     for (i = 0; i < 8; i += 2) {
 #define R(a,b) (((a) << (b)) | ((a) >> (32 - (b))))
-        /* Operate on colugtc. */
+        /* Operate on columns. */
         x[ 4] ^= R(x[ 0]+x[12], 7);  x[ 8] ^= R(x[ 4]+x[ 0], 9);
         x[12] ^= R(x[ 8]+x[ 4],13);  x[ 0] ^= R(x[12]+x[ 8],18);
 

@@ -1,11 +1,11 @@
-// Copyright (c) 2009-2014 The Bitcoin Core developers
-// Copyright (c) 2016-2018 The PIVX developers
-// Copyright (c) 2021-2021 The GastroCoin developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2016-2019 The PIVX developers
+// Copyright (c) 2021-2022 The Gastrocoin Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/gastrocoin-config.h"
+#include "config/pivx-config.h"
 #endif
 
 #include <cstddef>

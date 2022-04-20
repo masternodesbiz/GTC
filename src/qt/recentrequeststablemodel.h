@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
-// Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2021-2021 The GastroCoin developers
+// Copyright (c) 2017-2019 The PIVX developers
+// Copyright (c) 2021-2022 The Gastrocoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -29,12 +29,11 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
         unsigned int nDate = date.toTime_t();
 
-        READWRITE(this->nVersion);
-        nVersion = this->nVersion;
+        READWRITE(nVersion);
         READWRITE(id);
         READWRITE(nDate);
         READWRITE(recipient);
@@ -55,7 +54,7 @@ private:
     Qt::SortOrder order;
 };
 
-/** Model for list of recently generated payment requests / gastrocoin: URIs.
+/** Model for list of recently generated payment requests / gtc: URIs.
  * Part of wallet model.
  */
 class RecentRequestsTableModel : public QAbstractTableModel
@@ -72,7 +71,7 @@ public:
         Address = 2,
         Message = 3,
         Amount = 4,
-        NUMBER_OF_COLUGTC
+        NUMBER_OF_COLUMNS
     };
 
     /** @name Methods overridden from QAbstractTableModel
@@ -92,13 +91,13 @@ public:
     void addNewRequest(const std::string& recipient);
     void addNewRequest(RecentRequestEntry& recipient);
 
-public slots:
+public Q_SLOTS:
     void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
     void updateDisplayUnit();
 
 private:
     WalletModel* walletModel;
-    QStringList colugtc;
+    QStringList columns;
     QList<RecentRequestEntry> list;
     int64_t nReceiveRequestsMaxId;
 

@@ -1,11 +1,10 @@
-// Copyright (c) 2015-2018 The PIVX developers
-// Copyright (c) 2019-2020 The MasterWin developers
-// Copyright (c) 2021-2021 The GastroCoin developers
+// Copyright (c) 2018 The PIVX developers
+// Copyright (c) 2021-2022 The Gastrocoin Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GastroCoin_INVALID_OUTPOINTS_JSON_H
-#define GastroCoin_INVALID_OUTPOINTS_JSON_H
+#ifndef PIVX_INVALID_OUTPOINTS_JSON_H
+#define PIVX_INVALID_OUTPOINTS_JSON_H
 #include <string>
 
 std::string LoadInvalidOutPoints()
@@ -636,7 +635,7 @@ std::string LoadInvalidOutPoints()
             "    \"n\": 1\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"1bf2cfd9cedb058caee02f6c561a3df026f66f1cd3aebea5c4999332c35ce8f64\",\n"
+            "    \"txid\": \"1bf2cfd9cedb058caee02f6c561a3df026f66f1cd3aebea5c131532c35ce8f64\",\n"
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
@@ -824,11 +823,11 @@ std::string LoadInvalidOutPoints()
             "    \"n\": 1\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"24a595be809e5549994cd5b4f264be3b053fe8c780d843dd81a7b45282ed360bc\",\n"
+            "    \"txid\": \"24a595be809e552319cd5b4f264be3b053fe8c780d843dd81a7b45282ed360bc\",\n"
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"24a595be809e5549994cd5b4f264be3b053fe8c780d843dd81a7b45282ed360bc\",\n"
+            "    \"txid\": \"24a595be809e552319cd5b4f264be3b053fe8c780d843dd81a7b45282ed360bc\",\n"
             "    \"n\": 1\n"
             "  },\n"
             "  {\n"
@@ -2316,7 +2315,7 @@ std::string LoadInvalidOutPoints()
             "    \"n\": 1\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"5db3d4cd885c2b28cf68bd7c32309f5281011942722333ed4cf6ecfbe7c000fd\",\n"
+            "    \"txid\": \"5db3d4cd885c2b28cf68bd7c32309f5281111842722333ed4cf6ecfbe7c000fd\",\n"
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
@@ -2328,11 +2327,11 @@ std::string LoadInvalidOutPoints()
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"5fcbb13db805876800d2a499949a48cb675387bf1e4d8c52e3d1aab4f6e511a0c\",\n"
+            "    \"txid\": \"5fcbb13db805876800d2a23199a48cb675387bf1e4d8c52e3d1aab4f6e511a0c\",\n"
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"5fcbb13db805876800d2a499949a48cb675387bf1e4d8c52e3d1aab4f6e511a0c\",\n"
+            "    \"txid\": \"5fcbb13db805876800d2a23199a48cb675387bf1e4d8c52e3d1aab4f6e511a0c\",\n"
             "    \"n\": 1\n"
             "  },\n"
             "  {\n"
@@ -3440,7 +3439,7 @@ std::string LoadInvalidOutPoints()
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"8b6362c0b6bff7019d61621924f8ca36535db2ab14d06916ca3c2152fa53e9f7d\",\n"
+            "    \"txid\": \"8b6362c0b6bff7019d6221824f8ca36535db2ab14d06916ca3c2152fa53e9f7d\",\n"
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
@@ -3928,11 +3927,11 @@ std::string LoadInvalidOutPoints()
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"9c2bdc667c4a8a5ed0d71bc3cfe101192ce5676e139dcf7a0706fbc2377c72ac\",\n"
+            "    \"txid\": \"9c2bdc667c4a8a5ed0d71bc3cfe299182ce5676e139dcf7a0706fbc2377c72ac\",\n"
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"9c2bdc667c4a8a5ed0d71bc3cfe101192ce5676e139dcf7a0706fbc2377c72ac\",\n"
+            "    \"txid\": \"9c2bdc667c4a8a5ed0d71bc3cfe299182ce5676e139dcf7a0706fbc2377c72ac\",\n"
             "    \"n\": 1\n"
             "  },\n"
             "  {\n"
@@ -5264,11 +5263,11 @@ std::string LoadInvalidOutPoints()
             "    \"n\": 1\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"cd4f629d985fabfb1658db5fce49994f6374432344fe55674a84d4dfbe3887f3a\",\n"
+            "    \"txid\": \"cd4f629d985fabfb1658db5fce2319f6374432344fe55674a84d4dfbe3887f3a\",\n"
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"cd4f629d985fabfb1658db5fce49994f6374432344fe55674a84d4dfbe3887f3a\",\n"
+            "    \"txid\": \"cd4f629d985fabfb1658db5fce2319f6374432344fe55674a84d4dfbe3887f3a\",\n"
             "    \"n\": 1\n"
             "  },\n"
             "  {\n"
@@ -5976,11 +5975,11 @@ std::string LoadInvalidOutPoints()
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"e438a25429d1a6ad008e808796f4999348532acd0ce730436c9136b53c22e73a7\",\n"
+            "    \"txid\": \"e438a25429d1a6ad008e808796f231848532acd0ce730436c9136b53c22e73a7\",\n"
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"e438a25429d1a6ad008e808796f4999348532acd0ce730436c9136b53c22e73a7\",\n"
+            "    \"txid\": \"e438a25429d1a6ad008e808796f231848532acd0ce730436c9136b53c22e73a7\",\n"
             "    \"n\": 1\n"
             "  },\n"
             "  {\n"
@@ -6100,7 +6099,7 @@ std::string LoadInvalidOutPoints()
             "    \"n\": 1\n"
             "  },\n"
             "  {\n"
-            "    \"txid\": \"e92fd5c27b38503c286aa3871a0912a7f61b6a253c96e10077d7247753a0514e\",\n"
+            "    \"txid\": \"e92fd5c27b38503c286aa3871a0912a7f61b6a253c96e1ff6100247753a0514e\",\n"
             "    \"n\": 0\n"
             "  },\n"
             "  {\n"
@@ -6795,4 +6794,4 @@ std::string LoadInvalidOutPoints()
     return str;
 }
 
-#endif //GastroCoin_INVALID_OUTPOINTS_JSON_H
+#endif //PIVX_INVALID_OUTPOINTS_JSON_H

@@ -1,64 +1,40 @@
-![Logo](https://avatars.githubusercontent.com/u/80650691?s=460&u=de5c8bf68d03e1ab1368bbb304b7c5194bef98b2&v=4)
+Gastrocoin Standard wallet repository
+=====================================
 
-### Website: 
+### Coin Specs
 
-- [Official Website](https://www.gastrocoin.net) 
-- [Discord](https://discord.gg/HapZxgUKgK)
-- [BitcoinTalk](https://bitcointalk.org/index.php?topic=5325925)
-- [GitHub](https://github.com/TeamGastroCoin/gastrocoin)
-- [Twitter](https://twitter.com/CoinGastro) 
-- [Instagram](https://www.instagram.com/gastrocoin)
-- [Telegram](https://t.me/gastrocoin)
-- [White Paper](https://gastrocoin.net/wp-content/uploads/2021/03/GC-WPv1-4.pdf)
-- [Bootstrap](https://bootstraps.ihostmn.com/gastrocoin.tar.gz)
+- PoW Algorithm: X11KVS
+- Premine:  3,200,000 (Current supply of all coins for swapping to Gastrocoin)
+- PoW Blocks: 1 - 200
+- PoS Blocks: Starting from 201
+- Block Time: 60 Seconds
+- Maturity: 100 Confirmations
+- Prefix: GTC adresses start with the capital letter "G"
+- Ports: 8887 (p2p) / 8888 (rpc)
 
-### EXPLORERS:
- 
-- [Explorer 1](https://explorer.gastrocoin.net/)
-- [Explorer 2](https://gtc.flitswallet.app/)
-- [Explorer 3](https://ihostmn.com/explorerinfo.php?coin=GTC)
+- Explorer https://explorer.gastrocoin.net/
 
-### NFTs:
+- Website [https://gastrocoin.net/)
 
-- [OpenSea](https://opensea.io/collection/gtc-apple)
-
-###  EXCHANGES:
-
-- [xt.com GTC/USDT](https://www.xt.com/tradePro/gtc_usdt)
-- [xt.com GTC/BTC](https://www.xt.com/tradePro/gtc_btc)
-
-- [Crex24 GTC/USDT](https://crex24.com/exchange/GTC-USDT)
-- [Crex24 GTC/BTC](https://crex24.com/exchange/GTC-BTC)
-- [Crex24 GTC/ETH](https://crex24.com/exchange/GTC-ETH)
-
-- [Hypecoinexchange GTC/USDT](https://www.hypecoinexchange.com/exchange/GTC-USDT?type=pro)
-- [Hypecoinexchange GTC/BTC](https://www.hypecoinexchange.com/exchange/GTC-BTC?type=pro)
-
-- [Socialsend GTC/BTC](https://socialsend.net/exchange/GTC_BTC)
-
-###  INVESTMENTS:
-
-- [vault.investments](https://my.vault.investments/coins/gtc/coin-packs/) 
-
-###  COIN INFORMATION:
-
-- [CoinMarketCap](https://coinmarketcap.com/currencies/gastrocoin/)
-- [MasterNodes.online](https://masternodes.online/currencies/GTC/)
-- [NodeStats](https://nodestats.info/default.php?coin=gtc)
-- [CoinGecko](https://www.coingecko.com/en/coins/gastrocoin)
-- [CoinPaprika](https://coinpaprika.com/coin/gtc-gastrocoin/)
-- [CoinCodex](https://coincodex.com/crypto/gastrocoin/)
-- [VaultWatch](https://vaultwatch.eu/detail.php?coin=gtc)
-- [LivecoinWatch](https://www.livecoinwatch.com/price/GastroCoin-_GTC)
-- [Masternodes.biz](https://masternodes.biz/cryptocurrency/GTC)
-
-### MOBILE WALLETS:
-
-- [Flits](https://flitswallet.app/) (Full node only)
-
-### MASTERNODE SERVICES:
-
-- [IhostMN](https://ihostmn.com/)
-- [Shared Nodes at IHostMN](https://ihostmn.com/sharemn.php?id=170)
-- [Pecunia](https://pecuniaplatform.io/coin-details/GastroCoin) (Full node only, no shared)
-- [Crypos](https://crypos.io/ )
+### Rewards Breakdown
+|Block  |Collateral|Block Reward|MN Reward %|Staking Reward %|MN Reward|Staker Reward|
+|-------|----------|------------|-----------|----------------|---------|-------------|
+|1      |0         |1600.00     |0          |0               |0        |0            |
+|201    |10000     |22.50       |90         |10              |20.25    |2.25         |
+|20001  |12000     |25.00       |90         |10              |22.50    |2.50         |
+|40001  |14000     |30.00       |90         |10              |27.00    |3.00         |
+|60001  |16000     |35.00       |90         |10              |31.50    |3.50         |
+|70001  |18000     |40.00       |90         |10              |36.00    |4.00         |
+|100001 |20000     |45.00       |90         |10              |40.50    |4.50         |
+|120001 |22000     |50.00       |90         |10              |45.00    |5.00         |
+|160001 |24000     |60.00       |90         |10              |54.00    |6.00         |
+|185001 |30000     |65.00       |90         |10              |58.50    |6.50         |
+|300001 |50000     |75.00       |90         |10              |67.50    |7.50         |
+|600001 |75000     |80.00       |90         |10              |72.00    |8.00         |
+|900001 |80000     |85.00       |90         |10              |76.50    |8.50         |
+|1200001|85000     |90.00       |90         |10              |81.00    |9.00         |
+|1500001|900000    |90.00       |90         |10              |81.00    |9.00         |
+|1900001|100000    |95.00       |90         |10              |85.50    |8.50         |
+|2300001|150000    |96.00       |90         |10              |86.40    |9.60         |
+|2500001|200000    |97.00       |90         |10              |87.30    |9.70         |
+|3000001|250000    |99.00       |90         |10              |89.10    |9.90         |

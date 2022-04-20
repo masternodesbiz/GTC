@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2016 The Dash developers
-// Copyright (c) 2016-2018 The PIVX developers
-// Copyright (c) 2021-2021 The GastroCoin developers
+// Copyright (c) 2016-2020 The PIVX developers
+// Copyright (c) 2021-2022 The Gastrocoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,6 +9,7 @@
 #define BITCOIN_QT_TRANSACTIONRECORD_H
 
 #include "amount.h"
+#include "script/script.h"
 #include "uint256.h"
 
 #include <QList>
@@ -23,7 +24,7 @@ class TransactionStatus
 {
 public:
     TransactionStatus() : countsForBalance(false), sortKey(""),
-                          matures_in(0), status(Offline), depth(0), open_for(0), cur_num_blocks(-1)
+                          matures_in(0), status(Unconfirmed), depth(0), open_for(0), cur_num_blocks(-1)
     {
     }
 
@@ -32,13 +33,11 @@ public:
         /// Normal (sent/received) transactions
         OpenUntilDate,  /**< Transaction not yet final, waiting for date */
         OpenUntilBlock, /**< Transaction not yet final, waiting for block */
-        Offline,        /**< Not sent to any other nodes **/
         Unconfirmed,    /**< Not yet mined into a block **/
         Confirming,     /**< Confirmed, but waiting for the recommended number of confirmations **/
         Conflicted,     /**< Conflicts with other transaction or mempool **/
         /// Generated (mined) transactions
         Immature,       /**< Mined but waiting for maturity */
-        MaturesWarning, /**< Transaction will likely not mature because no nodes have confirmed */
         NotAccepted     /**< Mined but not accepted */
     };
 
@@ -63,9 +62,6 @@ public:
 
     /** Current number of blocks (to know whether cached status is still valid) */
     int cur_num_blocks;
-
-    //** Know when to update transaction for ix locks **/
-    int cur_num_ix_locks;
 };
 
 /** UI model for a transaction. A core transaction can be represented by multiple UI transactions if it has
@@ -78,7 +74,7 @@ public:
         Other,
         Generated,
         StakeMint,
-        StakeZGTC,
+        StakeZPIV,
         SendToAddress,
         SendToOther,
         RecvWithAddress,
@@ -88,38 +84,54 @@ public:
         ZerocoinMint,
         ZerocoinSpend,
         RecvFromZerocoinSpend,
-        ZerocoinSpend_Change_zGTC,
+        ZerocoinSpend_Change_zPiv,
         ZerocoinSpend_FromMe,
-        RecvWithObfuscation,
-        ObfuscationDenominate,
-        ObfuscationCollateralPayment,
-        ObfuscationMakeCollaterals,
-        ObfuscationCreateDenominations,
-        Obfuscated
     };
 
     /** Number of confirmation recommended for accepting a transaction */
     static const int RecommendedNumConfirmations = 6;
 
-    TransactionRecord() : hash(), time(0), type(Other), address(""), debit(0), credit(0), idx(0)
+    TransactionRecord(unsigned int size) : hash(), time(0), type(Other), address(""), debit(0), credit(0), size(size), idx(0)
     {
     }
 
-    TransactionRecord(uint256 hash, qint64 time) : hash(hash), time(time), type(Other), address(""), debit(0),
-                                                   credit(0), idx(0)
+    TransactionRecord(uint256 hash, qint64 time, unsigned int size) : hash(hash), time(time), type(Other), address(""), debit(0),
+                                                   credit(0), size(size), idx(0)
     {
     }
 
-    TransactionRecord(uint256 hash, qint64 time, Type type, const std::string& address, const CAmount& debit, const CAmount& credit) : hash(hash), time(time), type(type), address(address), debit(debit), credit(credit),
-                                                                                                                                       idx(0)
+    TransactionRecord(uint256 hash, qint64 time, unsigned int size, Type type, const std::string& address, const CAmount& debit, const CAmount& credit) : hash(hash), time(time), type(type), address(address), debit(debit), credit(credit),
+                                                                                                                                       size(size), idx(0)
     {
     }
 
     /** Decompose CWallet transaction to model transaction records.
      */
-    static bool showTransaction(const CWalletTx& wtx);
     static QList<TransactionRecord> decomposeTransaction(const CWallet* wallet, const CWalletTx& wtx);
 
+    /// Helpers
+    static bool decomposeCoinStake(const CWallet* wallet, const CWalletTx& wtx,
+                                   const CAmount& nCredit, const CAmount& nDebit, bool fZSpendFromMe,
+                                   QList<TransactionRecord>& parts);
+
+    static bool decomposeZcSpendTx(const CWallet* wallet, const CWalletTx& wtx,
+                                    const CAmount& nCredit, const CAmount& nDebit, bool fZSpendFromMe,
+                                    QList<TransactionRecord>& parts);
+
+    static bool decomposeCreditTransaction(const CWallet* wallet, const CWalletTx& wtx,
+                                    QList<TransactionRecord>& parts);
+
+    static bool decomposeSendToSelfTransaction(const CWalletTx& wtx, const CAmount& nCredit,
+                                    const CAmount& nDebit, bool involvesWatchAddress,
+                                    QList<TransactionRecord>& parts);
+
+    static bool decomposeDebitTransaction(const CWallet* wallet, const CWalletTx& wtx,
+                                                      const CAmount& nDebit, bool involvesWatchAddress,
+                                                      QList<TransactionRecord>& parts);
+
+    static std::string getValueOrReturnEmpty(const std::map<std::string, std::string>& mapValue, const std::string& key);
+    static bool ExtractAddress(const CScript& scriptPubKey, std::string& addressStr);
+    
     /** @name Immutable transaction attributes
       @{*/
     uint256 hash;
@@ -128,6 +140,7 @@ public:
     std::string address;
     CAmount debit;
     CAmount credit;
+    unsigned int size;
     /**@}*/
 
     /** Subtransaction index, for sort key */
@@ -152,6 +165,19 @@ public:
     /** Return whether a status update is needed.
      */
     bool statusUpdateNeeded();
+
+    /** Return transaction status
+     */
+    std::string statusToString();
+
+    /** Return true if the tx is a coinstake
+     */
+    bool isCoinStake() const;
+
+    /** Return true if the tx hash is null and/or if the size is 0
+     */
+    bool isNull() const;
+
 };
 
 #endif // BITCOIN_QT_TRANSACTIONRECORD_H
