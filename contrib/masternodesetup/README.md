@@ -1,4 +1,4 @@
-![Example-Logo](https://avatars.githubusercontent.com/u/74193190?v=4)
+![Example-Logo](https://avatars.githubusercontent.com/u/80650691?v=4)
 
 # Gastrocoin Masternode Setup Guide
 ***
