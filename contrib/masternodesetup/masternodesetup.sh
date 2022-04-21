@@ -2,7 +2,7 @@
 
 TMP_FOLDER=$(mktemp -d)
 CONFIG_FILE='gastrocoin.conf'
-CONFIGFOLDER='/root/.gtc'
+CONFIGFOLDER='/root/.gastrocoin'
 COIN_DAEMON='gtcd'
 COIN_CLI='gtc-cli'
 COIN_PATH='/usr/local/bin/'
