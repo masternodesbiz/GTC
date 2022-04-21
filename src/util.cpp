@@ -286,10 +286,10 @@ void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
 
 fs::path GetDefaultDataDir()
 {
-// Windows < Vista: C:\Documents and Settings\Username\Application Data\gtc
-// Windows >= Vista: C:\Users\Username\AppData\Roaming\gtc
-// Mac: ~/Library/Application Support/gtc
-// Unix: ~/.gtc
+// Windows < Vista: C:\Documents and Settings\Username\Application Data\GastroCoin
+// Windows >= Vista: C:\Users\Username\AppData\Roaming\GastroCoin
+// Mac: ~/Library/Application Support/GastroCoin
+// Unix: ~/.gastrocoin
 #ifdef WIN32
     // Windows
     return GetSpecialFolderPath(CSIDL_APPDATA) / "GastroCoin";
@@ -307,7 +307,7 @@ fs::path GetDefaultDataDir()
     return pathRet / "GastroCoin";
 #else
     // Unix
-    return pathRet / ".gtc";
+    return pathRet / ".gastrocoin";
 #endif
 #endif
 }
