@@ -49,11 +49,12 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
 
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0, uint256("0x00000f49b5e18705a724580d471916ec1dd93de55452d0ef837496ec43c6fee7"));
+    (0, uint256("0x00000f49b5e18705a724580d471916ec1dd93de55452d0ef837496ec43c6fee7"))
+    (580400, uint256("0xf05146c9f85296c82de1372065aa088c0b77f03e649196cbf4c7db5bf4233e1c"));
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1615728970, // * UNIX timestamp of last checkpoint block
-    0,		// * total number of transactions between genesis and last checkpoint
+    1651075436, // * UNIX timestamp of last checkpoint block
+    580400,	// * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2000        // * estimated number of transactions per day after checkpoint
 };
@@ -99,12 +100,12 @@ public:
         consensus.nCoinbaseMaturity = 100;
         consensus.nFutureTimeDriftPoW = 7200;
         consensus.nFutureTimeDriftPoS = 120;
-        consensus.nMaxMoneyOut = 52000000 * COIN;
+        consensus.nMaxMoneyOut = 1500000000 * COIN;
         consensus.nPoolMaxTransactions = 3;
         consensus.nProposalEstablishmentTime = 60 * 60 * 24;    // must be at least a day old to make it into a budget
         consensus.nStakeMinAge = 60 * 60;
         consensus.nStakeMinDepth = 60;
-        consensus.nStakeMinDepthV2 = 60;
+        consensus.nStakeMinDepthV2 = 600;
         consensus.nTargetTimespan = 1 * 60;
         consensus.nTargetTimespanV2 = 30 * 60;
         consensus.nTargetSpacing = 1 * 60;
@@ -153,8 +154,8 @@ public:
         consensus.vUpgrades[Consensus::UPGRADE_ZC_V2].nActivationHeight                  = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
         consensus.vUpgrades[Consensus::UPGRADE_BIP65].nActivationHeight                  = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
         consensus.vUpgrades[Consensus::UPGRADE_ZC_PUBLIC].nActivationHeight              = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
-        consensus.vUpgrades[Consensus::UPGRADE_STAKE_MODIFIER_V2].nActivationHeight      = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
-        consensus.vUpgrades[Consensus::UPGRADE_TIME_PROTOCOL_V2].nActivationHeight       = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
+        consensus.vUpgrades[Consensus::UPGRADE_STAKE_MODIFIER_V2].nActivationHeight      = 590000;
+        consensus.vUpgrades[Consensus::UPGRADE_TIME_PROTOCOL_V2].nActivationHeight       = 590001;
         consensus.vUpgrades[Consensus::UPGRADE_P2PKH_BLOCK_SIGNATURES].nActivationHeight = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
         consensus.vUpgrades[Consensus::UPGRADE_STAKE_MIN_DEPTH_V2].nActivationHeight     = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
         consensus.vUpgrades[Consensus::UPGRADE_MASTERNODE_RANK_V2].nActivationHeight     = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
@@ -179,13 +180,9 @@ public:
         pchMessageStart[3] = 0x1d;
         nDefaultPort = 8887;
 
-        vSeeds.push_back(CDNSSeedData("1", "178.18.248.71"));
-        vSeeds.push_back(CDNSSeedData("2", "38.242.235.172"));
-        vSeeds.push_back(CDNSSeedData("3", "95.217.145.123"));
-        vSeeds.push_back(CDNSSeedData("4", "75.119.128.46"));
-        vSeeds.push_back(CDNSSeedData("5", "136.243.77.62"));
-        vSeeds.push_back(CDNSSeedData("6", "[2a01:4f8:212:2b15::61]"));
-	    vSeeds.push_back(CDNSSeedData("7", "[2a01:4f8:212:2b15::62]"));
+        vSeeds.push_back(CDNSSeedData("1", "136.243.77.62"));
+        vSeeds.push_back(CDNSSeedData("2", "[2a01:4f8:212:2b15::61]"));
+        vSeeds.push_back(CDNSSeedData("3", "[2a01:4f8:212:2b15::62]"));
 
 
 
