@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2016-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2016-2018 The PIVX developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,13 +13,15 @@
 
 #include <boost/assign/list_of.hpp>
 
+using namespace boost::assign;
+
 /**
  * Main network
  */
 class CBaseMainParams : public CBaseChainParams
 {
 public:
-    CBaseMainParams() 
+    CBaseMainParams()
     {
         networkID = CBaseChainParams::MAIN;
         nRPCPort = 8888;
@@ -28,7 +30,7 @@ public:
 static CBaseMainParams mainParams;
 
 /**
- * Testnet (v1)
+ * Testnet (v3)
  */
 class CBaseTestNetParams : public CBaseMainParams
 {
@@ -36,8 +38,8 @@ public:
     CBaseTestNetParams()
     {
         networkID = CBaseChainParams::TESTNET;
-        nRPCPort = 32488;
-        strDataDir = "testnet1";
+        nRPCPort = 32823;
+        strDataDir = "testnet4";
     }
 };
 static CBaseTestNetParams testNetParams;
@@ -56,6 +58,20 @@ public:
 };
 static CBaseRegTestParams regTestParams;
 
+/*
+ * Unit test
+ */
+class CBaseUnitTestParams : public CBaseMainParams
+{
+public:
+    CBaseUnitTestParams()
+    {
+        networkID = CBaseChainParams::UNITTEST;
+        strDataDir = "unittest";
+    }
+};
+static CBaseUnitTestParams unitTestParams;
+
 static CBaseChainParams* pCurrentBaseParams = 0;
 
 const CBaseChainParams& BaseParams()
@@ -64,24 +80,25 @@ const CBaseChainParams& BaseParams()
     return *pCurrentBaseParams;
 }
 
-CBaseChainParams& BaseParams(CBaseChainParams::Network network)
+void SelectBaseParams(CBaseChainParams::Network network)
 {
     switch (network) {
     case CBaseChainParams::MAIN:
-        return mainParams;
+        pCurrentBaseParams = &mainParams;
+        break;
     case CBaseChainParams::TESTNET:
-        return testNetParams;
+        pCurrentBaseParams = &testNetParams;
+        break;
     case CBaseChainParams::REGTEST:
-        return regTestParams;
+        pCurrentBaseParams = &regTestParams;
+        break;
+    case CBaseChainParams::UNITTEST:
+        pCurrentBaseParams = &unitTestParams;
+        break;
     default:
         assert(false && "Unimplemented network");
-        return mainParams;
+        return;
     }
-}
-
-void SelectBaseParams(CBaseChainParams::Network network)
-{
-    pCurrentBaseParams = &BaseParams(network);
 }
 
 CBaseChainParams::Network NetworkIdFromCommandLine()

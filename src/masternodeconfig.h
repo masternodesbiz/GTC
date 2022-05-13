@@ -1,17 +1,18 @@
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019-2020 The MasterWin developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef SRC_MASTERNODECONFIG_H_
 #define SRC_MASTERNODECONFIG_H_
 
-#include "fs.h"
-
 #include <string>
 #include <vector>
 
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/fstream.hpp>
 
 class CMasternodeConfig;
 extern CMasternodeConfig masternodeConfig;
@@ -53,7 +54,7 @@ public:
             return outputIndex;
         }
 
-        bool castOutputIndex(int& n) const;
+        bool castOutputIndex(int& n);
 
         void setOutputIndex(const std::string& outputIndex)
         {
@@ -98,8 +99,7 @@ public:
 
     void clear();
     bool read(std::string& strErr);
-    CMasternodeConfig::CMasternodeEntry* add(std::string alias, std::string ip, std::string privKey, std::string txHash, std::string outputIndex);
-    void remove(std::string alias);
+    void add(std::string alias, std::string ip, std::string privKey, std::string txHash, std::string outputIndex);
 
     std::vector<CMasternodeEntry>& getEntries()
     {

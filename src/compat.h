@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,7 +9,7 @@
 #define BITCOIN_COMPAT_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/pivx-config.h"
+#include "config/gastrocoin-config.h"
 #endif
 
 #ifdef WIN32
@@ -40,7 +40,7 @@
 #include <net/if.h>
 #include <netdb.h>
 #include <netinet/in.h>
-#include <sys/fcntl.h>
+#include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/socket.h>
 #include <sys/types.h>

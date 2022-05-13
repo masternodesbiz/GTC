@@ -1,5 +1,8 @@
-// Copyright (c) 2019 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019-2020 The MasterWin developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,35 +11,14 @@
 
 #include "guiutil.h"
 #include "walletmodel.h"
-#include "qt/pivx/qtutils.h"
 
 #include <QUrl>
-#include <QFile>
 
 OpenURIDialog::OpenURIDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
                                                 ui(new Ui::OpenURIDialog)
 {
     ui->setupUi(this);
-    this->setStyleSheet(parent->styleSheet());
-    ui->uriEdit->setPlaceholderText("gtc:");
-
-    ui->labelSubtitle->setText("URI");
-    setCssProperty(ui->labelSubtitle, "text-title2-dialog");
-    setCssProperty(ui->frame, "container-dialog");
-    setCssProperty(ui->labelTitle, "text-title-dialog");
-
-    setCssBtnPrimary(ui->pushButtonOK);
-    setCssBtnPrimary(ui->selectFileButton);
-    setCssProperty(ui->pushButtonCancel, "btn-dialog-cancel");
-
-    initCssEditLine(ui->uriEdit, true);
-    connect(ui->pushButtonOK, &QPushButton::clicked, this, &OpenURIDialog::accept);
-    connect(ui->pushButtonCancel, &QPushButton::clicked, this, &OpenURIDialog::close);
-}
-
-void OpenURIDialog::showEvent(QShowEvent *event)
-{
-    ui->uriEdit->setFocus();
+    ui->uriEdit->setPlaceholderText("gastrocoin:");
 }
 
 OpenURIDialog::~OpenURIDialog()
@@ -56,7 +38,7 @@ void OpenURIDialog::accept()
         /* Only accept value URIs */
         QDialog::accept();
     } else {
-        setCssEditLineDialog(ui->uriEdit, false, true);
+        ui->uriEdit->setValid(false);
     }
 }
 
@@ -65,31 +47,6 @@ void OpenURIDialog::on_selectFileButton_clicked()
     QString filename = GUIUtil::getOpenFileName(this, tr("Select payment request file to open"), "", "", NULL);
     if (filename.isEmpty())
         return;
-
-    QFile file(filename);
-    if(!file.exists()) {
-        inform(tr("File not found"));
-        return;
-    }
-
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)){
-        QByteArray r = file.readAll();
-        if (r.size() > 200) {
-            inform(tr("Parsed data too large"));
-            return;
-        }
-
-        QString str = QString::fromStdString(std::string(r.constData(), r.length()));
-        if (!str.startsWith("gtc")) {
-            inform(tr("Invalid URI, not starting with \"gtc\" prefix"));
-        }
-        ui->uriEdit->setText(str);
-    }
-}
-
-void OpenURIDialog::inform(const QString& str) {
-    if (!snackBar) snackBar = new SnackBar(nullptr, this);
-    snackBar->setText(str);
-    snackBar->resize(this->width(), snackBar->height());
-    openDialog(snackBar, this);
+    QUrl fileUri = QUrl::fromLocalFile(filename);
+    ui->uriEdit->setText("gastrocoin:?r=" + QUrl::toPercentEncoding(fileUri.toString()));
 }

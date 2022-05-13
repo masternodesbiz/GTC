@@ -1,12 +1,13 @@
-// Copyright (c) 2018 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019-2020 The MasterWin developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 
 
-#ifndef PIVX_INVALID_SERIALS_JSON_H
-#define PIVX_INVALID_SERIALS_JSON_H
+#ifndef GastroCoin_INVALID_SERIALS_JSON_H
+#define GastroCoin_INVALID_SERIALS_JSON_H
 
 #include <string>
 
@@ -860,7 +861,7 @@ std::string LoadInvalidSerials()
             "    \"s\": \"129d442e3b955f050273b1910489ba5d6732a9651864f40a1af8209855e6e4ac0\"\n"
             "  },\n"
             "  {\n"
-            "    \"s\": \"12a29a6f2f99f60131862b771a0615f113155c3e5a026ab700a4687114c5d4e8e\"\n"
+            "    \"s\": \"12a29a6f2f99f60131862b771a0615f1499935c3e5a026ab700a4687114c5d4e8e\"\n"
             "  },\n"
             "  {\n"
             "    \"s\": \"12a5a2dc9b64822bbd6c487e133eedee3e2b45828024e45c4cbc89f874018c461\"\n"
@@ -935,7 +936,7 @@ std::string LoadInvalidSerials()
             "    \"s\": \"13e1d94c5b94fdccda9e13432305d893484dd1a313d7de761aadde39fb68569b9\"\n"
             "  },\n"
             "  {\n"
-            "    \"s\": \"13fa9376108c6669fdba82b0d3cb374e55621d2219af65014d0aecb676fe0ccc3\"\n"
+            "    \"s\": \"13fa9376108c6669fdba82b0d3cb374e55621d16219af65014d0aecb676fe0ccc3\"\n"
             "  },\n"
             "  {\n"
             "    \"s\": \"1400b7edc16df9b0267683d2332eabfc788ec8060481b3ea572d5655ae0a7e31d\"\n"
@@ -1190,4 +1191,4 @@ std::string LoadInvalidSerials()
     return str;
 }
 
-#endif //PIVX_INVALID_SERIALS_JSON_H
+#endif //GastroCoin_INVALID_SERIALS_JSON_H

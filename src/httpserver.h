@@ -1,5 +1,4 @@
 // Copyright (c) 2015 The Bitcoin Core developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +7,9 @@
 
 #include <string>
 #include <stdint.h>
-#include <functional>
+#include <boost/thread.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <boost/function.hpp>
 
 static const int DEFAULT_HTTP_THREADS=4;
 static const int DEFAULT_HTTP_WORKQUEUE=16;
@@ -33,12 +34,8 @@ void InterruptHTTPServer();
 /** Stop HTTP server */
 void StopHTTPServer();
 
-/** Change logging level for libevent. Removes BCLog::LIBEVENT from log categories if
- * libevent doesn't support debug logging.*/
-bool UpdateHTTPServerLogging(bool enable);
-
 /** Handler for requests to a certain HTTP path */
-typedef std::function<void(HTTPRequest* req, const std::string &)> HTTPRequestHandler;
+typedef boost::function<void(HTTPRequest* req, const std::string &)> HTTPRequestHandler;
 /** Register handler for prefix.
  * If multiple handlers match a prefix, the first-registered one will
  * be invoked.
@@ -87,7 +84,7 @@ public:
 
     /**
      * Get the request header specified by hdr, or an empty string.
-     * Return an pair (isPresent,std::string).
+     * Return an pair (isPresent,string).
      */
     std::pair<bool, std::string> GetHeader(const std::string& hdr);
 
@@ -135,7 +132,7 @@ public:
      * deleteWhenTriggered deletes this event object after the event is triggered (and the handler called)
      * handler is the handler to call when the event is triggered.
      */
-    HTTPEvent(struct event_base* base, bool deleteWhenTriggered, const std::function<void(void)>& handler);
+    HTTPEvent(struct event_base* base, bool deleteWhenTriggered, const boost::function<void(void)>& handler);
     ~HTTPEvent();
 
     /** Trigger the event. If tv is 0, trigger it immediately. Otherwise trigger it after
@@ -144,7 +141,7 @@ public:
     void trigger(struct timeval* tv);
 
     bool deleteWhenTriggered;
-    std::function<void(void)> handler;
+    boost::function<void(void)> handler;
 private:
     struct event* ev;
 };

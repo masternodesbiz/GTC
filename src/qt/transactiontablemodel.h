@@ -1,6 +1,4 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2019 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,13 +9,6 @@
 
 #include <QAbstractTableModel>
 #include <QStringList>
-
-#define SINGLE_THREAD_MAX_TXES_SIZE 4000
-
-// Maximum amount of loaded records in ram in the first load.
-// If the user has more and want to load them:
-// TODO, add load on demand in pages (not every tx loaded all the time into the records list).
-#define MAX_AMOUNT_LOADED_RECORDS 100000
 
 class TransactionRecord;
 class TransactionTablePriv;
@@ -56,6 +47,8 @@ public:
         WatchonlyRole,
         /** Watch-only icon */
         WatchonlyDecorationRole,
+        /** Long description (HTML format) */
+        LongDescriptionRole,
         /** Address of transaction */
         AddressRole,
         /** Label of address related to transaction */
@@ -71,27 +64,20 @@ public:
         /** Formatted amount, without brackets when unconfirmed */
         FormattedAmountRole,
         /** Transaction status (TransactionRecord::Status) */
-        StatusRole,
-        /** Transaction size in bytes */
-        SizeRole
+        StatusRole
     };
 
     int rowCount(const QModelIndex& parent) const;
     int columnCount(const QModelIndex& parent) const;
-    int size() const;
-    bool hasZcTxes();
     QVariant data(const QModelIndex& index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const;
     bool processingQueuedTransactions() { return fProcessingQueuedTransactions; }
 
-Q_SIGNALS:
-    void txArrived(const QString& hash, const bool& isCoinStake);
-
 private:
     CWallet* wallet;
     WalletModel* walletModel;
-    QStringList columns;
+    QStringList colugtc;
     TransactionTablePriv* priv;
     bool fProcessingQueuedTransactions;
 
@@ -110,7 +96,7 @@ private:
     QVariant txWatchonlyDecoration(const TransactionRecord* wtx) const;
     QVariant txAddressDecoration(const TransactionRecord* wtx) const;
 
-public Q_SLOTS:
+public slots:
     /* New transaction, or transaction changed status */
     void updateTransaction(const QString& hash, int status, bool showTransaction);
     void updateConfirmations();

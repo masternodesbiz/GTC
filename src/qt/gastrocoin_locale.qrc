@@ -1,0 +1,36 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/gastrocoin_bg.qm</file>
+        <file alias="ca">locale/gastrocoin_ca.qm</file>
+        <file alias="cs">locale/gastrocoin_cs.qm</file>
+        <file alias="da">locale/gastrocoin_da.qm</file>
+        <file alias="de">locale/gastrocoin_de.qm</file>
+        <file alias="en">locale/gastrocoin_en.qm</file>
+        <file alias="en_US">locale/gastrocoin_en_US.qm</file>
+        <file alias="eo">locale/gastrocoin_eo.qm</file>
+        <file alias="es">locale/gastrocoin_es.qm</file>
+        <file alias="es_ES">locale/gastrocoin_es_ES.qm</file>
+        <file alias="fi">locale/gastrocoin_fi.qm</file>
+        <file alias="fr_FR">locale/gastrocoin_fr_FR.qm</file>
+        <file alias="hi_IN">locale/gastrocoin_hi_IN.qm</file>
+        <file alias="hr">locale/gastrocoin_hr.qm</file>
+        <file alias="hr_HR">locale/gastrocoin_hr_HR.qm</file>
+        <file alias="it">locale/gastrocoin_it.qm</file>
+        <file alias="ja">locale/gastrocoin_ja.qm</file>
+        <file alias="ko_KR">locale/gastrocoin_ko_KR.qm</file>
+        <file alias="lt_LT">locale/gastrocoin_lt_LT.qm</file>
+        <file alias="nl">locale/gastrocoin_nl.qm</file>
+        <file alias="pl">locale/gastrocoin_pl.qm</file>
+        <file alias="pt">locale/gastrocoin_pt.qm</file>
+        <file alias="pt_BR">locale/gastrocoin_pt_BR.qm</file>
+        <file alias="ro_RO">locale/gastrocoin_ro_RO.qm</file>
+        <file alias="ru">locale/gastrocoin_ru.qm</file>
+        <file alias="sk">locale/gastrocoin_sk.qm</file>
+        <file alias="sv">locale/gastrocoin_sv.qm</file>
+        <file alias="tr">locale/gastrocoin_tr.qm</file>
+        <file alias="uk">locale/gastrocoin_uk.qm</file>
+        <file alias="vi">locale/gastrocoin_vi.qm</file>
+        <file alias="zh_CN">locale/gastrocoin_zh_CN.qm</file>
+        <file alias="zh_TW">locale/gastrocoin_zh_TW.qm</file>
+    </qresource>
+</RCC>

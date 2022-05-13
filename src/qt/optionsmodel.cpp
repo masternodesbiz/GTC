@@ -1,12 +1,13 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019-2020 The MasterWin developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/pivx-config.h"
+#include "config/gastrocoin-config.h"
 #endif
 
 #include "optionsmodel.h"
@@ -18,17 +19,17 @@
 #include "init.h"
 #include "main.h"
 #include "net.h"
-#include "netbase.h"
 #include "txdb.h" // for -dbcache defaults
 #include "util.h"
 
 #ifdef ENABLE_WALLET
 #include "masternodeconfig.h"
-#include "wallet/wallet.h"
-#include "wallet/walletdb.h"
+#include "wallet.h"
+#include "walletdb.h"
 #endif
 
 #include <QNetworkProxy>
+#include <QSettings>
 #include <QStringList>
 
 OptionsModel::OptionsModel(QObject* parent) : QAbstractListModel(parent)
@@ -49,52 +50,43 @@ void OptionsModel::Init()
 
     // Ensure restart flag is unset on client startup
     setRestartRequired(false);
-    setSSTChanged(false);
 
     // These are Qt-only settings:
 
     // Window
-    setWindowDefaultOptions(settings);
+    if (!settings.contains("fMinimizeToTray"))
+        settings.setValue("fMinimizeToTray", false);
+    fMinimizeToTray = settings.value("fMinimizeToTray").toBool();
+
+    if (!settings.contains("fMinimizeOnClose"))
+        settings.setValue("fMinimizeOnClose", false);
+    fMinimizeOnClose = settings.value("fMinimizeOnClose").toBool();
 
     // Display
+    if (!settings.contains("nDisplayUnit"))
+        settings.setValue("nDisplayUnit", BitcoinUnits::GTC);
+    nDisplayUnit = settings.value("nDisplayUnit").toInt();
+
+    if (!settings.contains("strThirdPartyTxUrls"))
+        settings.setValue("strThirdPartyTxUrls", "");
+    strThirdPartyTxUrls = settings.value("strThirdPartyTxUrls", "").toString();
+
     if (!settings.contains("fHideZeroBalances"))
         settings.setValue("fHideZeroBalances", true);
     fHideZeroBalances = settings.value("fHideZeroBalances").toBool();
-
-    if (!settings.contains("fHideOrphans"))
-        settings.setValue("fHideOrphans", true);
-    fHideOrphans = settings.value("fHideOrphans").toBool();
 
     if (!settings.contains("fCoinControlFeatures"))
         settings.setValue("fCoinControlFeatures", false);
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
 
+    if (!settings.contains("nAnonymizeGastroCoinAmount"))
+        settings.setValue("nAnonymizeGastroCoinAmount", 1000);
+
+    nAnonymizeGastroCoinAmount = settings.value("nAnonymizeGastroCoinAmount").toLongLong();
+
     if (!settings.contains("fShowMasternodesTab"))
         settings.setValue("fShowMasternodesTab", masternodeConfig.getCount());
 
-    // Main
-    setMainDefaultOptions(settings);
-
-    // Wallet
-#ifdef ENABLE_WALLET
-    setWalletDefaultOptions(settings);
-#endif
-
-    // Network
-    setNetworkDefaultOptions(settings);
-    // Display
-    setDisplayDefaultOptions(settings);
-
-    language = settings.value("language").toString();
-}
-
-void OptionsModel::refreshDataView()
-{
-    Q_EMIT dataChanged(index(0), index(rowCount(QModelIndex()) - 1));
-}
-
-void OptionsModel::setMainDefaultOptions(QSettings& settings, bool reset)
-{
     // These are shared with the core or have a command-line parameter
     // and we want command-line parameters to overwrite the GUI settings.
     //
@@ -102,50 +94,43 @@ void OptionsModel::setMainDefaultOptions(QSettings& settings, bool reset)
     //
     // If SoftSetArg() or SoftSetBoolArg() return false we were overridden
     // by command-line and show this in the UI.
+
     // Main
-    if (!settings.contains("nDatabaseCache") || reset)
+    if (!settings.contains("nDatabaseCache"))
         settings.setValue("nDatabaseCache", (qint64)nDefaultDbCache);
     if (!SoftSetArg("-dbcache", settings.value("nDatabaseCache").toString().toStdString()))
         addOverriddenOption("-dbcache");
 
-    if (!settings.contains("nThreadsScriptVerif") || reset)
+    if (!settings.contains("nThreadsScriptVerif"))
         settings.setValue("nThreadsScriptVerif", DEFAULT_SCRIPTCHECK_THREADS);
     if (!SoftSetArg("-par", settings.value("nThreadsScriptVerif").toString().toStdString()))
         addOverriddenOption("-par");
 
-    if (reset) {
-        refreshDataView();
-    }
-}
-
-void OptionsModel::setWalletDefaultOptions(QSettings& settings, bool reset)
-{
-    if (!settings.contains("bSpendZeroConfChange") || reset)
+// Wallet
+#ifdef ENABLE_WALLET
+    if (!settings.contains("bSpendZeroConfChange"))
         settings.setValue("bSpendZeroConfChange", false);
     if (!SoftSetBoolArg("-spendzeroconfchange", settings.value("bSpendZeroConfChange").toBool()))
         addOverriddenOption("-spendzeroconfchange");
-    if (reset) {
-        setStakeSplitThreshold(CWallet::DEFAULT_STAKE_SPLIT_THRESHOLD);
-        setUseCustomFee(false);
-        refreshDataView();
-    }
-}
+#endif
+    if (!settings.contains("nStakeSplitThreshold"))
+        settings.setValue("nStakeSplitThreshold", 1);
 
-void OptionsModel::setNetworkDefaultOptions(QSettings& settings, bool reset)
-{
-    if (!settings.contains("fUseUPnP") || reset)
+
+    // Network
+    if (!settings.contains("fUseUPnP"))
         settings.setValue("fUseUPnP", DEFAULT_UPNP);
     if (!SoftSetBoolArg("-upnp", settings.value("fUseUPnP").toBool()))
         addOverriddenOption("-upnp");
 
-    if (!settings.contains("fListen") || reset)
+    if (!settings.contains("fListen"))
         settings.setValue("fListen", DEFAULT_LISTEN);
     if (!SoftSetBoolArg("-listen", settings.value("fListen").toBool()))
         addOverriddenOption("-listen");
 
-    if (!settings.contains("fUseProxy") || reset)
+    if (!settings.contains("fUseProxy"))
         settings.setValue("fUseProxy", false);
-    if (!settings.contains("addrProxy") || reset)
+    if (!settings.contains("addrProxy"))
         settings.setValue("addrProxy", "127.0.0.1:9050");
     // Only try to set -proxy, if user has enabled fUseProxy
     if (settings.value("fUseProxy").toBool() && !SoftSetArg("-proxy", settings.value("addrProxy").toString().toStdString()))
@@ -153,54 +138,22 @@ void OptionsModel::setNetworkDefaultOptions(QSettings& settings, bool reset)
     else if (!settings.value("fUseProxy").toBool() && !GetArg("-proxy", "").empty())
         addOverriddenOption("-proxy");
 
-    if (reset) {
-        refreshDataView();
-    }
-}
-
-void OptionsModel::setWindowDefaultOptions(QSettings& settings, bool reset)
-{
-    if (!settings.contains("fMinimizeToTray") || reset)
-        settings.setValue("fMinimizeToTray", false);
-    fMinimizeToTray = settings.value("fMinimizeToTray").toBool();
-
-    if (!settings.contains("fMinimizeOnClose") || reset)
-        settings.setValue("fMinimizeOnClose", false);
-    fMinimizeOnClose = settings.value("fMinimizeOnClose").toBool();
-
-    if (reset) {
-        refreshDataView();
-    }
-}
-
-void OptionsModel::setDisplayDefaultOptions(QSettings& settings, bool reset)
-{
-    if (!settings.contains("nDisplayUnit") || reset)
-        settings.setValue("nDisplayUnit", BitcoinUnits::PIV);
-    nDisplayUnit = settings.value("nDisplayUnit").toInt();
-    if (!settings.contains("digits") || reset)
+    // Display
+    if (!settings.contains("digits"))
         settings.setValue("digits", "2");
-    if (!settings.contains("theme") || reset)
+    if (!settings.contains("theme"))
         settings.setValue("theme", "");
-    if (!settings.contains("fCSSexternal") || reset)
+    if (!settings.contains("fCSSexternal"))
         settings.setValue("fCSSexternal", false);
-    if (!settings.contains("language") || reset)
+    if (!settings.contains("language"))
         settings.setValue("language", "");
     if (!SoftSetArg("-lang", settings.value("language").toString().toStdString()))
         addOverriddenOption("-lang");
 
-    if (settings.contains("nAnonymizePivxAmount") || reset)
-        SoftSetArg("-anonymizepivxamount", settings.value("nAnonymizePivxAmount").toString().toStdString());
+    if (settings.contains("nAnonymizeGastroCoinAmount"))
+        SoftSetArg("-anonymizegastrocoinamount", settings.value("nAnonymizeGastroCoinAmount").toString().toStdString());
 
-    if (!settings.contains("strThirdPartyTxUrls") || reset)
-        settings.setValue("strThirdPartyTxUrls", "");
-    strThirdPartyTxUrls = settings.value("strThirdPartyTxUrls", "").toString();
-
-    fHideCharts = GetBoolArg("-hidecharts", false);
-
-    if (reset) {
-        refreshDataView();
-    }
+    language = settings.value("language").toString();
 }
 
 void OptionsModel::Reset()
@@ -209,7 +162,7 @@ void OptionsModel::Reset()
 
     // Remove all entries from our QSettings object
     settings.clear();
-    resetSettings = true; // Needed in pivx.cpp during shotdown to also remove the window positions
+    resetSettings = true; // Needed in gastrocoin.cpp during shotdown to also remove the window positions
 
     // default setting for OptionsModel::StartAtStartup - disabled
     if (GUIUtil::GetStartOnSystemStartup())
@@ -259,18 +212,13 @@ QVariant OptionsModel::data(const QModelIndex& index, int role) const
             return settings.value("bSpendZeroConfChange");
         case ShowMasternodesTab:
             return settings.value("fShowMasternodesTab");
-        case StakeSplitThreshold:
-        {
-            // Return CAmount/qlonglong as double
-            const CAmount nStakeSplitThreshold = (pwalletMain) ? pwalletMain->nStakeSplitThreshold : CWallet::DEFAULT_STAKE_SPLIT_THRESHOLD;
-            return QVariant(static_cast<double>(nStakeSplitThreshold / static_cast<double>(COIN)));
-        }
-        case fUseCustomFee:
-            return QVariant((pwalletMain) ? pwalletMain->fUseCustomFee : false);
-        case nCustomFee:
-            return QVariant(static_cast<qlonglong>((pwalletMain) ? pwalletMain->nCustomFee : CWallet::GetRequiredFee(1000)));
 #endif
+        case StakeSplitThreshold:
+            if (pwalletMain)
+                return QVariant((int)pwalletMain->nStakeSplitThreshold);
+            return settings.value("nStakeSplitThreshold");
         case DisplayUnit:
+
             return nDisplayUnit;
         case ThirdPartyTxUrls:
             return strThirdPartyTxUrls;
@@ -286,12 +234,10 @@ QVariant OptionsModel::data(const QModelIndex& index, int role) const
             return settings.value("nDatabaseCache");
         case ThreadsScriptVerif:
             return settings.value("nThreadsScriptVerif");
-        case HideCharts:
-            return fHideCharts;
         case HideZeroBalances:
             return settings.value("fHideZeroBalances");
-        case HideOrphans:
-            return settings.value("fHideOrphans");
+        case AnonymizeGastroCoinAmount:
+            return QVariant(nAnonymizeGastroCoinAmount);
         case Listen:
             return settings.value("fListen");
         default:
@@ -366,17 +312,10 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
                 setRestartRequired(true);
             }
             break;
-        case fUseCustomFee:
-            setUseCustomFee(value.toBool());
-            break;
-        case nCustomFee:
-            setCustomFeeValue(value.toLongLong());
-            break;
 #endif
         case StakeSplitThreshold:
-            // Write double as qlonglong/CAmount
-            setStakeSplitThreshold(static_cast<CAmount>(value.toDouble() * COIN));
-            setSSTChanged(true);
+            settings.setValue("nStakeSplitThreshold", value.toInt());
+            setStakeSplitThreshold(value.toInt());
             break;
         case DisplayUnit:
             setDisplayUnit(value);
@@ -406,24 +345,21 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
                 setRestartRequired(true);
             }
             break;
-        case HideCharts:
-            fHideCharts = value.toBool();   // memory only
-            Q_EMIT hideChartsChanged(fHideCharts);
-            break;
         case HideZeroBalances:
             fHideZeroBalances = value.toBool();
             settings.setValue("fHideZeroBalances", fHideZeroBalances);
-            Q_EMIT hideZeroBalancesChanged(fHideZeroBalances);
+            emit hideZeroBalancesChanged(fHideZeroBalances);
             break;
-        case HideOrphans:
-            fHideOrphans = value.toBool();
-            settings.setValue("fHideOrphans", fHideOrphans);
-            Q_EMIT hideOrphansChanged(fHideOrphans);
+
+        case AnonymizeGastroCoinAmount:
+            nAnonymizeGastroCoinAmount = value.toInt();
+            settings.setValue("nAnonymizeGastroCoinAmount", nAnonymizeGastroCoinAmount);
+            emit anonymizeGastroCoinAmountChanged(nAnonymizeGastroCoinAmount);
             break;
         case CoinControlFeatures:
             fCoinControlFeatures = value.toBool();
             settings.setValue("fCoinControlFeatures", fCoinControlFeatures);
-            Q_EMIT coinControlFeaturesChanged(fCoinControlFeatures);
+            emit coinControlFeaturesChanged(fCoinControlFeatures);
             break;
         case DatabaseCache:
             if (settings.value("nDatabaseCache") != value) {
@@ -448,7 +384,7 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
         }
     }
 
-    Q_EMIT dataChanged(index, index);
+    emit dataChanged(index, index);
 
     return successful;
 }
@@ -460,13 +396,17 @@ void OptionsModel::setDisplayUnit(const QVariant& value)
         QSettings settings;
         nDisplayUnit = value.toInt();
         settings.setValue("nDisplayUnit", nDisplayUnit);
-        Q_EMIT displayUnitChanged(nDisplayUnit);
+        emit displayUnitChanged(nDisplayUnit);
     }
 }
 
 /* Update StakeSplitThreshold's value in wallet */
-void OptionsModel::setStakeSplitThreshold(const CAmount nStakeSplitThreshold)
+void OptionsModel::setStakeSplitThreshold(int value)
 {
+    // XXX: maybe it's worth to wrap related stuff with WALLET_ENABLE ?
+    uint64_t nStakeSplitThreshold;
+
+    nStakeSplitThreshold = value;
     if (pwalletMain && pwalletMain->nStakeSplitThreshold != nStakeSplitThreshold) {
         CWalletDB walletdb(pwalletMain->strWalletFile);
         LOCK(pwalletMain->cs_wallet);
@@ -478,49 +418,6 @@ void OptionsModel::setStakeSplitThreshold(const CAmount nStakeSplitThreshold)
     }
 }
 
-/* returns default minimum value for stake split threshold as doulbe */
-double OptionsModel::getSSTMinimum() const
-{
-    return static_cast<double>(CWallet::minStakeSplitThreshold / COIN);
-}
-
-/* Verify that StakeSplitThreshold's value is either 0 or above the min. Else reset */
-bool OptionsModel::isSSTValid()
-{
-    if (pwalletMain && pwalletMain->nStakeSplitThreshold &&
-            pwalletMain->nStakeSplitThreshold < CWallet::minStakeSplitThreshold) {
-        setStakeSplitThreshold(CWallet::minStakeSplitThreshold);
-        return false;
-    }
-    return true;
-}
-
-/* Update Custom Fee value in wallet */
-void OptionsModel::setUseCustomFee(bool fUse)
-{
-    if (pwalletMain && pwalletMain->fUseCustomFee != fUse) {
-        CWalletDB walletdb(pwalletMain->strWalletFile);
-        {
-            LOCK(pwalletMain->cs_wallet);
-            pwalletMain->fUseCustomFee = fUse;
-            if (pwalletMain->fFileBacked)
-                walletdb.WriteUseCustomFee(fUse);
-        }
-    }
-}
-
-void OptionsModel::setCustomFeeValue(const CAmount& value)
-{
-    if (pwalletMain && pwalletMain->nCustomFee != value) {
-        CWalletDB walletdb(pwalletMain->strWalletFile);
-        {
-            LOCK(pwalletMain->cs_wallet);
-            pwalletMain->nCustomFee = value;
-            if (pwalletMain->fFileBacked)
-                walletdb.WriteCustomFeeValue(value);
-        }
-    }
-}
 
 bool OptionsModel::getProxySettings(QNetworkProxy& proxy) const
 {
@@ -549,16 +446,4 @@ bool OptionsModel::isRestartRequired()
 {
     QSettings settings;
     return settings.value("fRestartRequired", false).toBool();
-}
-
-void OptionsModel::setSSTChanged(bool fChanged)
-{
-    QSettings settings;
-    return settings.setValue("fSSTChanged", fChanged);
-}
-
-bool OptionsModel::isSSTChanged()
-{
-    QSettings settings;
-    return settings.value("fSSTChanged", false).toBool();
 }

@@ -280,7 +280,7 @@ mix_column(sph_u64 W[16][2], int ia, int ib, int ic, int id)
 
 #endif
 
-#define BIG_MIX_COLUMNS   do { \
+#define BIG_MIX_COLUGTC   do { \
 		MIX_COLUMN(0, 1, 2, 3); \
 		MIX_COLUMN(4, 5, 6, 7); \
 		MIX_COLUMN(8, 9, 10, 11); \
@@ -290,7 +290,7 @@ mix_column(sph_u64 W[16][2], int ia, int ib, int ic, int id)
 #define BIG_ROUND   do { \
 		BIG_SUB_WORDS; \
 		BIG_SHIFT_ROWS; \
-		BIG_MIX_COLUMNS; \
+		BIG_MIX_COLUGTC; \
 	} while (0)
 
 #define FINAL_SMALL   do { \
@@ -570,7 +570,7 @@ mix_column(sph_u32 W[16][4], int ia, int ib, int ic, int id)
 
 #endif
 
-#define BIG_MIX_COLUMNS   do { \
+#define BIG_MIX_COLUGTC   do { \
 		MIX_COLUMN(0, 1, 2, 3); \
 		MIX_COLUMN(4, 5, 6, 7); \
 		MIX_COLUMN(8, 9, 10, 11); \
@@ -580,7 +580,7 @@ mix_column(sph_u32 W[16][4], int ia, int ib, int ic, int id)
 #define BIG_ROUND   do { \
 		BIG_SUB_WORDS; \
 		BIG_SHIFT_ROWS; \
-		BIG_MIX_COLUMNS; \
+		BIG_MIX_COLUGTC; \
 	} while (0)
 
 #define FINAL_SMALL   do { \

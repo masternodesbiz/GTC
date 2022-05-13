@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,8 +13,6 @@
 
 #include <QDateTime>
 
-#define SKIP_ROWCOUNT_N_TIMES 10
-
 // Earliest date that can be represented (far in the past)
 const QDateTime TransactionFilterProxy::MIN_DATE = QDateTime::fromTime_t(0);
 // Last date that can be represented (far in the future)
@@ -24,12 +22,11 @@ TransactionFilterProxy::TransactionFilterProxy(QObject* parent) : QSortFilterPro
                                                                   dateFrom(MIN_DATE),
                                                                   dateTo(MAX_DATE),
                                                                   addrPrefix(),
-                                                                  typeFilter(ALL_TYPES),
+                                                                  typeFilter(COMMON_TYPES),
                                                                   watchOnlyFilter(WatchOnlyFilter_All),
                                                                   minAmount(0),
                                                                   limitRows(-1),
-                                                                  showInactive(true),
-                                                                  fHideOrphans(true)
+                                                                  showInactive(true)
 {
 }
 
@@ -47,9 +44,7 @@ bool TransactionFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex& 
 
     if (!showInactive && status == TransactionStatus::Conflicted)
         return false;
-    if (fHideOrphans && isOrphan(status, type))
-        return false;
-    if (!(bool)(TYPE(type) & typeFilter))
+    if (!(TYPE(type) & typeFilter))
         return false;
     if (involvesWatchAddress && watchOnlyFilter == WatchOnlyFilter_No)
         return false;
@@ -57,16 +52,9 @@ bool TransactionFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex& 
         return false;
     if (datetime < dateFrom || datetime > dateTo)
         return false;
-    if (!addrPrefix.isEmpty()) {
-        if (!address.contains(addrPrefix, Qt::CaseInsensitive) && !label.contains(addrPrefix, Qt::CaseInsensitive))
-            return false;
-    }
+    if (!address.contains(addrPrefix, Qt::CaseInsensitive) && !label.contains(addrPrefix, Qt::CaseInsensitive))
+        return false;
     if (amount < minAmount)
-        return false;
-    if (fOnlyZc && !isZcTx(type)){
-        return false;
-    }
-    if (fOnlyStakesandMN && !isStakeTx(type) && !isMasternodeRewardTx(type))
         return false;
 
     return true;
@@ -74,8 +62,6 @@ bool TransactionFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex& 
 
 void TransactionFilterProxy::setDateRange(const QDateTime& from, const QDateTime& to)
 {
-    if (from == this->dateFrom && to == this->dateTo)
-        return; // No need to set the range.
     this->dateFrom = from;
     this->dateTo = to;
     invalidateFilter();
@@ -116,56 +102,11 @@ void TransactionFilterProxy::setShowInactive(bool showInactive)
     invalidateFilter();
 }
 
-void TransactionFilterProxy::setHideOrphans(bool fHide)
-{
-    this->fHideOrphans = fHide;
-    invalidateFilter();
-}
-
-void TransactionFilterProxy::setShowZcTxes(bool fOnlyZc)
-{
-    this->fOnlyZc = fOnlyZc;
-    invalidateFilter();
-}
-
-void TransactionFilterProxy::setOnlyStakesandMN(bool fOnlyStakesandMN)
-{
-    this->fOnlyStakesandMN = fOnlyStakesandMN;
-    invalidateFilter();
-}
-
 int TransactionFilterProxy::rowCount(const QModelIndex& parent) const
 {
-    static int entryCount = 0;
-
-    int rowCount = 
-        entryCount++ < SKIP_ROWCOUNT_N_TIMES ?
-        sourceModel()->rowCount() :
-        QSortFilterProxyModel::rowCount(parent);
-
     if (limitRows != -1) {
-        return std::min(rowCount, limitRows);
+        return std::min(QSortFilterProxyModel::rowCount(parent), limitRows);
     } else {
-        return rowCount;
+        return QSortFilterProxyModel::rowCount(parent);
     }
-}
-
-bool TransactionFilterProxy::isOrphan(const int status, const int type)
-{
-    return ( (type == TransactionRecord::Generated || type == TransactionRecord::StakeMint ||
-            type == TransactionRecord::StakeZPIV || type == TransactionRecord::MNReward)
-            && (status == TransactionStatus::Conflicted || status == TransactionStatus::NotAccepted) );
-}
-
-bool TransactionFilterProxy::isZcTx(int type) const {
-    return (type == TransactionRecord::ZerocoinMint || type == TransactionRecord::ZerocoinSpend || type == TransactionRecord::ZerocoinSpend_Change_zPiv
-            || type == TransactionRecord::ZerocoinSpend_FromMe || type == TransactionRecord::RecvFromZerocoinSpend);
-}
-
-bool TransactionFilterProxy::isStakeTx(int type) const {
-    return type == TransactionRecord::StakeMint || type == TransactionRecord::Generated;
-}
-
-bool TransactionFilterProxy::isMasternodeRewardTx(int type) const {
-    return (type == TransactionRecord::MNReward);
 }

@@ -1,6 +1,6 @@
 // Copyright (c) 2014 The Bitcoin developers
-// Copyright (c) 2017-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,8 +11,8 @@
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between gtc-cli and gtcd)
- * of a given instance of the gtc system.
+ * CBaseChainParams defines the base parameters (shared between gastrocoin-cli and gastrocoind)
+ * of a given instance of the GastroCoin system.
  */
 class CBaseChainParams
 {
@@ -21,6 +21,7 @@ public:
         MAIN,
         TESTNET,
         REGTEST,
+        UNITTEST,
 
         MAX_NETWORK_TYPES
     };
@@ -41,11 +42,6 @@ protected:
  * outside of the unit tests.
  */
 const CBaseChainParams& BaseParams();
-
-/**
- * Return parameters for the given network.
- */
-CBaseChainParams& BaseParams(CBaseChainParams::Network network);
 
 /** Sets the params returned by Params() to those for the given network. */
 void SelectBaseParams(CBaseChainParams::Network network);

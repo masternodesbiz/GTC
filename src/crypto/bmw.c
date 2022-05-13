@@ -1,6 +1,6 @@
 /* $Id: bmw.c 227 2010-06-16 17:28:38Z tp $ */
 /*
- * BMW implementation.
+ * BGTC implementation.
  *
  * ==========================(LICENSE BEGIN)============================
  *
@@ -40,8 +40,8 @@ extern "C"{
 
 #include "sph_bmw.h"
 
-#if SPH_SMALL_FOOTPRINT && !defined SPH_SMALL_FOOTPRINT_BMW
-#define SPH_SMALL_FOOTPRINT_BMW   1
+#if SPH_SMALL_FOOTPRINT && !defined SPH_SMALL_FOOTPRINT_BGTC
+#define SPH_SMALL_FOOTPRINT_BGTC   1
 #endif
 
 #ifdef _MSC_VER
@@ -211,7 +211,7 @@ static const sph_u64 IV512[] = {
 
 #define Kb(j)   SPH_T64((sph_u64)(j) * SPH_C64(0x0555555555555555))
 
-#if SPH_SMALL_FOOTPRINT_BMW
+#if SPH_SMALL_FOOTPRINT_BGTC
 
 static const sph_u64 Kb_tab[] = {
 	Kb(16), Kb(17), Kb(18), Kb(19), Kb(20), Kb(21), Kb(22), Kb(23),
@@ -308,7 +308,7 @@ static const sph_u64 Kb_tab[] = {
 #define Ws14   MAKE_W(SPH_T32,  3, -,  5, +,  8, -, 11, -, 12)
 #define Ws15   MAKE_W(SPH_T32, 12, -,  4, -,  6, -,  9, +, 13)
 
-#if SPH_SMALL_FOOTPRINT_BMW
+#if SPH_SMALL_FOOTPRINT_BGTC
 
 #define MAKE_Qas   do { \
 		unsigned u; \
@@ -426,7 +426,7 @@ static const sph_u64 Kb_tab[] = {
 #define Wb14   MAKE_W(SPH_T64,  3, -,  5, +,  8, -, 11, -, 12)
 #define Wb15   MAKE_W(SPH_T64, 12, -,  4, -,  6, -,  9, +, 13)
 
-#if SPH_SMALL_FOOTPRINT_BMW
+#if SPH_SMALL_FOOTPRINT_BGTC
 
 #define MAKE_Qab   do { \
 		unsigned u; \

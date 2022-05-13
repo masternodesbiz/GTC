@@ -1,13 +1,13 @@
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019-2020 The MasterWin developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef MASTERNODEMAN_H
 #define MASTERNODEMAN_H
 
-#include "activemasternode.h"
 #include "base58.h"
 #include "key.h"
 #include "main.h"
@@ -19,14 +19,11 @@
 #define MASTERNODES_DUMP_SECONDS (15 * 60)
 #define MASTERNODES_DSEG_SECONDS (3 * 60 * 60)
 
+using namespace std;
 
 class CMasternodeMan;
-class CActiveMasternode;
 
 extern CMasternodeMan mnodeman;
-extern CActiveMasternode activeMasternode;
-extern std::string strMasterNodePrivKey;
-
 void DumpMasternodes();
 
 /** Access to the MN database (mncache.dat)
@@ -34,7 +31,7 @@ void DumpMasternodes();
 class CMasternodeDB
 {
 private:
-    fs::path pathMN;
+    boost::filesystem::path pathMN;
     std::string strMagicMessage;
 
 public:
@@ -57,10 +54,10 @@ class CMasternodeMan
 {
 private:
     // critical section to protect the inner data structures
-    mutable RecursiveMutex cs;
+    mutable CCriticalSection cs;
 
     // critical section to protect the inner data structures specifically on messaging
-    mutable RecursiveMutex cs_process_message;
+    mutable CCriticalSection cs_process_message;
 
     // map to hold all MNs
     std::vector<CMasternode> vMasternodes;
@@ -73,18 +70,17 @@ private:
 
 public:
     // Keep track of all broadcasts I've seen
-    std::map<uint256, CMasternodeBroadcast> mapSeenMasternodeBroadcast;
+    map<uint256, CMasternodeBroadcast> mapSeenMasternodeBroadcast;
     // Keep track of all pings I've seen
-    std::map<uint256, CMasternodePing> mapSeenMasternodePing;
+    map<uint256, CMasternodePing> mapSeenMasternodePing;
 
     // keep track of dsq count to prevent masternodes from gaming obfuscation queue
-    // TODO: Remove this from serialization
     int64_t nDsqCount;
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action)
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
     {
         LOCK(cs);
         READWRITE(vMasternodes);
@@ -98,12 +94,13 @@ public:
     }
 
     CMasternodeMan();
+    CMasternodeMan(CMasternodeMan& other);
 
     /// Add an entry
     bool Add(CMasternode& mn);
 
     /// Ask (source) node for mnb
-    void AskForMN(CNode* pnode, const CTxIn& vin);
+    void AskForMN(CNode* pnode, CTxIn& vin);
 
     /// Check all Masternodes
     void Check();
@@ -115,8 +112,10 @@ public:
     void Clear();
 
     int CountEnabled(int protocolVersion = -1);
+    int CountEnabledOnLevel (unsigned int mnLevel, int protocolVersion = -1);
 
     void CountNetworks(int protocolVersion, int& ipv4, int& ipv6, int& onion);
+    void CountNetworks (unsigned int masternodeLevel, int protocolVersion, int& ipv4, int& ipv6, int& onion);
 
     void DsegUpdate(CNode* pnode);
 
@@ -124,13 +123,17 @@ public:
     CMasternode* Find(const CScript& payee);
     CMasternode* Find(const CTxIn& vin);
     CMasternode* Find(const CPubKey& pubKeyMasternode);
-    CMasternode* Find(const CService &addr);
 
     /// Find an entry in the masternode list that is next to be paid
-    CMasternode* GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount, std::vector<std::pair<int64_t, CTxIn>>& vecMasternodeLastPaid);
+    CMasternode* GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount);
+    CMasternode* GetNextMasternodeInQueueForPayment (int nBlockHeight, unsigned int masternodeLevel, bool fFilterSigTime, int& nCount);
+
+    /// Find a random entry
+    CMasternode* FindRandomNotInVec(std::vector<CTxIn>& vecToExclude, int protocolVersion = -1);
 
     /// Get the current winner for this block
     CMasternode* GetCurrentMasterNode(int mod = 1, int64_t nBlockHeight = 0, int minProtocol = 0);
+    CMasternode* GetCurrentMasternodeOnLevel (unsigned int masternodeLevel, int mod = 1, int64_t nBlockHeight = 0, int minProtocol = 0);
 
     std::vector<CMasternode> GetFullMasternodeVector()
     {
@@ -138,25 +141,42 @@ public:
         return vMasternodes;
     }
 
-    std::vector<std::pair<int, CMasternode> > GetMasternodeRanks(int64_t nBlockHeight, int minProtocol = 0);
-    int GetMasternodeRank(const CTxIn& vin, int64_t nBlockHeight, int minProtocol = 0);
+    std::vector<pair<int, CMasternode> > GetMasternodeRanks(int64_t nBlockHeight, int minProtocol = 0);
+    int GetMasternodeRank(const CTxIn& vin, int64_t nBlockHeight, int minProtocol = 0, bool fOnlyActive = true);
+    CMasternode* GetMasternodeByRank(int nRank, int64_t nBlockHeight, int minProtocol = 0, bool fOnlyActive = true);
+
+    void ProcessMasternodeConnections();
 
     void ProcessMessage(CNode* pfrom, std::string& strCommand, CDataStream& vRecv);
 
     /// Return the number of (unique) Masternodes
-    int size() { return vMasternodes.size(); }
+    int size () {
+        return vMasternodes.size();
+    }
+    
+    int size (unsigned int masternodeLevel) {
+        int masternodeCount = 0;
+        
+        BOOST_FOREACH (CMasternode masternode, vMasternodes) {
+            if (masternode.GetPhase () == masternodeLevel)
+                masternodeCount++;
+        }
+        
+        return masternodeCount;
+    }
 
     /// Return the number of Masternodes older than (default) 8000 seconds
     int stable_size ();
+    int stable_size (unsigned int masternodeLevel);
 
     std::string ToString() const;
 
     void Remove(CTxIn vin);
 
+    int GetEstimatedMasternodes(int nBlock);
+
     /// Update masternode list and maps using provided CMasternodeBroadcast
     void UpdateMasternodeList(CMasternodeBroadcast mnb);
 };
-
-void ThreadCheckMasternodes();
 
 #endif

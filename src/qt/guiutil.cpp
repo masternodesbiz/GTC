@@ -1,7 +1,8 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019-2020 The MasterWin developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,7 +20,6 @@
 #include "script/script.h"
 #include "script/standard.h"
 #include "util.h"
-#include "qt/pivx/qtutils.h"
 
 #ifdef WIN32
 #ifdef _WIN32_WINNT
@@ -39,19 +39,22 @@
 #include "shlwapi.h"
 #endif
 
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/fstream.hpp>
+#if BOOST_FILESYSTEM_VERSION >= 3
+#include <boost/filesystem/detail/utf8_codecvt_facet.hpp>
+#endif
+
 #include <QAbstractItemView>
 #include <QApplication>
 #include <QClipboard>
 #include <QDateTime>
 #include <QDesktopServices>
 #include <QDesktopWidget>
-#include <QRegExp>
-#include <QRegularExpression>
-#include <QRegularExpressionValidator>
+#include <QDoubleValidator>
 #include <QFileDialog>
 #include <QFont>
 #include <QLineEdit>
-#include <QScreen>
 #include <QSettings>
 #include <QTextDocument> // for Qt::mightBeRichText
 #include <QThread>
@@ -59,7 +62,9 @@
 #include <QMouseEvent>
 
 
-static fs::detail::utf8_codecvt_facet utf8;
+#if BOOST_FILESYSTEM_VERSION >= 3
+static boost::filesystem::detail::utf8_codecvt_facet utf8;
+#endif
 
 #if defined(Q_OS_MAC)
 extern double NSAppKitVersionNumber;
@@ -71,28 +76,13 @@ extern double NSAppKitVersionNumber;
 #endif
 #endif
 
-#define URI_SCHEME "gtc"
-
-#if defined(Q_OS_MAC)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-#include <CoreServices/CoreServices.h>
-#include <QProcess>
-
-void ForceActivation();
-#endif
+#define URI_SCHEME "gastrocoin"
 
 namespace GUIUtil
 {
 QString dateTimeStr(const QDateTime& date)
 {
     return date.date().toString(Qt::SystemLocaleShortDate) + QString(" ") + date.toString("hh:mm");
-}
-
-QString dateTimeStrWithSeconds(const QDateTime& date)
-{
-    return date.date().toString(Qt::SystemLocaleShortDate) + QString(" ") + date.toString("hh:mm:ss");
 }
 
 QString dateTimeStr(qint64 nTime)
@@ -107,29 +97,6 @@ QFont bitcoinAddressFont()
     return font;
 }
 
-/**
- * Parse a string into a number of base monetary units and
- * return validity.
- * @note Must return 0 if !valid.
- */
-CAmount parseValue(const QString& text, int displayUnit, bool* valid_out)
-{
-    CAmount val = 0;
-    bool valid = BitcoinUnits::parse(displayUnit, text, &val);
-    if (valid) {
-        if (val < 0 || val > BitcoinUnits::maxMoney())
-            valid = false;
-    }
-    if (valid_out)
-        *valid_out = valid;
-    return valid ? val : 0;
-}
-
-QString formatBalance(CAmount amount, int nDisplayUnit, bool isZpiv)
-{
-    return (amount == 0) ? ("0.00 " + BitcoinUnits::name(nDisplayUnit, isZpiv)) : BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, amount, false, BitcoinUnits::separatorAlways, true, isZpiv);
-}
-
 void setupAddressWidget(QValidatedLineEdit* widget, QWidget* parent)
 {
     parent->setFocusProxy(widget);
@@ -137,29 +104,23 @@ void setupAddressWidget(QValidatedLineEdit* widget, QWidget* parent)
     widget->setFont(bitcoinAddressFont());
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter GTC address (e.g. %1)").arg("D7VFR83SQbiezrW72hjcWJtcfip5krte2Z"));
+    widget->setPlaceholderText(QObject::tr("Enter a GastroCoin address (e.g. %1)").arg("C6M1kT6PQaieDqNv2ajcTJtcfip2krta6a"));
     widget->setValidator(new BitcoinAddressEntryValidator(parent));
     widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));
 }
 
 void setupAmountWidget(QLineEdit* widget, QWidget* parent)
 {
-    QRegularExpression rx("^(\\d{0,8})((\\.|,)\\d{1,8})?$");
-    QValidator *validator = new QRegularExpressionValidator(rx, widget);
-    widget->setValidator(validator);
-}
-
-void updateWidgetTextAndCursorPosition(QLineEdit* widget, const QString& str)
-{
-    const int cpos = widget->cursorPosition();
-    widget->setText(str);
-    if (cpos > str.size()) return;
-    widget->setCursorPosition(cpos);
+    QDoubleValidator* amountValidator = new QDoubleValidator(parent);
+    amountValidator->setDecimals(8);
+    amountValidator->setBottom(0.0);
+    widget->setValidator(amountValidator);
+    widget->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 
 bool parseBitcoinURI(const QUrl& uri, SendCoinsRecipient* out)
 {
-    // return if URI is not valid or is no GTC: URI
+    // return if URI is not valid or is no GastroCoin: URI
     if (!uri.isValid() || uri.scheme() != QString(URI_SCHEME))
         return false;
 
@@ -190,7 +151,7 @@ bool parseBitcoinURI(const QUrl& uri, SendCoinsRecipient* out)
             fShouldReturnFalse = false;
         } else if (i->first == "amount") {
             if (!i->second.isEmpty()) {
-                if (!BitcoinUnits::parse(BitcoinUnits::PIV, i->second, &rv.amount)) {
+                if (!BitcoinUnits::parse(BitcoinUnits::GTC, i->second, &rv.amount)) {
                     return false;
                 }
             }
@@ -208,9 +169,9 @@ bool parseBitcoinURI(const QUrl& uri, SendCoinsRecipient* out)
 
 bool parseBitcoinURI(QString uri, SendCoinsRecipient* out)
 {
-    // Convert gtc:// to gtc:
+    // Convert gastrocoin:// to gastrocoin:
     //
-    //    Cannot handle this later, because gtc:// will cause Qt to see the part after // as host,
+    //    Cannot handle this later, because gastrocoin:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
     if (uri.startsWith(URI_SCHEME "://", Qt::CaseInsensitive)) {
         uri.replace(0, std::strlen(URI_SCHEME) + 3, URI_SCHEME ":");
@@ -225,7 +186,7 @@ QString formatBitcoinURI(const SendCoinsRecipient& info)
     int paramCount = 0;
 
     if (info.amount) {
-        ret += QString("?amount=%1").arg(BitcoinUnits::format(BitcoinUnits::PIV, info.amount, false, BitcoinUnits::separatorNever));
+        ret += QString("?amount=%1").arg(BitcoinUnits::format(BitcoinUnits::GTC, info.amount, false, BitcoinUnits::separatorNever));
         paramCount++;
     }
 
@@ -246,7 +207,7 @@ QString formatBitcoinURI(const SendCoinsRecipient& info)
 
 bool isDust(const QString& address, const CAmount& amount)
 {
-    CTxDestination dest = DecodeDestination(address.toStdString());
+    CTxDestination dest = CBitcoinAddress(address.toStdString()).Get();
     CScript script = GetScriptForDestination(dest);
     CTxOut txOut(amount, script);
     return txOut.IsDust(::minRelayTxFee);
@@ -279,17 +240,17 @@ void copyEntryData(QAbstractItemView* view, int column, int role)
     }
 }
 
-QVariant getEntryData(QAbstractItemView *view, int column, int role)
+QString getEntryData(QAbstractItemView *view, int column, int role)
 {
-    if (!view || !view->selectionModel())
-        return QVariant();
+    if(!view || !view->selectionModel())
+        return QString();
     QModelIndexList selection = view->selectionModel()->selectedRows(column);
 
-    if (!selection.isEmpty()) {
+    if(!selection.isEmpty()) {
         // Return first item
-        return (selection.at(0).data(role));
+        return (selection.at(0).data(role).toString());
     }
-    return QVariant();
+    return QString();
 }
 
 QString getSaveFileName(QWidget* parent, const QString& caption, const QString& dir, const QString& filter, QString* selectedSuffixOut)
@@ -380,58 +341,40 @@ bool isObscured(QWidget* w)
     return !(checkPoint(QPoint(0, 0), w) && checkPoint(QPoint(w->width() - 1, 0), w) && checkPoint(QPoint(0, w->height() - 1), w) && checkPoint(QPoint(w->width() - 1, w->height() - 1), w) && checkPoint(QPoint(w->width() / 2, w->height() / 2), w));
 }
 
-void bringToFront(QWidget* w)
+void openDebugLogfile()
 {
-#ifdef Q_OS_MAC
-    ForceActivation();
-#endif
+    boost::filesystem::path pathDebug = GetDataDir() / "debug.log";
 
-    if (w) {
-        // activateWindow() (sometimes) helps with keyboard focus on Windows
-        if (w->isMinimized()) {
-            w->showNormal();
-        } else {
-            w->show();
-        }
-        w->activateWindow();
-        w->raise();
-    }
+    /* Open debug.log with the associated application */
+    if (boost::filesystem::exists(pathDebug))
+        QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathDebug)));
 }
 
-/* Open file with the associated application */
-bool openFile(fs::path path, bool isTextFile)
+void openConfigfile()
 {
-    bool ret = false;
-    if (fs::exists(path)) {
-        ret = QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(path)));
-#ifdef Q_OS_MAC
-        // Workaround for macOS-specific behavior; see btc@15409.
-        if (isTextFile && !ret) {
-            ret = QProcess::startDetached("/usr/bin/open", QStringList{"-t", boostPathToQString(path)});
-        }
-#endif
-    }
-    return ret;
+    boost::filesystem::path pathConfig = GetConfigFile();
+
+    /* Open gastrocoin.conf with the associated application */
+    if (boost::filesystem::exists(pathConfig))
+        QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 }
 
-bool openDebugLogfile()
+void openMNConfigfile()
 {
-    return openFile(GetDataDir() / "debug.log", true);
+    boost::filesystem::path pathConfig = GetMasternodeConfigFile();
+
+    /* Open masternode.conf with the associated application */
+    if (boost::filesystem::exists(pathConfig))
+        QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 }
 
-bool openConfigfile()
+void showBackups()
 {
-    return openFile(GetConfigFile(), true);
-}
+    boost::filesystem::path pathBackups = GetDataDir() / "backups";
 
-bool openMNConfigfile()
-{
-    return openFile(GetMasternodeConfigFile(), true);
-}
-
-bool showBackups()
-{
-    return openFile(GetDataDir() / "backups", false);
+    /* Open folder with default browser */
+    if (boost::filesystem::exists(pathBackups))
+        QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathBackups)));
 }
 
 void SubstituteFonts(const QString& language)
@@ -494,15 +437,15 @@ bool ToolTipToRichTextFilter::eventFilter(QObject* obj, QEvent* evt)
 
 void TableViewLastColumnResizingFixer::connectViewHeadersSignals()
 {
-    connect(tableView->horizontalHeader(), &QHeaderView::sectionResized, this, &TableViewLastColumnResizingFixer::on_sectionResized);
-    connect(tableView->horizontalHeader(), &QHeaderView::geometriesChanged, this, &TableViewLastColumnResizingFixer::on_geometriesChanged);
+    connect(tableView->horizontalHeader(), SIGNAL(sectionResized(int, int, int)), this, SLOT(on_sectionResized(int, int, int)));
+    connect(tableView->horizontalHeader(), SIGNAL(geometriesChanged()), this, SLOT(on_geometriesChanged()));
 }
 
 // We need to disconnect these while handling the resize events, otherwise we can enter infinite loops.
 void TableViewLastColumnResizingFixer::disconnectViewHeadersSignals()
 {
-    disconnect(tableView->horizontalHeader(), &QHeaderView::sectionResized, this, &TableViewLastColumnResizingFixer::on_sectionResized);
-    disconnect(tableView->horizontalHeader(), &QHeaderView::geometriesChanged, this, &TableViewLastColumnResizingFixer::on_geometriesChanged);
+    disconnect(tableView->horizontalHeader(), SIGNAL(sectionResized(int, int, int)), this, SLOT(on_sectionResized(int, int, int)));
+    disconnect(tableView->horizontalHeader(), SIGNAL(geometriesChanged()), this, SLOT(on_geometriesChanged()));
 }
 
 // Setup the resize mode, handles compatibility for Qt5 and below as the method signatures changed.
@@ -518,13 +461,13 @@ void TableViewLastColumnResizingFixer::resizeColumn(int nColumnIndex, int width)
     tableView->horizontalHeader()->resizeSection(nColumnIndex, width);
 }
 
-int TableViewLastColumnResizingFixer::getColumnsWidth()
+int TableViewLastColumnResizingFixer::getColugtcWidth()
 {
-    int nColumnsWidthSum = 0;
+    int nColugtcWidthSum = 0;
     for (int i = 0; i < columnCount; i++) {
-        nColumnsWidthSum += tableView->horizontalHeader()->sectionSize(i);
+        nColugtcWidthSum += tableView->horizontalHeader()->sectionSize(i);
     }
-    return nColumnsWidthSum;
+    return nColugtcWidthSum;
 }
 
 int TableViewLastColumnResizingFixer::getAvailableWidthForColumn(int column)
@@ -533,22 +476,22 @@ int TableViewLastColumnResizingFixer::getAvailableWidthForColumn(int column)
     int nTableWidth = tableView->horizontalHeader()->width();
 
     if (nTableWidth > 0) {
-        int nOtherColsWidth = getColumnsWidth() - tableView->horizontalHeader()->sectionSize(column);
+        int nOtherColsWidth = getColugtcWidth() - tableView->horizontalHeader()->sectionSize(column);
         nResult = std::max(nResult, nTableWidth - nOtherColsWidth);
     }
 
     return nResult;
 }
 
-// Make sure we don't make the columns wider than the tables viewport width.
-void TableViewLastColumnResizingFixer::adjustTableColumnsWidth()
+// Make sure we don't make the colugtc wider than the tables viewport width.
+void TableViewLastColumnResizingFixer::adjustTableColugtcWidth()
 {
     disconnectViewHeadersSignals();
     resizeColumn(lastColumnIndex, getAvailableWidthForColumn(lastColumnIndex));
     connectViewHeadersSignals();
 
     int nTableWidth = tableView->horizontalHeader()->width();
-    int nColsWidth = getColumnsWidth();
+    int nColsWidth = getColugtcWidth();
     if (nColsWidth > nTableWidth) {
         resizeColumn(secondToLastColumnIndex, getAvailableWidthForColumn(secondToLastColumnIndex));
     }
@@ -565,7 +508,7 @@ void TableViewLastColumnResizingFixer::stretchColumnWidth(int column)
 // When a section is resized this is a slot-proxy for ajustAmountColumnWidth().
 void TableViewLastColumnResizingFixer::on_sectionResized(int logicalIndex, int oldSize, int newSize)
 {
-    adjustTableColumnsWidth();
+    adjustTableColugtcWidth();
     int remainingWidth = getAvailableWidthForColumn(logicalIndex);
     if (newSize > remainingWidth) {
         resizeColumn(logicalIndex, remainingWidth);
@@ -576,7 +519,7 @@ void TableViewLastColumnResizingFixer::on_sectionResized(int logicalIndex, int o
 // as the "Stretch" resize mode does not allow for interactive resizing.
 void TableViewLastColumnResizingFixer::on_geometriesChanged()
 {
-    if ((getColumnsWidth() - this->tableView->horizontalHeader()->width()) != 0) {
+    if ((getColugtcWidth() - this->tableView->horizontalHeader()->width()) != 0) {
         disconnectViewHeadersSignals();
         resizeColumn(secondToLastColumnIndex, getAvailableWidthForColumn(secondToLastColumnIndex));
         connectViewHeadersSignals();
@@ -585,16 +528,16 @@ void TableViewLastColumnResizingFixer::on_geometriesChanged()
 
 /**
  * Initializes all internal variables and prepares the
- * the resize modes of the last 2 columns of the table and
+ * the resize modes of the last 2 colugtc of the table and
  */
 TableViewLastColumnResizingFixer::TableViewLastColumnResizingFixer(QTableView* table, int lastColMinimumWidth, int allColsMinimumWidth) : tableView(table),
                                                                                                                                           lastColumnMinimumWidth(lastColMinimumWidth),
-                                                                                                                                          allColumnsMinimumWidth(allColsMinimumWidth)
+                                                                                                                                          allColugtcMinimumWidth(allColsMinimumWidth)
 {
     columnCount = tableView->horizontalHeader()->count();
     lastColumnIndex = columnCount - 1;
     secondToLastColumnIndex = columnCount - 2;
-    tableView->horizontalHeader()->setMinimumSectionSize(allColumnsMinimumWidth);
+    tableView->horizontalHeader()->setMinimumSectionSize(allColugtcMinimumWidth);
     setViewHeaderResizeMode(secondToLastColumnIndex, QHeaderView::Interactive);
     setViewHeaderResizeMode(lastColumnIndex, QHeaderView::Interactive);
 }
@@ -627,21 +570,21 @@ bool DHMSTableWidgetItem::operator<(QTableWidgetItem const& item) const
 }
 
 #ifdef WIN32
-fs::path static StartupShortcutPath()
+boost::filesystem::path static StartupShortcutPath()
 {
-    return GetSpecialFolderPath(CSIDL_STARTUP) / "gtc.lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / "GastroCoin.lnk";
 }
 
 bool GetStartOnSystemStartup()
 {
-    // check for gtc.lnk
-    return fs::exists(StartupShortcutPath());
+    // check for GastroCoin.lnk
+    return boost::filesystem::exists(StartupShortcutPath());
 }
 
 bool SetStartOnSystemStartup(bool fAutoStart)
 {
     // If the shortcut exists already, remove it for updating
-    fs::remove(StartupShortcutPath());
+    boost::filesystem::remove(StartupShortcutPath());
 
     if (fAutoStart) {
         CoInitialize(NULL);
@@ -695,8 +638,10 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 // Follow the Desktop Application Autostart Spec:
 //  http://standards.freedesktop.org/autostart-spec/autostart-spec-latest.html
 
-fs::path static GetAutostartDir()
+boost::filesystem::path static GetAutostartDir()
 {
+    namespace fs = boost::filesystem;
+
     char* pszConfigHome = getenv("XDG_CONFIG_HOME");
     if (pszConfigHome) return fs::path(pszConfigHome) / "autostart";
     char* pszHome = getenv("HOME");
@@ -704,14 +649,14 @@ fs::path static GetAutostartDir()
     return fs::path();
 }
 
-fs::path static GetAutostartFilePath()
+boost::filesystem::path static GetAutostartFilePath()
 {
-    return GetAutostartDir() / "gtc.desktop";
+    return GetAutostartDir() / "gastrocoin.desktop";
 }
 
 bool GetStartOnSystemStartup()
 {
-    fs::ifstream optionFile(GetAutostartFilePath());
+    boost::filesystem::ifstream optionFile(GetAutostartFilePath());
     if (!optionFile.good())
         return false;
     // Scan through file for "Hidden=true":
@@ -730,22 +675,22 @@ bool GetStartOnSystemStartup()
 bool SetStartOnSystemStartup(bool fAutoStart)
 {
     if (!fAutoStart)
-        fs::remove(GetAutostartFilePath());
+        boost::filesystem::remove(GetAutostartFilePath());
     else {
         char pszExePath[MAX_PATH + 1];
         memset(pszExePath, 0, sizeof(pszExePath));
         if (readlink("/proc/self/exe", pszExePath, sizeof(pszExePath) - 1) == -1)
             return false;
 
-        fs::create_directories(GetAutostartDir());
+        boost::filesystem::create_directories(GetAutostartDir());
 
-        fs::ofstream optionFile(GetAutostartFilePath(), std::ios_base::out | std::ios_base::trunc);
+        boost::filesystem::ofstream optionFile(GetAutostartFilePath(), std::ios_base::out | std::ios_base::trunc);
         if (!optionFile.good())
             return false;
-        // Write a gtc.desktop file to the autostart directory:
+        // Write a gastrocoin.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
-        optionFile << "Name=Gastrocoin\n";
+        optionFile << "Name=GastroCoin\n";
         optionFile << "Exec=" << pszExePath << " -min\n";
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -756,12 +701,17 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 
 
 #elif defined(Q_OS_MAC)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 // based on: https://github.com/Mozketo/LaunchAtLoginController/blob/master/LaunchAtLoginController.m
+
+#include <CoreFoundation/CoreFoundation.h>
+#include <CoreServices/CoreServices.h>
 
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl);
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl)
 {
-    // loop through the list of startup items and try to find the gtc app
+    // loop through the list of startup items and try to find the gastrocoin app
     CFArrayRef listSnapshot = LSSharedFileListCopySnapshot(list, NULL);
     for (int i = 0; i < CFArrayGetCount(listSnapshot); i++) {
         LSSharedFileListItemRef item = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(listSnapshot, i);
@@ -769,7 +719,7 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
         CFURLRef currentItemURL = NULL;
 
 #if defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= 10100
-    if (&LSSharedFileListItemCopyResolvedURL)
+    if(&LSSharedFileListItemCopyResolvedURL)
         currentItemURL = LSSharedFileListItemCopyResolvedURL(item, resolutionFlags, NULL);
 #if defined(MAC_OS_X_VERSION_MIN_REQUIRED) && MAC_OS_X_VERSION_MIN_REQUIRED < 10100
     else
@@ -779,7 +729,7 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
     LSSharedFileListItemResolve(item, resolutionFlags, &currentItemURL, NULL);
 #endif
 
-        if (currentItemURL && CFEqual(currentItemURL, findUrl)) {
+        if(currentItemURL && CFEqual(currentItemURL, findUrl)) {
             // found
             CFRelease(currentItemURL);
             return item;
@@ -806,7 +756,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
     LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, bitcoinAppUrl);
 
     if (fAutoStart && !foundItem) {
-        // add gtc app to startup item list
+        // add gastrocoin app to startup item list
         LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, NULL, NULL, bitcoinAppUrl, NULL, NULL);
     } else if (!fAutoStart && foundItem) {
         // remove item
@@ -839,7 +789,7 @@ void restoreWindowGeometry(const QString& strSetting, const QSize& defaultSize, 
     QSize size = settings.value(strSetting + "Size", defaultSize).toSize();
 
     if (!pos.x() && !pos.y()) {
-        QRect screen = QGuiApplication::primaryScreen()->geometry();
+        QRect screen = QApplication::desktop()->screenGeometry();
         pos.setX((screen.width() - size.width()) / 2);
         pos.setY((screen.height() - size.height()) / 2);
     }
@@ -854,7 +804,7 @@ bool isExternal(QString theme)
     if (theme.isEmpty())
         return false;
 
-    return (theme.operator!=("default") && theme.operator!=("default-dark"));
+    return (theme.operator!=("default"));
 }
 
 // Open CSS when configured
@@ -868,7 +818,7 @@ QString loadStyleSheet()
     if (isExternal(theme)) {
         // External CSS
         settings.setValue("fCSSexternal", true);
-        fs::path pathAddr = GetDataDir() / "themes/";
+        boost::filesystem::path pathAddr = GetDataDir() / "themes/";
         cssName = pathAddr.string().c_str() + theme + "/css/theme.css";
     } else {
         // Build-in CSS
@@ -876,8 +826,8 @@ QString loadStyleSheet()
         if (!theme.isEmpty()) {
             cssName = QString(":/css/") + theme;
         } else {
-            cssName = QString(":/css/default-dark");
-            setTheme(false);
+            cssName = QString(":/css/default");
+            settings.setValue("theme", "default");
         }
     }
 
@@ -895,15 +845,28 @@ void setClipboard(const QString& str)
     QApplication::clipboard()->setText(str, QClipboard::Selection);
 }
 
-fs::path qstringToBoostPath(const QString& path)
+#if BOOST_FILESYSTEM_VERSION >= 3
+boost::filesystem::path qstringToBoostPath(const QString& path)
 {
-    return fs::path(path.toStdString(), utf8);
+    return boost::filesystem::path(path.toStdString(), utf8);
 }
 
-QString boostPathToQString(const fs::path& path)
+QString boostPathToQString(const boost::filesystem::path& path)
 {
     return QString::fromStdString(path.string(utf8));
 }
+#else
+#warning Conversion between boost path and QString can use invalid character encoding with boost_filesystem v2 and older
+boost::filesystem::path qstringToBoostPath(const QString& path)
+{
+    return boost::filesystem::path(path.toStdString());
+}
+
+QString boostPathToQString(const boost::filesystem::path& path)
+{
+    return QString::fromStdString(path.string());
+}
+#endif
 
 QString formatDurationStr(int secs)
 {

@@ -116,7 +116,7 @@ extern "C"{
 /*
  * The AES*[] tables allow us to perform a fast evaluation of an AES
  * round; table AESi[] combines SubBytes for a byte at row i, and
- * MixColumns for the column where that byte goes after ShiftRows.
+ * MixColugtc for the column where that byte goes after ShiftRows.
  */
 
 static const sph_u32 AES0[256] = {

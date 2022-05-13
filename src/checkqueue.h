@@ -1,5 +1,4 @@
 // Copyright (c) 2012-2014 The Bitcoin developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,6 +8,7 @@
 #include <algorithm>
 #include <vector>
 
+#include <boost/foreach.hpp>
 #include <boost/thread/condition_variable.hpp>
 #include <boost/thread/locks.hpp>
 #include <boost/thread/mutex.hpp>
@@ -119,7 +119,7 @@ private:
                 fOk = fAllOk;
             }
             // execute work
-            for (T& check : vChecks)
+            BOOST_FOREACH (T& check, vChecks)
                 if (fOk)
                     fOk = check();
             vChecks.clear();
@@ -146,7 +146,7 @@ public:
     void Add(std::vector<T>& vChecks)
     {
         boost::unique_lock<boost::mutex> lock(mutex);
-        for (T& check : vChecks) {
+        BOOST_FOREACH (T& check, vChecks) {
             queue.push_back(T());
             check.swap(queue.back());
         }

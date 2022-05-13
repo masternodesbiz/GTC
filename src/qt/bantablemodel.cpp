@@ -1,6 +1,7 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2018-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2019-2020 The MasterWin developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,8 +13,6 @@
 
 #include "sync.h"
 #include "utiltime.h"
-
-#include <algorithm>
 
 #include <QDebug>
 #include <QList>
@@ -52,8 +51,7 @@ public:
     void refreshBanlist()
     {
         banmap_t banMap;
-        if(g_connman)
-            g_connman->GetBanned(banMap);
+        CNode::GetBanned(banMap);
 
         cachedBanlist.clear();
         cachedBanlist.reserve(banMap.size());
@@ -67,7 +65,7 @@ public:
 
         if (sortColumn >= 0)
             // sort cachedBanlist (use stable sort to prevent rows jumping around unneceesarily)
-            std::stable_sort(cachedBanlist.begin(), cachedBanlist.end(), BannedNodeLessThan(sortColumn, sortOrder));
+            qStableSort(cachedBanlist.begin(), cachedBanlist.end(), BannedNodeLessThan(sortColumn, sortOrder));
     }
 
     int size() const
@@ -88,7 +86,7 @@ BanTableModel::BanTableModel(ClientModel *parent) :
     QAbstractTableModel(parent),
     clientModel(parent)
 {
-    columns << tr("IP/Netmask") << tr("Banned Until");
+    colugtc << tr("IP/Netmask") << tr("Banned Until");
     priv.reset(new BanTablePriv());
     // default to unsorted
     priv->sortColumn = -1;
@@ -111,7 +109,7 @@ int BanTableModel::rowCount(const QModelIndex &parent) const
 int BanTableModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return columns.length();
+    return colugtc.length();
 }
 
 QVariant BanTableModel::data(const QModelIndex &index, int role) const
@@ -140,9 +138,9 @@ QVariant BanTableModel::headerData(int section, Qt::Orientation orientation, int
 {
     if(orientation == Qt::Horizontal)
     {
-        if(role == Qt::DisplayRole && section < columns.size())
+        if(role == Qt::DisplayRole && section < colugtc.size())
         {
-            return columns[section];
+            return colugtc[section];
         }
     }
     return QVariant();
@@ -151,7 +149,7 @@ QVariant BanTableModel::headerData(int section, Qt::Orientation orientation, int
 Qt::ItemFlags BanTableModel::flags(const QModelIndex &index) const
 {
     if(!index.isValid())
-        return Qt::NoItemFlags;
+        return 0;
 
     Qt::ItemFlags retval = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     return retval;

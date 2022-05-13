@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
-// Copyright (c) 2017-2019 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2021-2021 The GastroCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,8 +9,8 @@
 
 #include <QDialog>
 #include <QObject>
-#include <QMainWindow>
 
+class BitcoinGUI;
 class ClientModel;
 
 namespace Ui
@@ -33,6 +33,9 @@ public:
 private:
     Ui::HelpMessageDialog* ui;
     QString text;
+
+private slots:
+    void on_okButton_accepted();
 };
 
 
@@ -42,8 +45,8 @@ class ShutdownWindow : public QWidget
     Q_OBJECT
 
 public:
-    ShutdownWindow(QWidget* parent = nullptr, Qt::WindowFlags f = Qt::Widget);
-    static void showShutdownWindow(QMainWindow* window);
+    ShutdownWindow(QWidget* parent = 0, Qt::WindowFlags f = 0);
+    static void showShutdownWindow(BitcoinGUI* window);
 
 protected:
     void closeEvent(QCloseEvent* event);

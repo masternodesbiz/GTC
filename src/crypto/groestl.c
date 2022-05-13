@@ -66,7 +66,7 @@ extern "C"{
 /*
  * The internal representation may use either big-endian or
  * little-endian. Using the platform default representation speeds up
- * encoding and decoding between bytes and the matrix columns.
+ * encoding and decoding between bytes and the matrix colugtc.
  */
 
 #undef USE_LE

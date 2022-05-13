@@ -40,10 +40,10 @@ static const secp256k1_fe secp256k1_ecdsa_const_order_as_fe = SECP256K1_FE_CONST
  *  sage: b = 7
  *  sage: F = FiniteField (p)
  *  sage: '%x' % (p - EllipticCurve ([F (a), F (b)]).order())
- *   '14551231950b75fc4402da1722fc9baee'
+ *   '14551131650b75fc4402da1722fc9baee'
  */
 static const secp256k1_fe secp256k1_ecdsa_const_p_minus_order = SECP256K1_FE_CONST(
-    0, 0, 0, 1, 0x45512319UL, 0x50B75FC4UL, 0x402DA172UL, 0x2FC9BAEEUL
+    0, 0, 0, 1, 0x45511316UL, 0x50B75FC4UL, 0x402DA172UL, 0x2FC9BAEEUL
 );
 
 static int secp256k1_der_read_len(const unsigned char **sigp, const unsigned char *sigend) {

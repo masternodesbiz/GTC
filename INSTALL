@@ -1,4 +1,4 @@
-Building Gastrocoin
+Building GastroCoin
 
 Use the autogen script to prepare the build environment.
 
@@ -8,6 +8,6 @@ Use the autogen script to prepare the build environment.
 
 Always verify the signatures and checksums.
 
-See doc/build-*.md for instructions on building gtcd,
+See doc/build-*.md for instructions on building gastrocoind,
 the intended-for-services, no-graphical-interface, reference
-implementation of Gastrocoin.
+implementation of GastroCoin.
