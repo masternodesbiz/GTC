@@ -120,7 +120,7 @@ if test "x$want_boost" = "xyes"; then
 
     dnl first we check the system location for boost libraries
     dnl this location ist chosen if boost libraries are installed with the --layout=system option
-    dnl or if you install boost with GTC
+    dnl or if you install boost with RPM
     if test "$ac_boost_path" != ""; then
         BOOST_CPPFLAGS="-I$ac_boost_path/include"
         for ac_boost_path_tmp in $libsubdirs; do

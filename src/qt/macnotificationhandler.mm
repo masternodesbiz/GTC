@@ -1,7 +1,6 @@
 // Copyright (c) 2011-2013 The Bitcoin Core developers
-// Copyright (c) 2015-2018 The PIVX developers
-// Copyright (c) 2019-2020 The MasterWin developers
-// Copyright (c) 2021-2021 The GastroCoin developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2021-2022 The Gastrocoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,7 +15,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"io.gastrocoin.GastroCoin-Qt";
+        return @"io.gtc.Gastrocoin-Qt";
     } else {
         return [self __bundleIdentifier];
     }

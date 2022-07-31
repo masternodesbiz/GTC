@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2021-2021 The GastroCoin developers
+// Copyright (c) 2017-2019 The PIVX developers
+// Copyright (c) 2021-2022 The Gastrocoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -43,7 +43,7 @@ public:
     QString getAddress() const;
     void setAddress(const QString& address);
 
-public slots:
+public Q_SLOTS:
     void accept();
 
 private:

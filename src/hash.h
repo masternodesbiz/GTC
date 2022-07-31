@@ -1,35 +1,46 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The PIVX developers
-// Copyright (c) 2019-2020 The MasterWin developers
-// Copyright (c) 2021-2021 The GastroCoin developers
+// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2021-2022 The Gastrocoin Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GastroCoin_HASH_H
-#define GastroCoin_HASH_H
+#ifndef PIVX_HASH_H
+#define PIVX_HASH_H
 
 #include "crypto/ripemd160.h"
 #include "crypto/sha256.h"
+#include "prevector.h"
 #include "serialize.h"
 #include "uint256.h"
 #include "version.h"
 
+#include "crypto/sha512.h"
 #include "crypto/sph_blake.h"
 #include "crypto/sph_bmw.h"
+#include "crypto/sph_cubehash.h"
+#include "crypto/sph_echo.h"
+#include "crypto/sph_fugue.h"
 #include "crypto/sph_groestl.h"
+#include "crypto/sph_hamsi.h"
+#include "crypto/sph_haval.h"
 #include "crypto/sph_jh.h"
 #include "crypto/sph_keccak.h"
+#include "crypto/sph_luffa.h"
+#include "crypto/sph_sha2.h"
+#include "crypto/sph_shabal.h"
+#include "crypto/sph_shavite.h"
+#include "crypto/sph_simd.h"
 #include "crypto/sph_skein.h"
-#include "crypto/sha512.h"
+#include "crypto/sph_whirlpool.h"
 
 #include <iomanip>
 #include <openssl/sha.h>
 #include <sstream>
 #include <vector>
 
-using namespace std;
+#define _ALIGN(x) __attribute__ ((aligned(x)))
 
 typedef uint256 ChainCode;
 
@@ -114,7 +125,7 @@ GLOBAL sph_skein512_context z_skein;
     } while (0)
 
 #define ZBLAKE (memcpy(&ctx_blake, &z_blake, sizeof(z_blake)))
-#define ZBGTC (memcpy(&ctx_bmw, &z_bmw, sizeof(z_bmw)))
+#define ZBMW (memcpy(&ctx_bmw, &z_bmw, sizeof(z_bmw)))
 #define ZGROESTL (memcpy(&ctx_groestl, &z_groestl, sizeof(z_groestl)))
 #define ZJH (memcpy(&ctx_jh, &z_jh, sizeof(z_jh)))
 #define ZKECCAK (memcpy(&ctx_keccak, &z_keccak, sizeof(z_keccak)))
@@ -158,9 +169,9 @@ inline std::string Hash(std::string input)
     SHA256_Init(&sha256);
     SHA256_Update(&sha256, input.c_str(), input.size());
     SHA256_Final(hash, &sha256);
-    stringstream ss;
+    std::stringstream ss;
     for (int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
-        ss << hex << setw(2) << setfill('0') << (int)hash[i];
+        ss << std::hex << std::setw(2) << std::setfill('0') << (int)hash[i];
     }
     return ss.str();
 }
@@ -268,22 +279,32 @@ inline uint160 Hash160(const std::vector<unsigned char>& vch)
     return Hash160(vch.begin(), vch.end());
 }
 
+/** Compute the 160-bit hash of a vector. */
+template <unsigned int N>
+inline uint160 Hash160(const prevector<N, unsigned char>& vch)
+{
+    return Hash160(vch.begin(), vch.end());
+}
+
 /** A writer stream (for serialization) that computes a 256-bit hash. */
 class CHashWriter
 {
 private:
     CHash256 ctx;
 
+    const int nType;
+    const int nVersion;
+
 public:
-    int nType;
-    int nVersion;
 
     CHashWriter(int nTypeIn, int nVersionIn) : nType(nTypeIn), nVersion(nVersionIn) {}
 
-    CHashWriter& write(const char* pch, size_t size)
+    int GetType() const { return nType; }
+    int GetVersion() const { return nVersion; }
+
+    void write(const char* pch, size_t size)
     {
         ctx.Write((const unsigned char*)pch, size);
-        return (*this);
     }
 
     // invalidates the object
@@ -298,7 +319,42 @@ public:
     CHashWriter& operator<<(const T& obj)
     {
         // Serialize to this stream
-        ::Serialize(*this, obj, nType, nVersion);
+        ::Serialize(*this, obj);
+        return (*this);
+    }
+};
+
+/** Reads data from an underlying stream, while hashing the read data. */
+template<typename Source>
+class CHashVerifier : public CHashWriter
+{
+private:
+    Source* source;
+
+public:
+    CHashVerifier(Source* source_) : CHashWriter(source_->GetType(), source_->GetVersion()), source(source_) {}
+
+    void read(char* pch, size_t nSize)
+    {
+        source->read(pch, nSize);
+        this->write(pch, nSize);
+    }
+
+    void ignore(size_t nSize)
+    {
+        char data[1024];
+        while (nSize > 0) {
+            size_t now = std::min<size_t>(nSize, 1024);
+            read(data, now);
+            nSize -= now;
+        }
+    }
+
+    template <typename T>
+    CHashVerifier<Source>& operator>>(T& obj)
+    {
+        // Unserialize from this stream
+        ::Unserialize(*this, obj);
         return (*this);
     }
 };
@@ -323,7 +379,6 @@ void BIP32Hash(const ChainCode chainCode, unsigned int nChild, unsigned char hea
 /* ----------- Quark Hash ------------------------------------------------ */
 template <typename T1>
 inline uint256 HashQuark(const T1 pbegin, const T1 pend)
-
 {
     sph_blake512_context ctx_blake;
     sph_bmw512_context ctx_bmw;
@@ -344,7 +399,7 @@ inline uint256 HashQuark(const T1 pbegin, const T1 pend)
     sph_blake512_close(&ctx_blake, static_cast<void*>(&hash[0]));
 
     sph_bmw512_init(&ctx_bmw);
-    // ZBGTC;
+    // ZBMW;
     sph_bmw512(&ctx_bmw, static_cast<const void*>(&hash[0]), 64);
     sph_bmw512_close(&ctx_bmw, static_cast<void*>(&hash[1]));
 
@@ -377,7 +432,7 @@ inline uint256 HashQuark(const T1 pbegin, const T1 pend)
         sph_blake512_close(&ctx_blake, static_cast<void*>(&hash[5]));
     } else {
         sph_bmw512_init(&ctx_bmw);
-        // ZBGTC;
+        // ZBMW;
         sph_bmw512(&ctx_bmw, static_cast<const void*>(&hash[4]), 64);
         sph_bmw512_close(&ctx_bmw, static_cast<void*>(&hash[5]));
     }
@@ -408,4 +463,42 @@ inline uint256 HashQuark(const T1 pbegin, const T1 pend)
 
 void scrypt_hash(const char* pass, unsigned int pLen, const char* salt, unsigned int sLen, char* output, unsigned int N, unsigned int r, unsigned int p, unsigned int dkLen);
 
-#endif // GastroCoin_HASH_H
+
+/** SipHash-2-4 */
+class CSipHasher
+{
+private:
+    uint64_t v[4];
+    uint64_t tmp;
+    int count;
+
+public:
+    /** Construct a SipHash calculator initialized with 128-bit key (k0, k1) */
+    CSipHasher(uint64_t k0, uint64_t k1);
+    /** Hash a 64-bit integer worth of data
+     *  It is treated as if this was the little-endian interpretation of 8 bytes.
+     *  This function can only be used when a multiple of 8 bytes have been written so far.
+     */
+    CSipHasher& Write(uint64_t data);
+    /** Hash arbitrary bytes. */
+    CSipHasher& Write(const unsigned char* data, size_t size);
+    /** Compute the 64-bit SipHash-2-4 of the data written so far. The object remains untouched. */
+    uint64_t Finalize() const;
+};
+
+
+/** Optimized SipHash-2-4 implementation for uint256.
+ *
+ *  It is identical to:
+ *    SipHasher(k0, k1)
+ *      .Write(val.GetUint64(0))
+ *      .Write(val.GetUint64(1))
+ *      .Write(val.GetUint64(2))
+ *      .Write(val.GetUint64(3))
+ *      .Finalize()
+ */
+uint64_t SipHashUint256(uint64_t k0, uint64_t k1, const uint256& val);
+uint64_t SipHashUint256Extra(uint64_t k0, uint64_t k1, const uint256& val, uint32_t extra);
+
+#endif // PIVX_HASH_H
+
