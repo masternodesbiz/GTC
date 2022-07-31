@@ -3,12 +3,12 @@ Gastrocoin Standard wallet repository
 
 ### Coin Specs
 
-- PoW Algorithm: X11KVS
+- PoW Algorithm: Quark
 - Premine:  3,200,000 (Current supply of all coins for swapping to Gastrocoin)
 - PoW Blocks: 1 - 200
 - PoS Blocks: Starting from 201
 - Block Time: 60 Seconds
-- Maturity: 100 Confirmations
+- Maturity: 101 Confirmations
 - Prefix: GTC adresses start with the capital letter "G"
 - Ports: 8887 (p2p) / 8888 (rpc)
 
