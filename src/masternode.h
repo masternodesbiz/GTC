@@ -1,6 +1,6 @@
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2021-2023 The GastroCoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,6 +13,7 @@
 #include "messagesigner.h"
 #include "net.h"
 #include "sync.h"
+#include "spork.h"
 #include "timedata.h"
 #include "util.h"
 
@@ -113,7 +114,10 @@ private:
     // critical section to protect the inner data structures
     mutable RecursiveMutex cs;
     int64_t lastTimeChecked;
+    int64_t lastTimeCollateralChecked;
 
+    int64_t GetLastPaidV1(CBlockIndex* blockIndex, const CScript& mnpayee);
+    int64_t GetLastPaidV2(CBlockIndex* blockIndex, const CScript& mnpayee);
 public:
     enum state {
         MASTERNODE_PRE_ENABLED,
@@ -140,6 +144,7 @@ public:
     int nScanningErrorCount;
     int nLastScanningErrorBlockHeight;
     CMasternodePing lastPing;
+    int64_t lastPaid = INT64_MAX;
 
     CMasternode();
     CMasternode(const CMasternode& other);
@@ -265,19 +270,24 @@ public:
     bool IsInputAssociatedWithPubkey() const;
 
     static CAmount GetMasternodeNodeCollateral(int nHeight);
-    static CAmount GetCurrentMasternodeCollateral()  
+
+    static CAmount GetCurrentMasternodeCollateral()
     { 
         return GetMasternodeNodeCollateral(chainActive.Height()); 
     }
 
     static CAmount GetNextWeekMasternodeCollateral()
-    { 
-        return CMasternode::GetMasternodeNodeCollateral(
-            chainActive.Height() + 
-            (WEEK_IN_SECONDS / Params().GetConsensus().nTargetSpacing)
-        ); 
+    {
+        if(sporkManager.IsSporkActive(SPORK_115_MN_COLLATERAL_WINDOW)) {
+            return CMasternode::GetMasternodeNodeCollateral(
+                chainActive.Height() + 
+                (WEEK_IN_SECONDS / Params().GetConsensus().nTargetSpacing)
+            );
+        } else {
+            return GetCurrentMasternodeCollateral();
+        }
     }
-
+    
     static CAmount GetMinMasternodeCollateral()
     { 
         return std::min(

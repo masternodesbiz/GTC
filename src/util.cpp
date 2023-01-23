@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2021-2023 The GastroCoin Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,6 +21,8 @@
 
 #include <stdarg.h>
 #include <thread>
+#include <sstream>
+#include <iomanip>
 
 #include <boost/date_time/posix_time/posix_time.hpp>
 
@@ -87,19 +89,21 @@
 const char * const PIVX_CONF_FILENAME = "gastrocoin.conf";
 const char * const PIVX_PID_FILENAME = "gtc.pid";
 const char * const PIVX_MASTERNODE_CONF_FILENAME = "masternode.conf";
+const char * const PIVX_ACTIVE_MASTERNODE_CONF_FILENAME = "activemasternode.conf";
 
 
-// Gastrocoin only features
+// GastroCoin only features
 // Masternode
 bool fMasterNode = false;
-std::string strMasterNodePrivKey = "";
-std::string strMasterNodeAddr = "";
+bool fStaking = false;
+bool fStakingActive = false;
+bool fStakingStatus = false;
+bool fPrivacyMode = false;
 bool fLiteMode = false;
 
 /** Spork enforcement enabled time */
 int64_t enforceMasternodePaymentsTime = 4085657524;
 bool fSucessfullyLoaded = false;
-std::string strBudgetMode = "";
 
 std::map<std::string, std::string> mapArgs;
 std::map<std::string, std::vector<std::string> > mapMultiArgs;
@@ -314,65 +318,7 @@ fs::path GetDefaultDataDir()
 
 static fs::path pathCached;
 static fs::path pathCachedNetSpecific;
-static fs::path zc_paramsPathCached;
 static RecursiveMutex csPathCached;
-
-static fs::path ZC_GetBaseParamsDir()
-{
-    // Copied from GetDefaultDataDir and adapter for zcash params.
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\gtcParams
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\gtcParams
-    // Mac: ~/Library/Application Support/gtcParams
-    // Unix: ~/.gtc-params
-#ifdef WIN32
-    // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "GastrocoinParams";
-#else
-    fs::path pathRet;
-    char* pszHome = getenv("HOME");
-    if (pszHome == NULL || strlen(pszHome) == 0)
-        pathRet = fs::path("/");
-    else
-        pathRet = fs::path(pszHome);
-#ifdef MAC_OSX
-    // Mac
-    pathRet /= "Library/Application Support";
-    TryCreateDirectory(pathRet);
-    return pathRet / "GastrocoinParams";
-#else
-    // Unix
-    return pathRet / ".gtc-params";
-#endif
-#endif
-}
-
-const fs::path &ZC_GetParamsDir()
-{
-    LOCK(csPathCached); // Reuse the same lock as upstream.
-
-    fs::path &path = zc_paramsPathCached;
-
-    // This can be called during exceptions by LogPrintf(), so we cache the
-    // value so we don't have to do memory allocations after that.
-    if (!path.empty())
-        return path;
-
-#ifdef USE_CUSTOM_PARAMS
-    path = fs::system_complete(PARAMS_DIR);
-#else
-    if (mapArgs.count("-paramsdir")) {
-        path = fs::system_complete(mapArgs["-paramsdir"]);
-        if (!fs::is_directory(path)) {
-            path = "";
-            return path;
-        }
-    } else {
-        path = ZC_GetBaseParamsDir();
-    }
-#endif
-
-    return path;
-}
 
 const fs::path& GetDataDir(bool fNetSpecific)
 {
@@ -420,6 +366,12 @@ fs::path GetMasternodeConfigFile()
     return AbsPathForConfigVal(pathConfigFile);
 }
 
+fs::path GetActiveMasternodeConfigFile()
+{
+    fs::path pathConfigFile(GetArg("-activemnconf", PIVX_ACTIVE_MASTERNODE_CONF_FILENAME));
+    return AbsPathForConfigVal(pathConfigFile);
+}
+
 void ReadConfigFile(std::map<std::string, std::string>& mapSettingsRet,
     std::map<std::string, std::vector<std::string> >& mapMultiSettingsRet)
 {
@@ -446,8 +398,8 @@ void ReadConfigFile(std::map<std::string, std::string>& mapSettingsRet,
             strHeader += rpc_user;
             strHeader += "\nrpcpassword=";
             strHeader += rpc_passwd;
-	        strHeader += "\nrpcport=8888\naddnode=136.243.77.62:8887\naddnode=[2a01:4f8:212:2b15::61]:8887\naddnode=[2a01:4f8:212:2b15::62]:8887\n";
-		
+	        strHeader += "\nrpcport=8888\naddnode=seed1.gastrocoin.net:8887\naddnode=seed2.gastrocoin.net:8887\naddnode=seed3.gastrocoin.net:8887\naddnode=seed4.gastrocoin.net:8887\naddnode=seed5.gastrocoin.net:8887\naddnode=seed6.gastrocoin.net:8887\naddnode=seed7.gastrocoin.net:8887\naddnode=seed8.gastrocoin.net:8887\n";
+	
             fwrite(strHeader.c_str(), std::strlen(strHeader.c_str()), 1, configFile);
             fclose(configFile);
         }
@@ -459,7 +411,7 @@ void ReadConfigFile(std::map<std::string, std::string>& mapSettingsRet,
     setOptions.insert("*");
 
     for (boost::program_options::detail::config_file_iterator it(streamConfig, setOptions), end; it != end; ++it) {
-        // Don't overwrite existing settings so command line settings override gastrocoin.conf
+        // Don't overwrite existing settings so command line settings override gtc.conf
         std::string strKey = std::string("-") + it->string_key;
         std::string strValue = it->value[0];
         InterpretNegativeSetting(strKey, strValue);
@@ -715,4 +667,53 @@ void SetThreadPriority(int nPriority)
 int GetNumCores()
 {
     return std::thread::hardware_concurrency();
+}
+
+std::string GetReadableHashRate(uint64_t hashrate) 
+{
+    // Determine the suffix and readable value
+    std::string suffix;
+    double readable;
+    std::stringstream ss;
+
+    if (hashrate >= 1000000000000000000) // Exa
+    {
+        suffix = " EH/s";
+        readable = hashrate / 1000000000000000;
+    }
+    else if (hashrate >= 1000000000000000) // Peta
+    {
+        suffix = " PH/s";
+        readable = hashrate / 1000000000000;
+    }
+    else if (hashrate >= 1000000000000) // Tera
+    {
+        suffix = " TH/s";
+        readable = hashrate / 1000000000;
+    }
+    else if (hashrate >= 1000000000) // Giga
+    {
+        suffix = " GH/s";
+        readable = hashrate / 1000000;
+    }
+    else if (hashrate >= 1000000) // Mega
+    {
+        suffix = " MH/s";
+        readable = hashrate / 1000;
+    }
+    else if (hashrate >= 1000) // Kilo
+    {
+        suffix = " KH/s";
+        readable = hashrate;
+    }
+    else // regular
+    {
+        ss << readable << " H/s";
+        return ss.str();
+    }
+    // Divide by 1000 to get fractional value
+    readable = (readable / 1000);
+    // Return formatted number with suffix
+    ss << std::setprecision(3) << std::fixed << readable << suffix;
+    return ss.str();
 }

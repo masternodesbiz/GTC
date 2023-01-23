@@ -16,14 +16,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Gastrocoin"
-            VALUE "FileDescription",    "Gastrocoin-cli (OSS RPC client for Gastrocoin)"
+            VALUE "CompanyName",        "GastroCoin"
+            VALUE "FileDescription",    "GastroCoin-cli (OSS RPC client for GastroCoin)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "gtc-cli"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
             VALUE "OriginalFilename",   "gtc-cli.exe"
-            VALUE "ProductName",        "Gastrocoin-cli"
+            VALUE "ProductName",        "GastroCoin-cli"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

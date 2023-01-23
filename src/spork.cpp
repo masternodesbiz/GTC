@@ -1,6 +1,6 @@
 // Copyright (c) 2014-2016 The Dash developers
 // Copyright (c) 2016-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2021-2023 The GastroCoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,39 +15,41 @@
 #define MAKE_SPORK_DEF(name, defaultValue) CSporkDef(name, defaultValue, #name)
 
 std::vector<CSporkDef> sporkDefs = {
-    MAKE_SPORK_DEF(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT,       4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_14_MIN_PROTOCOL_ACCEPTED,               4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT,      4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_14_MIN_PROTOCOL_ACCEPTED,              4070908800ULL), // OFF
 
-    MAKE_SPORK_DEF(SPORK_101_SERVICES_ENFORCEMENT,               4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_102_FORCE_ENABLED_MASTERNODE ,          4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_103_PING_MESSAGE_SALT,                  0),             // OFF
-    MAKE_SPORK_DEF(SPORK_104_MAX_BLOCK_TIME,                     4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_105_MAX_BLOCK_SIZE,                     4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_106_STAKING_SKIP_MN_SYNC,               4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_107_IGNORE_COLLATERAL_CONFIRMATIONS,    4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_108_FORCE_MASTERNODE_MIN_AGE,           0),             // ON
-    MAKE_SPORK_DEF(SPORK_109_FORCE_ENABLED_VOTED_MASTERNODE,     4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_110_FORCE_ENABLED_MASTERNODE_PAYMENT,   4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_111_FORCE_ELIGIBLE_MASTERNODE_PAYMENT,  4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_112_MASTERNODE_LAST_PAID_V2,            4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_116_NEW_PROTOCOL_ENFORCEMENT,   	 4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_117_NEW_PROTOCOL_ENFORCEMENT_2,	 4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_101_SERVICES_ENFORCEMENT,              4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_102_FORCE_ENABLED_MASTERNODE ,         4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_103_PING_MESSAGE_SALT,                 0),             // OFF
+    MAKE_SPORK_DEF(SPORK_104_MAX_BLOCK_TIME,                    4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_105_MAX_BLOCK_SIZE,                    4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_106_STAKING_SKIP_MN_SYNC,              4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_107_IGNORE_COLLATERAL_CONFIRMATIONS,   4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_108_FORCE_MASTERNODE_MIN_AGE,          0),             // ON
+    MAKE_SPORK_DEF(SPORK_109_FORCE_ENABLED_VOTED_MASTERNODE,    4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_110_FORCE_ENABLED_MASTERNODE_PAYMENT,  4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_111_ALLOW_DUPLICATE_MN_IPS,            4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_112_MASTERNODE_LAST_PAID_V2,           4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_113_RECONSIDER_WINDOW_ENFORCEMENT,     4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_114_MN_PAYMENT_V2,                     4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_115_MN_COLLATERAL_WINDOW,              4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_116_NEW_PROTOCOL_ENFORCEMENT,   		4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_117_NEW_PROTOCOL_ENFORCEMENT_2,		4070908800ULL), // OFF
 
-
-    MAKE_SPORK_DEF(SPORK_2_NOOP,                            4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_3_NOOP,                            4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_5_NOOP,                            4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_7_NOOP,                            4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_9_NOOP,                            4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_10_NOOP,                           4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_11_NOOP,                           4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_12_NOOP,                           4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_13_NOOP,                           4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_15_NOOP,                           4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_16_NOOP,                           4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_17_NOOP,                           4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_18_NOOP,                           4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_19_NOOP,                           4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_2_NOOP,                                4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_3_NOOP,                                4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_5_NOOP,                                4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_7_NOOP,                                4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_9_NOOP,                                4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_10_NOOP,                               4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_11_NOOP,                               4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_12_NOOP,                               4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_13_NOOP,                               4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_15_NOOP,                               4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_16_NOOP,                               4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_17_NOOP,                               4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_18_NOOP,                               4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_19_NOOP,                               4070908800ULL), // OFF
 };
 
 CSporkManager sporkManager;
@@ -67,7 +69,7 @@ void CSporkManager::Clear()
     mapSporksActive.clear();
 }
 
-// Gastrocoin: on startup load spork values from previous session if they exist in the sporkDB
+// GastroCoin: on startup load spork values from previous session if they exist in the sporkDB
 void CSporkManager::LoadSporksFromDB()
 {
     for (const auto& sporkDef : sporkDefs) {
@@ -172,7 +174,7 @@ void CSporkManager::ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStr
         }
         spork.Relay();
 
-        // Gastrocoin: add to spork database.
+        // GastroCoin: add to spork database.
         pSporkDB->WriteSpork(spork.nSporkID, spork);
     }
     if (strCommand == NetMsgType::GETSPORKS) {

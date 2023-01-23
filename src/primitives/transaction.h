@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2015-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2021-2023 The GastroCoin Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -63,6 +63,12 @@ public:
 
 };
 
+struct COutPointCheapHasher {
+    int operator()(const COutPoint& vout) const {
+        return ((int)vout.hash.GetCheapHash()) ^ vout.n;
+    }
+};
+
 /** An input of a transaction.  It contains the location of the previous
  * transaction's output that it claims and a signature that matches the
  * output's public key.
@@ -97,9 +103,6 @@ public:
         return (nSequence == std::numeric_limits<uint32_t>::max());
     }
 
-    bool IsZerocoinSpend() const;
-    bool IsZerocoinPublicSpend() const;
-
     friend bool operator==(const CTxIn& a, const CTxIn& b)
     {
         return (a.prevout   == b.prevout &&
@@ -115,6 +118,16 @@ public:
     std::string ToString() const;
 
     size_t DynamicMemoryUsage() const { return scriptSig.DynamicMemoryUsage(); }
+};
+
+struct CTxInCheapHasher {
+    int operator()(const CTxIn& txin) const {
+        return 
+            COutPointCheapHasher{}(txin.prevout) ^
+            CScriptCheapHasher{}(txin.scriptSig) ^
+            txin.nSequence ^
+            CScriptCheapHasher{}(txin.prevPubKey);
+    }
 };
 
 /** An output of a transaction.  It contains the public key that the next input
@@ -189,8 +202,6 @@ public:
     {
         return (nValue < GetDustThreshold(minRelayTxFee));
     }
-
-    bool IsZerocoinMint() const;
 
     friend bool operator==(const CTxOut& a, const CTxOut& b)
     {
@@ -274,21 +285,9 @@ public:
     // Compute modified tx size for priority calculation (optionally given tx size)
     unsigned int CalculateModifiedSize(unsigned int nTxSize=0) const;
 
-    bool HasZerocoinSpendInputs() const;
-    bool HasZerocoinPublicSpendInputs() const;
-
-    bool HasZerocoinMintOutputs() const;
-
-    bool ContainsZerocoins() const
-    {
-        return HasZerocoinSpendInputs() || HasZerocoinMintOutputs();
-    }
-
-    CAmount GetZerocoinSpent() const;
-
     bool IsCoinBase() const
     {
-        return (vin.size() == 1 && vin[0].prevout.IsNull() && !ContainsZerocoins());
+        return (vin.size() == 1 && vin[0].prevout.IsNull());
     }
 
     bool IsCoinStake() const;

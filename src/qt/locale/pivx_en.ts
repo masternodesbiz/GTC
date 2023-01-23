@@ -940,7 +940,7 @@ for staking</source>
     </message>
     <message>
         <location line="-558"/>
-        <source>Amount of GTC and zGTC staked.</source>
+        <source>Amount of GTC staked.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1124,7 +1124,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <location line="+0"/>
-        <source>Gastrocoin</source>
+        <source>GastroCoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1135,7 +1135,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <location line="+6"/>
-        <source>About Gastrocoin</source>
+        <source>About GastroCoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1203,17 +1203,17 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <location line="+90"/>
-        <source>Welcome to Gastrocoin.</source>
+        <source>Welcome to GastroCoin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+35"/>
-        <source>As this is the first time the program is launched, you can choose where Gastrocoin will store its data.</source>
+        <source>As this is the first time the program is launched, you can choose where GastroCoin will store its data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>Gastrocoin will download and store a copy of the GTC block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <source>GastroCoin will download and store a copy of the GTC block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1238,7 +1238,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <location filename="../intro.cpp" line="+100"/>
-        <source>Gastrocoin</source>
+        <source>GastroCoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1640,7 +1640,7 @@ Please wait few more minutes (masternode collaterals require %1 confirmations).<
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the gastrocoin.conf file
+You will only have to paste the data in the gtc.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press &quot;start&quot;).
 </source>
@@ -1990,44 +1990,8 @@ NODES</source>
         <translation>Map port using &amp;UPnP</translation>
     </message>
     <message>
-        <location line="-187"/>
-        <source>Enable automatic minting of GTC units to zGTC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Enable zGTC Automint</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Enable automatic zGTC minting from specific addresses</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+6"/>
         <source>Enable Automint Addresses</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Percentage of incoming GTC which get automatically converted to zGTC via Zerocoin Protocol (min: 10%)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Percentage of autominted zGTC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <location line="+16"/>
-        <source>Wait with automatic conversion to Zerocoin until enough GTC for this denomination is available</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-13"/>
-        <source>Preferred Automint zGTC Denomination</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2225,7 +2189,7 @@ NODES</source>
         <location filename="../pivx/pivxgui.cpp" line="+69"/>
         <location line="+298"/>
         <location line="+69"/>
-        <source>Gastrocoin</source>
+        <source>GastroCoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2260,7 +2224,7 @@ NODES</source>
     </message>
     <message>
         <location line="+39"/>
-        <source>Gastrocoin client</source>
+        <source>GastroCoin client</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2530,7 +2494,7 @@ Address: %4
         <location line="+7"/>
         <location line="+13"/>
         <location line="+19"/>
-        <source>Gastrocoin</source>
+        <source>GastroCoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2555,7 +2519,7 @@ Address: %4
     </message>
     <message>
         <location line="+64"/>
-        <source>Gastrocoin didn&apos;t yet exit safely...</source>
+        <source>GastroCoin didn&apos;t yet exit safely...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3025,11 +2989,6 @@ Address: %4
     <message>
         <location line="+104"/>
         <source>Custom Backup Path:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Custom zGTC Backup Path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4415,13 +4374,12 @@ There was an error trying to save the address list to %1. Please try again.</sou
                            GTC is a form of digital online money using blockchain technology
                            that can be easily transferred globally, instantly, and with near
                            zero fees.  GTC incorporates market leading security &amp;
-                           privacy and is also the first PoS (Proof of Stake) Cryptocurrency
-                           to implement ZeroCoin(zGTC) and Zerocoin staking.
+                           privacy.
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
                            GTC utilizes a Proof of Stake (PoS) consensus system algorithm,
                            allowing all owners of GTC to participate in earning block rewards
                            while securing the network with full node wallets, as well as to
-                           run Masternodes to create and vote on proposals.
+                           run Masternodes to earn additional income regulary.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation type="unfinished"></translation>
@@ -4521,8 +4479,6 @@ There was an error trying to save the address list to %1. Please try again.</sou
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
 
                            &lt;ul&gt;
-                           &lt;li&gt;A decentralized governance (Proposal Voting)&lt;/li&gt;
-                           &lt;li&gt;A decentralized budgeting system (Treasury)&lt;/li&gt;
                            &lt;li&gt;Validation of transactions within each block&lt;/li&gt;
                            &lt;li&gt;Act as an additional full node in the network&lt;/li&gt;
                            &lt;/ul&gt;
@@ -4715,7 +4671,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
     </message>
     <message>
         <location line="+4"/>
-        <source>Unable to open gastrocoin.conf with default application</source>
+        <source>Unable to open gtc.conf with default application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5538,7 +5494,7 @@ Are you sure?
     <name>ShutdownWindow</name>
     <message>
         <location filename="../utilitydialog.cpp" line="+71"/>
-        <source>Gastrocoin is shutting down...</source>
+        <source>GastroCoin is shutting down...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5574,7 +5530,7 @@ Are you sure?
     </message>
     <message>
         <location filename="../pivx/splash.cpp" line="+30"/>
-        <source>Gastrocoin</source>
+        <source>GastroCoin</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5660,7 +5616,7 @@ Are you sure?
     </message>
     <message>
         <location line="+0"/>
-        <source>Staking not active</source>
+        <source>Staking inactive</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
@@ -6271,7 +6227,7 @@ Select fewer inputs with coin control.</source>
     <message>
         <location line="+89"/>
         <source>Welcome to
-Gastrocoin Wallet</source>
+GastroCoin Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6339,13 +6295,8 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="+5"/>
-        <source>Cannot obtain a lock on data directory %s. Gastrocoin is probably already running.</source>
+        <source>Cannot obtain a lock on data directory %s. GastroCoin is probably already running.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
-        <translation type="unfinished">Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -6361,11 +6312,6 @@ Gastrocoin Wallet</source>
         <location line="+3"/>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
         <translation type="unfinished">Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Delete all zerocoin spends and mints that have been recorded to the blockchain database and reindex them (0-1, default: %u)</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
@@ -6539,7 +6485,7 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="+3"/>
-        <source>Unable to bind to %s on this computer. Gastrocoin is probably already running.</source>
+        <source>Unable to bind to %s on this computer. GastroCoin is probably already running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6559,7 +6505,7 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Gastrocoin will not work properly.</source>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong GastroCoin will not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6733,11 +6679,6 @@ Gastrocoin Wallet</source>
         <translation type="unfinished">Error reading from database, shutting down.</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Error writing zerocoinDB to disk</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+1"/>
         <source>Error</source>
         <translation type="unfinished">Error</translation>
@@ -6819,7 +6760,7 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Initialization sanity check failed. Gastrocoin is shutting down.</source>
+        <source>Initialization sanity check failed. GastroCoin is shutting down.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6863,16 +6804,6 @@ Gastrocoin Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Reindexing zerocoin database...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Reindexing zerocoin failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+7"/>
         <source>Selected coins value is less than payment target</source>
         <translation type="unfinished"></translation>
@@ -6894,7 +6825,7 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="-144"/>
-        <source>Disable all GTC specific functionality (Masternodes, Zerocoin, Budgeting) (0-1, default: %u)</source>
+        <source>Disable all GTC specific functionality (Masternodes) (0-1, default: %u)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7014,16 +6945,6 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Failed to select a zerocoin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Failed to wipe zerocoinDB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Failed to write coin serial number into wallet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7066,11 +6987,6 @@ Gastrocoin Wallet</source>
         <location line="+1"/>
         <source>Loading block index...</source>
         <translation type="unfinished">Loading block index...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Loading budget cache...</source>
-        <translation type="unfinished">Loading budget cache...</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -7259,7 +7175,7 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="+7"/>
-        <source>Please check that your computer&apos;s date and time are correct! If your clock is wrong Gastrocoin will not work properly.</source>
+        <source>Please check that your computer&apos;s date and time are correct! If your clock is wrong GastroCoin will not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7314,7 +7230,7 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading %s: Wallet requires newer version of Gastrocoin</source>
+        <source>Error loading %s: Wallet requires newer version of GastroCoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7347,11 +7263,6 @@ Gastrocoin Wallet</source>
         <location line="+4"/>
         <source>Failed to accept tx in the memory pool (reason: %s)
 </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Failed to find Zerocoins in wallet database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7616,11 +7527,6 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Synchronizing budgets...</source>
-        <translation type="unfinished">Synchronizing budgets...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Synchronizing masternode winners...</source>
         <translation type="unfinished">Synchronizing masternode winners...</translation>
     </message>
@@ -7633,11 +7539,6 @@ Gastrocoin Wallet</source>
         <location line="+1"/>
         <source>Synchronizing sporks...</source>
         <translation type="unfinished">Synchronizing sporks...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Syncing zGTC wallet...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -7791,11 +7692,6 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Value is below the smallest available denomination (= 1) of zGTC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Verifying blocks...</source>
         <translation type="unfinished">Verifying blocks...</translation>
     </message>
@@ -7816,7 +7712,7 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Wallet needed to be rewritten: restart Gastrocoin to complete</source>
+        <source>Wallet needed to be rewritten: restart GastroCoin to complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7851,11 +7747,6 @@ Gastrocoin Wallet</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>You don&apos;t have enough Zerocoins in your wallet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>You need to rebuild the database using -reindex to change -txindex</source>
         <translation type="unfinished">You need to rebuild the database using -reindex to change -txindex</translation>
     </message>
@@ -7867,16 +7758,6 @@ Gastrocoin Wallet</source>
     <message>
         <location line="+1"/>
         <source>ZeroMQ notification options:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Zerocoin minting available only on regtest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Zerocoin options:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

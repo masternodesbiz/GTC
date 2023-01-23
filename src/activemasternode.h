@@ -1,12 +1,13 @@
 // Copyright (c) 2014-2016 The Dash developers
 // Copyright (c) 2015-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2021-2023 The GastroCoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef ACTIVEMASTERNODE_H
 #define ACTIVEMASTERNODE_H
 
+#include "activemasternodeconfig.h"
 #include "init.h"
 #include "key.h"
 #include "masternode.h"
@@ -37,9 +38,13 @@ public:
         status = ACTIVE_MASTERNODE_INITIAL;
     }
 
+    std::string strAlias {""};
+
     // Initialized by init.cpp
     // Keys for the main Masternode
     CPubKey pubKeyMasternode;
+
+    std::string strMasterNodePrivKey {""};
 
     // Initialized while registering Masternode
     Optional<CTxIn> vin;
@@ -55,4 +60,4 @@ public:
     bool EnableHotColdMasterNode(CTxIn& vin, CService& addr);
 };
 
-#endif
+#endif //ACTIVEMASTERNODE_H

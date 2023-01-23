@@ -700,8 +700,8 @@ for staking</source>
         <translation>Filter by</translation>
     </message>
     <message>
-        <source>Amount of GTC and zGTC staked.</source>
-        <translation>스테이킹 된 GTC와 zGTC 양</translation>
+        <source>Amount of GTC staked.</source>
+        <translation>스테이킹 된 GTC양</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -848,16 +848,16 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>버전</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About Gastrocoin</source>
-        <translation>Gastrocoin 정보</translation>
+        <source>About GastroCoin</source>
+        <translation>GastroCoin 정보</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -911,16 +911,16 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>환영합니다</translation>
     </message>
     <message>
-        <source>Welcome to Gastrocoin.</source>
-        <translation>Gastrocoin에 오신 것을 환영합니다.</translation>
+        <source>Welcome to GastroCoin.</source>
+        <translation>GastroCoin에 오신 것을 환영합니다.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Gastrocoin will store its data.</source>
-        <translation>이 프로그램이 처음 실행되었으므로 Gastrocoin가 데이터를 저장할 위치를 선택할 수 있습니다.</translation>
+        <source>As this is the first time the program is launched, you can choose where GastroCoin will store its data.</source>
+        <translation>이 프로그램이 처음 실행되었으므로 GastroCoin가 데이터를 저장할 위치를 선택할 수 있습니다.</translation>
     </message>
     <message>
-        <source>Gastrocoin will download and store a copy of the GTC block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Gastrocoin는 GTC 블록체인을 다운로드하여 저장합니다. 최소 %1GB의 데이터가 디렉토리에 저장되며 시간이 지날수록 증가합니다. 또한 지갑도 해당 디렉토리에 저장됩니다.</translation>
+        <source>GastroCoin will download and store a copy of the GTC block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>GastroCoin는 GTC 블록체인을 다운로드하여 저장합니다. 최소 %1GB의 데이터가 디렉토리에 저장되며 시간이 지날수록 증가합니다. 또한 지갑도 해당 디렉토리에 저장됩니다.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -939,8 +939,8 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>선택</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1241,7 +1241,7 @@ Please wait few more minutes (masternode collaterals require %1 confirmations).<
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the gastrocoin.conf file
+You will only have to paste the data in the gtc.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1249,7 +1249,7 @@ this controller wallet (select the Masternode in the list and press "start").
 클립보드로 내보내려고 합니다.
 
 
-그 데이터를 리모트 서버의 gastrocoin.conf 파일에
+그 데이터를 리모트 서버의 gtc.conf 파일에
 붙여넣고 시작합니다. 그리고 컨트롤러 지갑에서 마스터노드를
 시작합니다. (리스트에서 마스터노드를 선택하고 "시작"을 누르십시오.)
 </translation>
@@ -1500,36 +1500,8 @@ Are you sure?</source>
         <translation>&amp;UPnp를 사용하여 포트 매핑</translation>
     </message>
     <message>
-        <source>Enable automatic minting of GTC units to zGTC</source>
-        <translation>보상받은 GTC를 zGTC로 자동변환 활성화</translation>
-    </message>
-    <message>
-        <source>Enable zGTC Automint</source>
-        <translation>zGTC 자동생성 활성화</translation>
-    </message>
-    <message>
-        <source>Enable automatic zGTC minting from specific addresses</source>
-        <translation>특정 주소들로부터 자동으로 zGTC 민트되는 것을 허용</translation>
-    </message>
-    <message>
         <source>Enable Automint Addresses</source>
         <translation>Automint 주소 사용</translation>
-    </message>
-    <message>
-        <source>Percentage of incoming GTC which get automatically converted to zGTC via Zerocoin Protocol (min: 10%)</source>
-        <translation>GTC수신시 자동변환 zGTC 비율 (최소값:10%)</translation>
-    </message>
-    <message>
-        <source>Percentage of autominted zGTC</source>
-        <translation>자동 변환되는 zGTC 비율</translation>
-    </message>
-    <message>
-        <source>Wait with automatic conversion to Zerocoin until enough GTC for this denomination is available</source>
-        <translation>이 디노미네이션의 GTC가 충분해질 때까지 Zerocoin으로 자동전환은 보류됩니다.</translation>
-    </message>
-    <message>
-        <source>Preferred Automint zGTC Denomination</source>
-        <translation>선호하는 자동생성 zGTC 디노미네이션 </translation>
     </message>
     <message>
         <source>Stake split threshold:</source>
@@ -1683,8 +1655,8 @@ Are you sure?</source>
 <context>
     <name>PIVXGUI</name>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -1711,8 +1683,8 @@ Are you sure?</source>
         <translation>어플리케이션 종료</translation>
     </message>
     <message>
-        <source>Gastrocoin client</source>
-        <translation>Gastrocoin 클라이언트</translation>
+        <source>GastroCoin client</source>
+        <translation>GastroCoin 클라이언트</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1916,16 +1888,16 @@ Address: %4
         <translation>치명적인 오류가 발생하였습니다. GTC는 더 이상 안전하게 계속될 수 없으며, 곧 종료됩니다.</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
         <translation>Error: Specified data directory "%1" does not exist.</translation>
     </message>
     <message>
-        <source>Gastrocoin didn't yet exit safely...</source>
-        <translation>Gastrocoin가 아직 안전하게 종료되지 않았습니다....</translation>
+        <source>GastroCoin didn't yet exit safely...</source>
+        <translation>GastroCoin가 아직 안전하게 종료되지 않았습니다....</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -2209,10 +2181,6 @@ Address: %4
     <message>
         <source>Custom Backup Path:</source>
         <translation>맞춤 백업 경로 :</translation>
-    </message>
-    <message>
-        <source>Custom zGTC Backup Path:</source>
-        <translation>맞춤 zGTC 백업 경로 :</translation>
     </message>
     <message>
         <source>Custom Backups Threshold:</source>
@@ -3243,8 +3211,8 @@ Verify that you have installed a predetermined text editor.</source>
         <translation>백업 폴더를 열 수 없습니다.</translation>
     </message>
     <message>
-        <source>Unable to open gastrocoin.conf with default application</source>
-        <translation>gastrocoin.conf 파일을 기본 앱으로 열 수 없습니다.</translation>
+        <source>Unable to open gtc.conf with default application</source>
+        <translation>gtc.conf 파일을 기본 앱으로 열 수 없습니다.</translation>
     </message>
     <message>
         <source>In:</source>
@@ -3811,8 +3779,8 @@ Are you sure?
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Gastrocoin is shutting down...</source>
-        <translation>Gastrocoin가 종료됩니다...</translation>
+        <source>GastroCoin is shutting down...</source>
+        <translation>GastroCoin가 종료됩니다...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -3841,8 +3809,8 @@ Are you sure?
         <translation>로딩중...</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
 </context>
 <context>
@@ -3910,7 +3878,7 @@ Are you sure?
         <translation>스테이킹 활성화</translation>
     </message>
     <message>
-        <source>Staking not active</source>
+        <source>Staking inactive</source>
         <translation>스테이킹 비활성화</translation>
     </message>
     <message>
@@ -4263,9 +4231,9 @@ NOTE: 업그레이드 이후에는
     </message>
     <message>
         <source>Welcome to
-Gastrocoin Wallet</source>
+GastroCoin Wallet</source>
         <translation>환영합니다.
-Gastrocoin Wallet</translation>
+GastroCoin Wallet</translation>
     </message>
     <message>
         <source>GTC is the world’s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</source>
@@ -4311,12 +4279,8 @@ Gastrocoin Wallet</translation>
         <translation>JSON-RPC연결 수신을 위해 주어진 주소를 지정합니다. [host]: IPv6 포트 표기법 사용. 이 옵션은 여러번 지정할 수 있습니다. (기본값 : 모든 인터페이스에 지정)</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. Gastrocoin is probably already running.</source>
-        <translation>        &lt;translation&gt;잠겨진 데이터 디렉토리 %s 를 가져올 수 없습니다. Gastrocoin는 이미 실행 중입니다.</translation>
-    </message>
-    <message>
-        <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
-        <translation>최종 budget 투표 자동 작동 값을 변경합니다. mode=auto: 오직 내가 생성한 budget과 최종 budget이 정확히 일치할때 투표합니다. (string, 기본값: 자동)</translation>
+        <source>Cannot obtain a lock on data directory %s. GastroCoin is probably already running.</source>
+        <translation>        &lt;translation&gt;잠겨진 데이터 디렉토리 %s 를 가져올 수 없습니다. GastroCoin는 이미 실행 중입니다.</translation>
     </message>
     <message>
         <source>Continuously rate-limit free transactions to &lt;n&gt;*1000 bytes per minute (default:%u)</source>
@@ -4329,10 +4293,6 @@ Gastrocoin Wallet</translation>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
         <translation>지갑의 모든 트랜잭션들을 삭제하고 오직 블록체인을 통한 트랜잭션 부분들만 복구합니다 -시작 시 다시 스캔</translation>
-    </message>
-    <message>
-        <source>Delete all zerocoin spends and mints that have been recorded to the blockchain database and reindex them (0-1, default: %u)</source>
-        <translation>Delete all zerocoin spends and mints that have been recorded to the blockchain database and reindex them (0-1, default: %u)</translation>
     </message>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
@@ -4451,8 +4411,8 @@ Gastrocoin Wallet</translation>
         <translation>이 제품은 OpenSSL이 개발한 Open SSL 툴킷 &lt;https://www.openssl.org/&gt; 에서 사용하기 위한 프로젝트 소프트웨어, Eric Young이 개발한 암호화 소프트웨어, Thomas Bernard가 개발한 UPnP 소프트웨어가 포함되어 있습니다.</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. Gastrocoin is probably already running.</source>
-        <translation>이 컴퓨터를 %s 로 지정하는것은 불가능합니다. Gastrocoin는 이미 실행 중입니다.</translation>
+        <source>Unable to bind to %s on this computer. GastroCoin is probably already running.</source>
+        <translation>이 컴퓨터를 %s 로 지정하는것은 불가능합니다. GastroCoin는 이미 실행 중입니다.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
@@ -4467,8 +4427,8 @@ Gastrocoin Wallet</translation>
         <translation>경고 : -paytxfee가 매우 높게 설정되었습니다! 이것은 전송할 경우 지불 할 트랜잭션 수수료입니다.</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong Gastrocoin will not work properly.</source>
-        <translation>경고: 컴퓨터의 날짜와 시간이 올바르게 설정되어 있는지 확인해 주세요! 만일 시계가 잘못되어 있다면 Gastrocoin 코어는 정상적으로 작동하지 않을 수 있습니다.</translation>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong GastroCoin will not work properly.</source>
+        <translation>경고: 컴퓨터의 날짜와 시간이 올바르게 설정되어 있는지 확인해 주세요! 만일 시계가 잘못되어 있다면 GastroCoin 코어는 정상적으로 작동하지 않을 수 있습니다.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -4603,10 +4563,6 @@ Gastrocoin Wallet</translation>
         <translation>데이터베이스에서서 읽어오는 중 오류가 발생했습니다. 종료합니다.</translation>
     </message>
     <message>
-        <source>Error writing zerocoinDB to disk</source>
-        <translation>디스크에 zerocoinDB 쓰기 오류</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>에러</translation>
     </message>
@@ -4671,8 +4627,8 @@ Gastrocoin Wallet</translation>
         <translation>정보</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. Gastrocoin is shutting down.</source>
-        <translation>초기화 정확성 검사에 실패 했습니다. Gastrocoin가 종료됩니다.</translation>
+        <source>Initialization sanity check failed. GastroCoin is shutting down.</source>
+        <translation>초기화 정확성 검사에 실패 했습니다. GastroCoin가 종료됩니다.</translation>
     </message>
     <message>
         <source>Insufficient funds</source>
@@ -4707,14 +4663,6 @@ Gastrocoin Wallet</translation>
         <translation>GTC 공급 재계산중...</translation>
     </message>
     <message>
-        <source>Reindexing zerocoin database...</source>
-        <translation>제로코인 데이타베이스 재색인</translation>
-    </message>
-    <message>
-        <source>Reindexing zerocoin failed</source>
-        <translation>제로코인 재 인덱싱 실패</translation>
-    </message>
-    <message>
         <source>Selected coins value is less than payment target</source>
         <translation>지불대상보다 적은 코인 선택됨</translation>
     </message>
@@ -4723,8 +4671,8 @@ Gastrocoin Wallet</translation>
         <translation>이것은 사전 릴리스 테스트 빌드입니다 - 사용상 책임은 귀하에게 있습니다. - staking이나 상업적인 용도로는 절대 사용하지 마십시오!</translation>
     </message>
     <message>
-        <source>Disable all GTC specific functionality (Masternodes, Zerocoin, Budgeting) (0-1, default: %u)</source>
-        <translation>GTC의 모든 특정 기능들을 비활성화합니다(마스터노드, 난독화, Budgeting) (0-1, 기본값: %u)</translation>
+        <source>Disable all GTC specific functionality (Masternodes) (0-1, default: %u)</source>
+        <translation>GTC의 모든 특정 기능들을 비활성화합니다(마스터노드) (0-1, 기본값: %u)</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -checklevel found. Checklevel must be level 4.</source>
@@ -4791,14 +4739,6 @@ Gastrocoin Wallet</translation>
         <translation>Error: 유효하지 않는 utxo!</translation>
     </message>
     <message>
-        <source>Failed to select a zerocoin</source>
-        <translation>제로코인 선택 실패</translation>
-    </message>
-    <message>
-        <source>Failed to wipe zerocoinDB</source>
-        <translation>제로코인 DB 삭제 실패</translation>
-    </message>
-    <message>
         <source>Failed to write coin serial number into wallet</source>
         <translation>지갑에 코인 시리얼 번호 작성 실패</translation>
     </message>
@@ -4833,10 +4773,6 @@ Gastrocoin Wallet</translation>
     <message>
         <source>Loading block index...</source>
         <translation>블록 인덱스를 불러오는 중...</translation>
-    </message>
-    <message>
-        <source>Loading budget cache...</source>
-        <translation>budget 캐시를 불러오는 중...</translation>
     </message>
     <message>
         <source>Loading masternode cache...</source>
@@ -4939,8 +4875,8 @@ Gastrocoin Wallet</translation>
         <translation>재동기화 준비중...</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong Gastrocoin will not work properly.</source>
-        <translation>컴퓨터의 날짜와 시간이 올바르게 설정되어 있는지 확인해 주세요! 만일 시계가 잘못되어 있다면 Gastrocoin 코어는 정상적으로 작동하지 않을 수 있습니다.</translation>
+        <source>Please check that your computer's date and time are correct! If your clock is wrong GastroCoin will not work properly.</source>
+        <translation>컴퓨터의 날짜와 시간이 올바르게 설정되어 있는지 확인해 주세요! 만일 시계가 잘못되어 있다면 GastroCoin 코어는 정상적으로 작동하지 않을 수 있습니다.</translation>
     </message>
     <message>
         <source>Cannot resolve -%s address: '%s'</source>
@@ -5099,10 +5035,6 @@ Gastrocoin Wallet</translation>
         <translation>동기화 완료</translation>
     </message>
     <message>
-        <source>Synchronizing budgets...</source>
-        <translation>budgets 동기화 중입니다...</translation>
-    </message>
-    <message>
         <source>Synchronizing masternode winners...</source>
         <translation>마스터노드 승자를 동기화 중입니다...</translation>
     </message>
@@ -5113,10 +5045,6 @@ Gastrocoin Wallet</translation>
     <message>
         <source>Synchronizing sporks...</source>
         <translation>sporks와 동기화 중입니다...</translation>
-    </message>
-    <message>
-        <source>Syncing zGTC wallet...</source>
-        <translation>zGTC 지갑 동기화중...</translation>
     </message>
     <message>
         <source>This help message</source>
@@ -5211,10 +5139,6 @@ Gastrocoin Wallet</translation>
         <translation>JSON-RPC 연결 사용자 이름</translation>
     </message>
     <message>
-        <source>Value is below the smallest available denomination (= 1) of zGTC</source>
-        <translation>Value is below the smallest available denomination (= 1) of zGTC</translation>
-    </message>
-    <message>
         <source>Verifying blocks...</source>
         <translation>블록 인증 중...</translation>
     </message>
@@ -5227,8 +5151,8 @@ Gastrocoin Wallet</translation>
         <translation>지갑 %s 가 데이터 디렉토리 외부에 존재합니다 %s</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Gastrocoin to complete</source>
-        <translation>지갑을 다시 작성해야 합니다: 완료하려면 Gastrocoin 코어를 재시작해야 합니다</translation>
+        <source>Wallet needed to be rewritten: restart GastroCoin to complete</source>
+        <translation>지갑을 다시 작성해야 합니다: 완료하려면 GastroCoin 코어를 재시작해야 합니다</translation>
     </message>
     <message>
         <source>Wallet options:</source>
@@ -5255,10 +5179,6 @@ Gastrocoin Wallet</translation>
         <translation>경고 : 지원하지 않는 인수 -debugnet 무시됨 -debug=net를 사용하십시오.</translation>
     </message>
     <message>
-        <source>You don't have enough Zerocoins in your wallet</source>
-        <translation>지갑에 zGTC 가 부족합니다.</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex to change -txindex</source>
         <translation>-treindex를 변경하려면 -reindex를 사용하여 데이터베이스를 다시 빌드해야합니다.</translation>
     </message>
@@ -5269,10 +5189,6 @@ Gastrocoin Wallet</translation>
     <message>
         <source>ZeroMQ notification options:</source>
         <translation>ZeroMQ 알림 옵션:</translation>
-    </message>
-    <message>
-        <source>Zerocoin options:</source>
-        <translation>제로코인 옵션:</translation>
     </message>
     <message>
         <source>on startup</source>

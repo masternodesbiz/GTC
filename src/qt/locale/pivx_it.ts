@@ -747,8 +747,8 @@ per lo staking</translation>
         <translation>Filtra per</translation>
     </message>
     <message>
-        <source>Amount of GTC and zGTC staked.</source>
-        <translation>Quantità di GTC e zGTC dallo stake.</translation>
+        <source>Amount of GTC staked.</source>
+        <translation>Quantità di GTC in staking.</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -896,16 +896,16 @@ Si avvierà automaticamente non appena il portafoglio avrà sufficienti conferme
         <translation>versione</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About Gastrocoin</source>
-        <translation>Informazioni su Gastrocoin</translation>
+        <source>About GastroCoin</source>
+        <translation>Informazioni su GastroCoin</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -959,16 +959,16 @@ Si avvierà automaticamente non appena il portafoglio avrà sufficienti conferme
         <translation>Benvenuto</translation>
     </message>
     <message>
-        <source>Welcome to Gastrocoin.</source>
-        <translation>Benvenuto in Gastrocoin.</translation>
+        <source>Welcome to GastroCoin.</source>
+        <translation>Benvenuto in GastroCoin.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Gastrocoin will store its data.</source>
-        <translation>Essendo il primo avvio dell'applicazione, puoi scegliere dove Gastrocoin salverà i propri dati.</translation>
+        <source>As this is the first time the program is launched, you can choose where GastroCoin will store its data.</source>
+        <translation>Essendo il primo avvio dell'applicazione, puoi scegliere dove GastroCoin salverà i propri dati.</translation>
     </message>
     <message>
-        <source>Gastrocoin will download and store a copy of the GTC block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Gastrocoin scaricherà e salverà una copia della blockchain GTC. Verranno salvati almeno %1GB di dati in questa cartella, che cresceranno nel tempo. In questa cartella verrà salvato anche il portafoglio.</translation>
+        <source>GastroCoin will download and store a copy of the GTC block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>GastroCoin scaricherà e salverà una copia della blockchain GTC. Verranno salvati almeno %1GB di dati in questa cartella, che cresceranno nel tempo. In questa cartella verrà salvato anche il portafoglio.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -987,8 +987,8 @@ Si avvierà automaticamente non appena il portafoglio avrà sufficienti conferme
         <translation>OK</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1322,7 +1322,7 @@ Per favore, attendi qualche minuto (il collaterale del masternode richiede %1 co
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the gastrocoin.conf file
+You will only have to paste the data in the gtc.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1330,7 +1330,7 @@ this controller wallet (select the Masternode in the list and press "start").
 un Masternode su un server remoto .
 
 
-Dovrai solo incollare i dati nel file gastrocoin.conf del server remoto
+Dovrai solo incollare i dati nel file gtc.conf del server remoto
 e avviarlo, quindi avviare il Masternode utilizzando questo portafoglio
 come controller (selezionare il Masternode nell'elenco e premere "start").
 </translation>
@@ -1626,36 +1626,8 @@ NODE</translation>
         <translation>Mappa la porta utilizzando &amp;UPnP</translation>
     </message>
     <message>
-        <source>Enable automatic minting of GTC units to zGTC</source>
-        <translation>Attiva la forgiatura automatica di unità GTC in zGTC</translation>
-    </message>
-    <message>
-        <source>Enable zGTC Automint</source>
-        <translation>Attiva forgiatura automatica zGTC</translation>
-    </message>
-    <message>
-        <source>Enable automatic zGTC minting from specific addresses</source>
-        <translation>Attiva la forgiatura automatica di zGTC da indirizzi specifici</translation>
-    </message>
-    <message>
         <source>Enable Automint Addresses</source>
         <translation>Abilita indirizzi forgiatura automatica</translation>
-    </message>
-    <message>
-        <source>Percentage of incoming GTC which get automatically converted to zGTC via Zerocoin Protocol (min: 10%)</source>
-        <translation>Percentuale di GTC in entrata che viene automaticamente convertita in zGTC attraverso il protocollo Zerocoin (min: 10%)</translation>
-    </message>
-    <message>
-        <source>Percentage of autominted zGTC</source>
-        <translation>Percentuale di zGTC Percentuale di zGTC da forgiare automaticamente</translation>
-    </message>
-    <message>
-        <source>Wait with automatic conversion to Zerocoin until enough GTC for this denomination is available</source>
-        <translation>Attendere la conversione automatica in Zerocoin fino a quando non saranno disponibili abbastanza GTC per questa denominazione</translation>
-    </message>
-    <message>
-        <source>Preferred Automint zGTC Denomination</source>
-        <translation>Denominazione preferita forgiatura automatica zGTC</translation>
     </message>
     <message>
         <source>Stake split threshold:</source>
@@ -1809,8 +1781,8 @@ NODE</translation>
 <context>
     <name>PIVXGUI</name>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -1837,8 +1809,8 @@ NODE</translation>
         <translation>Chiude l'applicazione</translation>
     </message>
     <message>
-        <source>Gastrocoin client</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin client</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2042,8 +2014,8 @@ Indirizzo: %4
         <translation>Si è verificato un errore irreversibile. GTC non può più continuare in modo sicuro e verrà chiuso.</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
@@ -2062,8 +2034,8 @@ Indirizzo: %4
         <translation>Errore durante la lettura del file di configurazione del Masternode: %1</translation>
     </message>
     <message>
-        <source>Gastrocoin didn't yet exit safely...</source>
-        <translation>Gastrocoin non è ancora uscito in modo sicuro...</translation>
+        <source>GastroCoin didn't yet exit safely...</source>
+        <translation>GastroCoin non è ancora uscito in modo sicuro...</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -2415,10 +2387,6 @@ Indirizzo: %4
     <message>
         <source>Custom Backup Path:</source>
         <translation>Percorso di backup personalizzato:</translation>
-    </message>
-    <message>
-        <source>Custom zGTC Backup Path:</source>
-        <translation>Percorso di backup zGTC personalizzato:</translation>
     </message>
     <message>
         <source>Custom Backups Threshold:</source>
@@ -3532,22 +3500,19 @@ Si è verificato un errore nel tentativo di salvare l'elenco degli indirizzi in 
                            GTC is a form of digital online money using blockchain technology
                            that can be easily transferred globally, instantly, and with near
                            zero fees.  GTC incorporates market leading security &amp;
-                           privacy and is also the first PoS (Proof of Stake) Cryptocurrency
-                           to implement ZeroCoin(zGTC) and Zerocoin staking.
+                           privacy.
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            GTC utilizes a Proof of Stake (PoS) consensus system algorithm,
                            allowing all owners of GTC to participate in earning block rewards
                            while securing the network with full node wallets, as well as to
-                           run Masternodes to create and vote on proposals.
+                           run Masternodes to earn additional income regulary.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
 &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
 GTC è una forma di denaro online digitale che utilizza la tecnologia blockchain
 che può essere facilmente trasferito a livello globale, istantaneamente e con quasi
-zero costi. GTC incorpora le tecniche di sicurezza e privacy più avanzate del mercato
-ed è anche la prima criptovaluta PoS (Proof of Stake)
-ad implementare lo staking di ZeroCoin (zGTC) e Zerocoin.
+zero costi. GTC incorpora le tecniche di sicurezza e privacy.
 &lt;/p&gt;&lt;p align="justify"&gt;
 GTC utilizza un algoritmo del sistema di consenso Proof of Stake (PoS),
 consentendo a tutti i proprietari di GTC di partecipare alle ricompense dei blocchi
@@ -3650,8 +3615,6 @@ per vedere e spendere i saldi sulla rete.
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            &lt;ul&gt;
-                           &lt;li&gt;A decentralized governance (Proposal Voting)&lt;/li&gt;
-                           &lt;li&gt;A decentralized budgeting system (Treasury)&lt;/li&gt;
                            &lt;li&gt;Validation of transactions within each block&lt;/li&gt;
                            &lt;li&gt;Act as an additional full node in the network&lt;/li&gt;
                            &lt;/ul&gt;
@@ -3691,8 +3654,6 @@ regolarmente. Questi servizi includono:
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            &lt;ul&gt;
-                           &lt;li&gt;Una governance decentrata (votazione della proposta)&lt;/li&gt;
-                           &lt;li&gt;Un sistema di bilancio decentralizzato (Tesoreria)&lt;/li&gt;
                            &lt;li&gt;Convalida delle transazioni all'interno di ciascun blocco&lt;/li&gt;
                            &lt;li&gt;Funziona come un nodo completo aggiuntivo nella rete&lt;/li&gt;
                            &lt;/ul&gt;
@@ -3852,8 +3813,8 @@ regolarmente. Questi servizi includono:
         <translation>Impossibile aprire la cartella dei backup</translation>
     </message>
     <message>
-        <source>Unable to open gastrocoin.conf with default application</source>
-        <translation>Impossibile aprire gastrocoin.conf con l'applicazione predefinita</translation>
+        <source>Unable to open gtc.conf with default application</source>
+        <translation>Impossibile aprire gtc.conf con l'applicazione predefinita</translation>
     </message>
     <message>
         <source>In:</source>
@@ -4514,8 +4475,8 @@ Sei sicuro?
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Gastrocoin is shutting down...</source>
-        <translation>Gastrocoin si sta spegnendo...</translation>
+        <source>GastroCoin is shutting down...</source>
+        <translation>GastroCoin si sta spegnendo...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -4544,8 +4505,8 @@ Sei sicuro?
         <translation>Caricamento...</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
 </context>
 <context>
@@ -4613,7 +4574,7 @@ Sei sicuro?
         <translation>Stacking attivo</translation>
     </message>
     <message>
-        <source>Staking not active</source>
+        <source>Staking inactive</source>
         <translation>Stacking non attivo</translation>
     </message>
     <message>
@@ -5064,9 +5025,9 @@ Selezionare meno ingressi con controllo coin.</translation>
     </message>
     <message>
         <source>Welcome to
-Gastrocoin Wallet</source>
+GastroCoin Wallet</source>
         <translation>Benvenuto in
-Portafoglio Gastrocoin.</translation>
+Portafoglio GastroCoin.</translation>
     </message>
     <message>
         <source>GTC is the world’s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</source>
@@ -5116,12 +5077,8 @@ Portafoglio Gastrocoin.</translation>
         <translation>Associa l'indirizzo indicato per ascoltare le connessioni JSON-RPC. Usa la notazione [host]:porta per IPv6. Questa opzione può essere specificata più volte (impostazione predefinita: associa a tutte le interfacce)</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. Gastrocoin is probably already running.</source>
-        <translation>Impossibile allocare la directory di dati %s. Probabilmente Gastrocoin è già in esecuzione.</translation>
-    </message>
-    <message>
-        <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
-        <translation>Modifica il comportamento di votazione automatica del budget finalizzato. mode=auto: vota solo per la corrispondenza esatta del budget finalizzato al mio budget generato. (stringa, impostazione predefinita: auto)</translation>
+        <source>Cannot obtain a lock on data directory %s. GastroCoin is probably already running.</source>
+        <translation>Impossibile allocare la directory di dati %s. Probabilmente GastroCoin è già in esecuzione.</translation>
     </message>
     <message>
         <source>Continuously rate-limit free transactions to &lt;n&gt;*1000 bytes per minute (default:%u)</source>
@@ -5134,10 +5091,6 @@ Portafoglio Gastrocoin.</translation>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
         <translation>Elimina tutte le transazioni del portafoglio e recupera solo quelle parti della blockchain tramite -rescan all'avvio</translation>
-    </message>
-    <message>
-        <source>Delete all zerocoin spends and mints that have been recorded to the blockchain database and reindex them (0-1, default: %u)</source>
-        <translation>Elimina tutte le spese e forgiature zerocoin che sono state registrate nella blockchain e le reindicizza (0-1, impostazione predefinita: %u)</translation>
     </message>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
@@ -5276,8 +5229,8 @@ Portafoglio Gastrocoin.</translation>
         <translation>La lunghezza totale della stringa della versione di rete (%i) supera la lunghezza massima (%i). Ridurre il numero o la dimensione degli uacomments.</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. Gastrocoin is probably already running.</source>
-        <translation>Impossibile associare %s su questo computer. Probabilmente Gastrocoin è già in esecuzione.</translation>
+        <source>Unable to bind to %s on this computer. GastroCoin is probably already running.</source>
+        <translation>Impossibile associare %s su questo computer. Probabilmente GastroCoin è già in esecuzione.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
@@ -5292,8 +5245,8 @@ Portafoglio Gastrocoin.</translation>
         <translation>Attenzione: -paytxfee è impostato molto alto! Questa è la commissione di transazione che dovrai pagare se invii una transazione.</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong Gastrocoin will not work properly.</source>
-        <translation>Avvertenza: verificare che la data e l'ora del computer siano corrette! Se l'orologio è sbagliato, Gastrocoin non funzionerà correttamente.</translation>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong GastroCoin will not work properly.</source>
+        <translation>Avvertenza: verificare che la data e l'ora del computer siano corrette! Se l'orologio è sbagliato, GastroCoin non funzionerà correttamente.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -5432,10 +5385,6 @@ Portafoglio Gastrocoin.</translation>
         <translation>Errore durante la lettura dal database, arresto.</translation>
     </message>
     <message>
-        <source>Error writing zerocoinDB to disk</source>
-        <translation>Errore durante la scrittura di zerocoinDB sul disco</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
@@ -5500,8 +5449,8 @@ Portafoglio Gastrocoin.</translation>
         <translation>Informazioni</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. Gastrocoin is shutting down.</source>
-        <translation>Verifica dell'integrità dell'inizializzazione non riuscita. Gastrocoin si sta spegnendo.</translation>
+        <source>Initialization sanity check failed. GastroCoin is shutting down.</source>
+        <translation>Verifica dell'integrità dell'inizializzazione non riuscita. GastroCoin si sta spegnendo.</translation>
     </message>
     <message>
         <source>Insufficient funds</source>
@@ -5536,14 +5485,6 @@ Portafoglio Gastrocoin.</translation>
         <translation>Ricalcolo della supply GTC...</translation>
     </message>
     <message>
-        <source>Reindexing zerocoin database...</source>
-        <translation>Reindicizzazione del database zerocoin...</translation>
-    </message>
-    <message>
-        <source>Reindexing zerocoin failed</source>
-        <translation>Errore nella reindicizzazione del database zerocoin</translation>
-    </message>
-    <message>
         <source>Selected coins value is less than payment target</source>
         <translation>Il valore delle coin selezionate è inferiore all'obiettivo di pagamento</translation>
     </message>
@@ -5552,8 +5493,8 @@ Portafoglio Gastrocoin.</translation>
         <translation>Questa è una build di test pre-release - utilizzare a proprio rischio - non utilizzare per staking o applicazioni commerciali!</translation>
     </message>
     <message>
-        <source>Disable all GTC specific functionality (Masternodes, Zerocoin, Budgeting) (0-1, default: %u)</source>
-        <translation>Disabilita tutte le funzionalità specifiche di GTC (Masternodes, Zerocoin, Budgeting) (0-1, default: %u)</translation>
+        <source>Disable all GTC specific functionality (Masternodes) (0-1, default: %u)</source>
+        <translation>Disabilita tutte le funzionalità specifiche di GTC (Masternodes) (0-1, default: %u)</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -checklevel found. Checklevel must be level 4.</source>
@@ -5628,14 +5569,6 @@ Portafoglio Gastrocoin.</translation>
         <translation>Analisi della spesa pubblica non riuscita</translation>
     </message>
     <message>
-        <source>Failed to select a zerocoin</source>
-        <translation>Impossibile selezionare uno zerocoin</translation>
-    </message>
-    <message>
-        <source>Failed to wipe zerocoinDB</source>
-        <translation>Impossibile cancellare zerocoinDB</translation>
-    </message>
-    <message>
         <source>Failed to write coin serial number into wallet</source>
         <translation>Impossibile scrivere il numero seriale della coin nel portafoglio</translation>
     </message>
@@ -5670,10 +5603,6 @@ Portafoglio Gastrocoin.</translation>
     <message>
         <source>Loading block index...</source>
         <translation>Caricamento indice dei blocchi...</translation>
-    </message>
-    <message>
-        <source>Loading budget cache...</source>
-        <translation>Caricamento cache budget...</translation>
     </message>
     <message>
         <source>Loading masternode cache...</source>
@@ -5824,8 +5753,8 @@ Portafoglio Gastrocoin.</translation>
         <translation>Importo positivo minimo (in GTC) consentito da GUI e RPC per la soglia di ripartizione della partecipazione (default: %s)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong Gastrocoin will not work properly.</source>
-        <translation>Verificare che la data e l'ora del computer siano corrette! Se l'orologio sincronizzato, Gastrocoin non funzionerà correttamente.</translation>
+        <source>Please check that your computer's date and time are correct! If your clock is wrong GastroCoin will not work properly.</source>
+        <translation>Verificare che la data e l'ora del computer siano corrette! Se l'orologio sincronizzato, GastroCoin non funzionerà correttamente.</translation>
     </message>
     <message>
         <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect/-noconnect)</source>
@@ -6082,10 +6011,6 @@ Portafoglio Gastrocoin.</translation>
         <translation>Sincronizzazione finita</translation>
     </message>
     <message>
-        <source>Synchronizing budgets...</source>
-        <translation>Sincronizzazione budgets...</translation>
-    </message>
-    <message>
         <source>Synchronizing masternode winners...</source>
         <translation>Sincronizzazione dei Masternode vincitori...</translation>
     </message>
@@ -6096,10 +6021,6 @@ Portafoglio Gastrocoin.</translation>
     <message>
         <source>Synchronizing sporks...</source>
         <translation>Sincronizzazione sporks...</translation>
-    </message>
-    <message>
-        <source>Syncing zGTC wallet...</source>
-        <translation>Sincronizzazione del portafoglio zGTC...</translation>
     </message>
     <message>
         <source>The threshold value cannot be less than %s</source>
@@ -6218,10 +6139,6 @@ Portafoglio Gastrocoin.</translation>
         <translation>Nome utente per connessioni JSON-RPC</translation>
     </message>
     <message>
-        <source>Value is below the smallest available denomination (= 1) of zGTC</source>
-        <translation>Il valore è inferiore alla denominazione più piccola disponibile (=1) di zGTC</translation>
-    </message>
-    <message>
         <source>Verifying blocks...</source>
         <translation>Verifica dei blocchi...</translation>
     </message>
@@ -6234,8 +6151,8 @@ Portafoglio Gastrocoin.</translation>
         <translation>Il portafoglio %s risiede al di fuori della directory di dati %s</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Gastrocoin to complete</source>
-        <translation>Il portafoglio doveva essere riscritto: riavviare Gastrocoin per completare</translation>
+        <source>Wallet needed to be rewritten: restart GastroCoin to complete</source>
+        <translation>Il portafoglio doveva essere riscritto: riavviare GastroCoin per completare</translation>
     </message>
     <message>
         <source>Wallet options:</source>
@@ -6262,10 +6179,6 @@ Portafoglio Gastrocoin.</translation>
         <translation>Avvertenza: argomento non supportato -debugnet ignorato, utilizzare -debug=net.</translation>
     </message>
     <message>
-        <source>You don't have enough Zerocoins in your wallet</source>
-        <translation>Non hai abbastanza Zerocoin nel tuo portafoglio</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex to change -txindex</source>
         <translation>È necessario ricostruire il database utilizzando -reindex per modificare -txindex</translation>
     </message>
@@ -6276,14 +6189,6 @@ Portafoglio Gastrocoin.</translation>
     <message>
         <source>ZeroMQ notification options:</source>
         <translation>Opzioni di notifica ZeroMQ:</translation>
-    </message>
-    <message>
-        <source>Zerocoin minting available only on regtest</source>
-        <translation>Coniatura di Zerocoin disponibile solo su regtest</translation>
-    </message>
-    <message>
-        <source>Zerocoin options:</source>
-        <translation>Opzioni Zerocoin:</translation>
     </message>
     <message>
         <source>on startup</source>

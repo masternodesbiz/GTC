@@ -699,8 +699,8 @@ Stake için kaldırın</translation>
         <translation>Filtrele</translation>
     </message>
     <message>
-        <source>Amount of GTC and zGTC staked.</source>
-        <translation>Stake edilmiş GTC ve zGTC miktarı</translation>
+        <source>Amount of GTC staked.</source>
+        <translation>Stake edilmiş GTC miktarı</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -848,16 +848,16 @@ Cüzdanınız senkronize olduktan ve harcanmamış bakiyeniz yeterli miktarda on
         <translation>versiyon</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About Gastrocoin</source>
-        <translation>Gastrocoin Hakkında </translation>
+        <source>About GastroCoin</source>
+        <translation>GastroCoin Hakkında </translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -907,16 +907,16 @@ Cüzdanınız senkronize olduktan ve harcanmamış bakiyeniz yeterli miktarda on
         <translation>Hoşgeldiniz</translation>
     </message>
     <message>
-        <source>Welcome to Gastrocoin.</source>
-        <translation>Gastrocoin'a hoşgeldiniz.</translation>
+        <source>Welcome to GastroCoin.</source>
+        <translation>GastroCoin'a hoşgeldiniz.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Gastrocoin will store its data.</source>
-        <translation>Program ilk başlatıldığında Gastrocoin'un verilerini nerede saklayacağını seçebilirsiniz.</translation>
+        <source>As this is the first time the program is launched, you can choose where GastroCoin will store its data.</source>
+        <translation>Program ilk başlatıldığında GastroCoin'un verilerini nerede saklayacağını seçebilirsiniz.</translation>
     </message>
     <message>
-        <source>Gastrocoin will download and store a copy of the GTC block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Gastrocoin, GTC blok zincirinin bir kopyasını indirecek ve depolayacaktır. Bu dizinde en az %1GB veri saklanacak ve zamanla büyüyecektir. Ayrıca cüzdanınız da bu dizinde saklanır.</translation>
+        <source>GastroCoin will download and store a copy of the GTC block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>GastroCoin, GTC blok zincirinin bir kopyasını indirecek ve depolayacaktır. Bu dizinde en az %1GB veri saklanacak ve zamanla büyüyecektir. Ayrıca cüzdanınız da bu dizinde saklanır.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -935,8 +935,8 @@ Cüzdanınız senkronize olduktan ve harcanmamış bakiyeniz yeterli miktarda on
         <translation>TAMAM</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1133,7 +1133,7 @@ and vote on the treasury system receiving a periodic reward.</source>
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the gastrocoin.conf file
+You will only have to paste the data in the gtc.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1141,7 +1141,7 @@ this controller wallet (select the Masternode in the list and press "start").
 panoya almak üzeresiniz.
 
 
-Bilgiyi uzak sunucunuzdaki gastrocoin.conf dosyasına yapıştırmanız ve
+Bilgiyi uzak sunucunuzdaki gtc.conf dosyasına yapıştırmanız ve
  başlatmanız gerekecektir, ondan sonra bu kontrol cüzdanını kullanan
 Masternodu başlatın (Listeden Masternodu seçip "başlat" tuşuna basın).
 </translation>
@@ -1381,36 +1381,8 @@ Emin misiniz?</translation>
         <translation>Map port using &amp;UPnP</translation>
     </message>
     <message>
-        <source>Enable automatic minting of GTC units to zGTC</source>
-        <translation>GTC birimlerinin zGTC'e otomatik basımını ektinleştir</translation>
-    </message>
-    <message>
-        <source>Enable zGTC Automint</source>
-        <translation>zGTC Otomatik basımı etkinleştir</translation>
-    </message>
-    <message>
-        <source>Enable automatic zGTC minting from specific addresses</source>
-        <translation>Belirli bir adresten otomatik zGTC minting yapılmasını etkinleştir</translation>
-    </message>
-    <message>
         <source>Enable Automint Addresses</source>
         <translation>Automint adreslerini etkinleştir</translation>
-    </message>
-    <message>
-        <source>Percentage of incoming GTC which get automatically converted to zGTC via Zerocoin Protocol (min: 10%)</source>
-        <translation>Zerocoin Protokolü üzerinden otomatik olarak zGTC'ye dönüştürülen gelen GTC yüzdesi (dakika: 10%)</translation>
-    </message>
-    <message>
-        <source>Percentage of autominted zGTC</source>
-        <translation>Otomatikleştirilmiş zGTC yüzdesi</translation>
-    </message>
-    <message>
-        <source>Wait with automatic conversion to Zerocoin until enough GTC for this denomination is available</source>
-        <translation>Bu bölen için yeterli GTC bulunana kadar Zerocoin'e otomatik dönüştürmede kalın</translation>
-    </message>
-    <message>
-        <source>Preferred Automint zGTC Denomination</source>
-        <translation>Tercih edilen Automint zGTC Nominal değeri</translation>
     </message>
     <message>
         <source>Stake split threshold:</source>
@@ -1564,8 +1536,8 @@ Emin misiniz?</translation>
 <context>
     <name>PIVXGUI</name>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -1592,8 +1564,8 @@ Emin misiniz?</translation>
         <translation>Uygulamayı sonlandır</translation>
     </message>
     <message>
-        <source>Gastrocoin client</source>
-        <translation>Gastrocoin istemci</translation>
+        <source>GastroCoin client</source>
+        <translation>GastroCoin istemci</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1660,7 +1632,7 @@ Adres: %4
     </message>
     <message>
         <source>Cannot start gtc: click-to-pay handler</source>
-        <translation>Gastrocoin başlatılamıyor: tıkla ve ödeme işleyicisi</translation>
+        <translation>GastroCoin başlatılamıyor: tıkla ve ödeme işleyicisi</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid GTC address or malformed URI parameters.</source>
@@ -1793,8 +1765,8 @@ Adres: %4
         <translation>Onarılamaz bir hata oluştu. GTC güvenli bir şekilde çalışamaz, kapanacaktır.</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
@@ -1813,8 +1785,8 @@ Adres: %4
         <translation>Masternode konfigürasyon dosyası okuma hatası: %1</translation>
     </message>
     <message>
-        <source>Gastrocoin didn't yet exit safely...</source>
-        <translation>Gastrocoin henüz güvenle kapanmadı..</translation>
+        <source>GastroCoin didn't yet exit safely...</source>
+        <translation>GastroCoin henüz güvenle kapanmadı..</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -2070,10 +2042,6 @@ Adres: %4
     <message>
         <source>Custom Backup Path:</source>
         <translation>Özel Yedekleme Yolu:</translation>
-    </message>
-    <message>
-        <source>Custom zGTC Backup Path:</source>
-        <translation>Özel zGTC Yedekleme Yolu:</translation>
     </message>
     <message>
         <source>Custom Backups Threshold:</source>
@@ -2953,22 +2921,19 @@ Verify that you have installed a predetermined text editor.</source>
                            GTC is a form of digital online money using blockchain technology
                            that can be easily transferred globally, instantly, and with near
                            zero fees.  GTC incorporates market leading security &amp;
-                           privacy and is also the first PoS (Proof of Stake) Cryptocurrency
-                           to implement ZeroCoin(zGTC) and Zerocoin staking.
+                           privacy.
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            GTC utilizes a Proof of Stake (PoS) consensus system algorithm,
                            allowing all owners of GTC to participate in earning block rewards
                            while securing the network with full node wallets, as well as to
-                           run Masternodes to create and vote on proposals.
+                           run Masternodes to earn additional income regulary.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
                            GTC blockchain teknolojisini kullanan bir dijital online para birimidir
                            global olarak anında ve sıfıra yakın ücretlerle transfer edilebilir
-                           GTC sektördeki en ileri güvenlik ve gizliliğe sahip olmakla birlikte
-                          Zerocoin (zGTC) ve Zerocoin staking özelliklerini
-                          uygulayan ilk PoS (Proof of Stake) Kriptoparadır.
+                           GTC sektördeki en ileri güvenlik ve gizliliğe sahip olmakla birlikte.
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            GTC bir  Proof of Stake (PoS) konsensüs algoritma sistemi kullanmaktadır,
 bu sayede GTC sahipleri blok ödülü kazanımına katılabilmektedir
@@ -3035,8 +3000,6 @@ bu sayede GTC sahipleri blok ödülü kazanımına katılabilmektedir
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            &lt;ul&gt;
-                           &lt;li&gt;A decentralized governance (Proposal Voting)&lt;/li&gt;
-                           &lt;li&gt;A decentralized budgeting system (Treasury)&lt;/li&gt;
                            &lt;li&gt;Validation of transactions within each block&lt;/li&gt;
                            &lt;li&gt;Act as an additional full node in the network&lt;/li&gt;
                            &lt;/ul&gt;
@@ -3076,8 +3039,6 @@ bu sayede GTC sahipleri blok ödülü kazanımına katılabilmektedir
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            &lt;ul&gt;
-                           &lt;li&gt;Merkeziyetsiz yönetim (Teklif Onaylama)&lt;/li&gt;
-                           &lt;li&gt;Merkeziyetsiz bütçe sistemi (Hazine)&lt;/li&gt;
                            &lt;li&gt;Her blogun içinde işlem onayı&lt;/li&gt;
                            &lt;li&gt;Ağda ek bir düğüm olarak görev yapmak&lt;/li&gt;
                            &lt;/ul&gt;
@@ -3181,8 +3142,8 @@ işletim maliyetleri sonrası pasif bir gelir sunar.
         <translation>Yedek klasörü açılamadı</translation>
     </message>
     <message>
-        <source>Unable to open gastrocoin.conf with default application</source>
-        <translation>gastrocoin.conf dosyası uygulama tarafından açılamadı</translation>
+        <source>Unable to open gtc.conf with default application</source>
+        <translation>gtc.conf dosyası uygulama tarafından açılamadı</translation>
     </message>
     <message>
         <source>In:</source>
@@ -3759,8 +3720,8 @@ Emin misiniz?
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Gastrocoin is shutting down...</source>
-        <translation>Gastrocoin kapanıyor ...</translation>
+        <source>GastroCoin is shutting down...</source>
+        <translation>GastroCoin kapanıyor ...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -3789,8 +3750,8 @@ Emin misiniz?
         <translation>Yükleniyor...</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
 </context>
 <context>
@@ -3858,7 +3819,7 @@ Emin misiniz?
         <translation>Stake etkin</translation>
     </message>
     <message>
-        <source>Staking not active</source>
+        <source>Staking inactive</source>
         <translation>Stake kapalı</translation>
     </message>
     <message>
@@ -4137,8 +4098,8 @@ Emin misiniz?
     </message>
     <message>
         <source>Welcome to
-Gastrocoin Wallet</source>
-        <translation>Gastrocoin Cüzdanı'na
+GastroCoin Wallet</source>
+        <translation>GastroCoin Cüzdanı'na
 Hoşgeldiniz</translation>
     </message>
     <message>
@@ -4189,12 +4150,8 @@ Hoşgeldiniz</translation>
         <translation>JSON-RPC bağlantılarını dinlemek için verilen adrese bağlanın. IPv6 için [host]: port gösterimini kullanın. Bu seçenek birden çok kez belirtilebilir (varsayılan: tüm arabirimlere bağlanır)</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. Gastrocoin is probably already running.</source>
-        <translation>Veri dizini %s üzerinde bir kilit elde edemiyor. Gastrocoin muhtemelen zaten çalışıyor.</translation>
-    </message>
-    <message>
-        <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
-        <translation>Otomatik sonuçlandırılmış bütçe oylama davranışını değiştirin. mode = auto: Yalnızca kesin bütçelendirilmiş bütçeyi, oluşturulan bütçemle eşleştirmek için oy verin. (dize, varsayılan: otomatik)</translation>
+        <source>Cannot obtain a lock on data directory %s. GastroCoin is probably already running.</source>
+        <translation>Veri dizini %s üzerinde bir kilit elde edemiyor. GastroCoin muhtemelen zaten çalışıyor.</translation>
     </message>
     <message>
         <source>Continuously rate-limit free transactions to &lt;n&gt;*1000 bytes per minute (default:%u)</source>
@@ -4207,10 +4164,6 @@ Hoşgeldiniz</translation>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
         <translation>Tüm cüzdan işlemlerini sil ve sadece -rescan on startup komutuyla ilgili kısmımları sadece kurtar</translation>
-    </message>
-    <message>
-        <source>Delete all zerocoin spends and mints that have been recorded to the blockchain database and reindex them (0-1, default: %u)</source>
-        <translation>Blockchain'e kaydedilmiş tüm zerocoin ve mintleri sil ve tekrar endeksle (0-1, varsayılan: %u)</translation>
     </message>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
@@ -4345,8 +4298,8 @@ Hoşgeldiniz</translation>
         <translation>Ağ versiyon dizisi toplam uzunluğu(%i) maksimum uzunluğu aşıyor(%i). Yorumların büyüklüğünü veya sayısını azaltın.</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. Gastrocoin is probably already running.</source>
-        <translation>Bu bilgisayarda %s 'e bağlanılamıyor. Gastrocoin muhtemelen zaten çalışıyor.</translation>
+        <source>Unable to bind to %s on this computer. GastroCoin is probably already running.</source>
+        <translation>Bu bilgisayarda %s 'e bağlanılamıyor. GastroCoin muhtemelen zaten çalışıyor.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
@@ -4361,8 +4314,8 @@ Hoşgeldiniz</translation>
         <translation>Uyarı: paytxfee değeri çok yüksek ayarlanmış! Bu para gönderirken ödeyeceğiniz transfer ücretidir.</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong Gastrocoin will not work properly.</source>
-        <translation>Uyarı: Bilgisayarınızın tarih ve saat ayarlarının doğruluğunu kontrol edin! Saatiniz yanlış ise Gastrocoin düzgün çalışmayacaktır. </translation>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong GastroCoin will not work properly.</source>
+        <translation>Uyarı: Bilgisayarınızın tarih ve saat ayarlarının doğruluğunu kontrol edin! Saatiniz yanlış ise GastroCoin düzgün çalışmayacaktır. </translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -4501,10 +4454,6 @@ Hoşgeldiniz</translation>
         <translation>Veritabanı okunurken hata oluştu, kapatılıyorç</translation>
     </message>
     <message>
-        <source>Error writing zerocoinDB to disk</source>
-        <translation>ZerocoinDB diske yazılırken hata oluştu</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
@@ -4569,8 +4518,8 @@ Hoşgeldiniz</translation>
         <translation>Bilgi</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. Gastrocoin is shutting down.</source>
-        <translation>Sağlama kontrolü başlatımı başarısız. Gastrocoin kapatılıyor.</translation>
+        <source>Initialization sanity check failed. GastroCoin is shutting down.</source>
+        <translation>Sağlama kontrolü başlatımı başarısız. GastroCoin kapatılıyor.</translation>
     </message>
     <message>
         <source>Insufficient funds</source>
@@ -4605,14 +4554,6 @@ Hoşgeldiniz</translation>
         <translation>GTC tedariği tekrar hesaplanıyor...</translation>
     </message>
     <message>
-        <source>Reindexing zerocoin database...</source>
-        <translation>Zerocoin veritabanı tekrar endeksleniyor...</translation>
-    </message>
-    <message>
-        <source>Reindexing zerocoin failed</source>
-        <translation>Zerocoin tekrar endekslemesi başarısız</translation>
-    </message>
-    <message>
         <source>Selected coins value is less than payment target</source>
         <translation>Seçili koinlerin değeri hedeflenen ödeme tutarından düşük</translation>
     </message>
@@ -4621,8 +4562,8 @@ Hoşgeldiniz</translation>
         <translation>Bu ön-sürümdeki bir test programıdır - riski kabullenerek kullanınız - staking ve ticaret uygulamalarında kullanmayın.</translation>
     </message>
     <message>
-        <source>Disable all GTC specific functionality (Masternodes, Zerocoin, Budgeting) (0-1, default: %u)</source>
-        <translation>GTC spesifik tüm fonksiyonaliteyi devre dışı bırak (Masternodes, Zerocoin, Budgeting) (0-1, varsayılan: %u)</translation>
+        <source>Disable all GTC specific functionality (Masternodes) (0-1, default: %u)</source>
+        <translation>GTC spesifik tüm fonksiyonaliteyi devre dışı bırak (Masternodes) (0-1, varsayılan: %u)</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -checklevel found. Checklevel must be level 4.</source>
@@ -4697,14 +4638,6 @@ Hoşgeldiniz</translation>
         <translation>Açık harcama çözümlemesi başarısız</translation>
     </message>
     <message>
-        <source>Failed to select a zerocoin</source>
-        <translation>Zerocoin seçimi başarısız</translation>
-    </message>
-    <message>
-        <source>Failed to wipe zerocoinDB</source>
-        <translation>ZerocoinDB silinmesi başarısız</translation>
-    </message>
-    <message>
         <source>Failed to write coin serial number into wallet</source>
         <translation>Cüzdana koin seri numarası yazımı başarısız</translation>
     </message>
@@ -4731,10 +4664,6 @@ Hoşgeldiniz</translation>
     <message>
         <source>Loading block index...</source>
         <translation>Blok endeksi yükleniyor...</translation>
-    </message>
-    <message>
-        <source>Loading budget cache...</source>
-        <translation>Bütçe ön belleği yükleniyor...</translation>
     </message>
     <message>
         <source>Loading masternode cache...</source>
@@ -4993,10 +4922,6 @@ Hoşgeldiniz</translation>
         <translation>Eşzamanlama tamamlandı</translation>
     </message>
     <message>
-        <source>Synchronizing budgets...</source>
-        <translation>Bütçe eşzamanlanıyor..</translation>
-    </message>
-    <message>
         <source>Synchronizing masternode winners...</source>
         <translation>Masternode kazananları eşzamanlanıyor..</translation>
     </message>
@@ -5007,10 +4932,6 @@ Hoşgeldiniz</translation>
     <message>
         <source>Synchronizing sporks...</source>
         <translation>Sporklar eşzamanlanıyor..</translation>
-    </message>
-    <message>
-        <source>Syncing zGTC wallet...</source>
-        <translation>zGTC cüzdanı eşzamanlanıyor..</translation>
     </message>
     <message>
         <source>This help message</source>
@@ -5105,10 +5026,6 @@ Hoşgeldiniz</translation>
         <translation>JSON-RPC bağlantısı için kullanıcı adı</translation>
     </message>
     <message>
-        <source>Value is below the smallest available denomination (= 1) of zGTC</source>
-        <translation>Aşağıdaki değer zGTC'in mümkün olan en küçük bölüm değeridir (=1)</translation>
-    </message>
-    <message>
         <source>Verifying blocks...</source>
         <translation>Bloklar doğrulanıyor...</translation>
     </message>
@@ -5121,8 +5038,8 @@ Hoşgeldiniz</translation>
         <translation>Cüzdan %s bilgi dizini %s dışında bulunuyor</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Gastrocoin to complete</source>
-        <translation>Cüzdanın tekrar yazılması gerekiyor: tamamlamak için Gastrocoin uygulamasını tekrar başlatın.</translation>
+        <source>Wallet needed to be rewritten: restart GastroCoin to complete</source>
+        <translation>Cüzdanın tekrar yazılması gerekiyor: tamamlamak için GastroCoin uygulamasını tekrar başlatın.</translation>
     </message>
     <message>
         <source>Wallet options:</source>
@@ -5149,10 +5066,6 @@ Hoşgeldiniz</translation>
         <translation>Hata: Desteklenmeyen argüman -debugnet yok sayıldı, -debug=net kullanın.</translation>
     </message>
     <message>
-        <source>You don't have enough Zerocoins in your wallet</source>
-        <translation>Cüzdanınızda yeterli miktarda Zerocoin bulunmuyor</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex to change -txindex</source>
         <translation>Tx endeksini değiştirmek için veritabanını -reindex kullanarak tekrar oluşturmanız gerekmektedir </translation>
     </message>
@@ -5163,10 +5076,6 @@ Hoşgeldiniz</translation>
     <message>
         <source>ZeroMQ notification options:</source>
         <translation>ZeroMQ bildirim seçenekleri:</translation>
-    </message>
-    <message>
-        <source>Zerocoin options:</source>
-        <translation>Zerocoin seçenekleri:</translation>
     </message>
     <message>
         <source>on startup</source>

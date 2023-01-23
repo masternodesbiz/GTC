@@ -703,8 +703,8 @@ for staking</source>
         <translation>过滤</translation>
     </message>
     <message>
-        <source>Amount of GTC and zGTC staked.</source>
-        <translation>已加注的GTC 和 zGTC 金额</translation>
+        <source>Amount of GTC staked.</source>
+        <translation>已加注的GTC 金额</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -852,16 +852,16 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>版本</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
         <translation>(%1-位)</translation>
     </message>
     <message>
-        <source>About Gastrocoin</source>
-        <translation>关于Gastrocoin</translation>
+        <source>About GastroCoin</source>
+        <translation>关于GastroCoin</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -915,16 +915,16 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>欢迎</translation>
     </message>
     <message>
-        <source>Welcome to Gastrocoin.</source>
-        <translation>欢迎使用 Gastrocoin</translation>
+        <source>Welcome to GastroCoin.</source>
+        <translation>欢迎使用 GastroCoin</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Gastrocoin will store its data.</source>
-        <translation>由于这是该程序第一次启动，您可以选择存储Gastrocoin 数据的位置。</translation>
+        <source>As this is the first time the program is launched, you can choose where GastroCoin will store its data.</source>
+        <translation>由于这是该程序第一次启动，您可以选择存储GastroCoin 数据的位置。</translation>
     </message>
     <message>
-        <source>Gastrocoin will download and store a copy of the GTC block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Gastrocoin将下载并存储GTC区块链副本。 至少 %1 GB的数据将存储在此目录中，并且会随着时间的推移而增长。 钱包也将存储在此目录中。</translation>
+        <source>GastroCoin will download and store a copy of the GTC block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>GastroCoin将下载并存储GTC区块链副本。 至少 %1 GB的数据将存储在此目录中，并且会随着时间的推移而增长。 钱包也将存储在此目录中。</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -943,8 +943,8 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>好的</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1246,7 +1246,7 @@ Please wait few more minutes (masternode collaterals require %1 confirmations).<
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the gastrocoin.conf file
+You will only have to paste the data in the gtc.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1254,7 +1254,7 @@ this controller wallet (select the Masternode in the list and press "start").
 到剪贴板的远程服务器上。
 
 
-您只需将数据粘贴到gastrocoin.conf文件中
+您只需将数据粘贴到gtc.conf文件中
 ，然后使用主节点启动它
 这个控制器钱包(在列表中选择主节点并按“开始”)。
 </translation>
@@ -1506,36 +1506,8 @@ Are you sure?</source>
         <translation>端口使用&amp;UPnP</translation>
     </message>
     <message>
-        <source>Enable automatic minting of GTC units to zGTC</source>
-        <translation>启动自动铸造GTC到zGTC</translation>
-    </message>
-    <message>
-        <source>Enable zGTC Automint</source>
-        <translation>启动自动铸造zGTC</translation>
-    </message>
-    <message>
-        <source>Enable automatic zGTC minting from specific addresses</source>
-        <translation>启用从特定地址自动生成zGTC</translation>
-    </message>
-    <message>
         <source>Enable Automint Addresses</source>
         <translation>启动自动铸造地址</translation>
-    </message>
-    <message>
-        <source>Percentage of incoming GTC which get automatically converted to zGTC via Zerocoin Protocol (min: 10%)</source>
-        <translation>通过零币协议自动转换为zGTC的传入GTC的百分比(最小:10%)</translation>
-    </message>
-    <message>
-        <source>Percentage of autominted zGTC</source>
-        <translation>自动铸造的zGTC百分比</translation>
-    </message>
-    <message>
-        <source>Wait with automatic conversion to Zerocoin until enough GTC for this denomination is available</source>
-        <translation>等待自动转换为零币，直到足够的GTC为这种面额可用</translation>
-    </message>
-    <message>
-        <source>Preferred Automint zGTC Denomination</source>
-        <translation>首选自动铸造zGTC面额</translation>
     </message>
     <message>
         <source>Stake split threshold:</source>
@@ -1689,8 +1661,8 @@ Are you sure?</source>
 <context>
     <name>PIVXGUI</name>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -1717,8 +1689,8 @@ Are you sure?</source>
         <translation>关闭应用</translation>
     </message>
     <message>
-        <source>Gastrocoin client</source>
-        <translation>Gastrocoin 客户端</translation>
+        <source>GastroCoin client</source>
+        <translation>GastroCoin 客户端</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1922,8 +1894,8 @@ Address: %4
         <translation>发生了一个致命的错误。GTC不能继续安全，将退出。</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
@@ -1942,8 +1914,8 @@ Address: %4
         <translation>读取主节点配置文件出错:%1</translation>
     </message>
     <message>
-        <source>Gastrocoin didn't yet exit safely...</source>
-        <translation>Gastrocoin心尚未安全退出……</translation>
+        <source>GastroCoin didn't yet exit safely...</source>
+        <translation>GastroCoin心尚未安全退出……</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -2243,10 +2215,6 @@ Address: %4
     <message>
         <source>Custom Backup Path:</source>
         <translation>自定义备份路径:</translation>
-    </message>
-    <message>
-        <source>Custom zGTC Backup Path:</source>
-        <translation>自定义zGTC备份路径:</translation>
     </message>
     <message>
         <source>Custom Backups Threshold:</source>
@@ -3254,27 +3222,25 @@ There was an error trying to save the address list to %1. Please try again.</sou
                            GTC is a form of digital online money using blockchain technology
                            that can be easily transferred globally, instantly, and with near
                            zero fees.  GTC incorporates market leading security &amp;
-                           privacy and is also the first PoS (Proof of Stake) Cryptocurrency
-                           to implement ZeroCoin(zGTC) and Zerocoin staking.
+                           privacy.
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            GTC utilizes a Proof of Stake (PoS) consensus system algorithm,
                            allowing all owners of GTC to participate in earning block rewards
                            while securing the network with full node wallets, as well as to
-                           run Masternodes to create and vote on proposals.
+                           run Masternodes to earn additional income regulary.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
 &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-GTC是一种使用区块链技术的数字在线货币
-全球范围内快捷交易，即时，基本为
-零的交易费用。GTC是市场上领先的安全和
-隐私加密货币，也是第一个PoS(股权证明)加密货币
-实现零币(zGTC)和零币加注。
+GTC is a form of digital online money using blockchain technology
+that can be easily transferred globally, instantly, and with near
+zero fees.  GTC incorporates market leading security &amp;
+privacy.
 &lt;/p&gt;&lt;p align="justify"&gt;
-GTC使用了一个股权证明(PoS)一致系统算法，
-允许所有GTC的所有者参与赚取区块奖励
-同时保护网络与完整的节点钱包，以及
-运行主节点创建和投票来进行提案。</translation>
+GTC utilizes a Proof of Stake (PoS) consensus system algorithm,
+allowing all owners of GTC to participate in earning block rewards
+while securing the network with full node wallets, as well as to
+run Masternodes to create and vote on proposals</translation>
     </message>
     <message>
         <source>2</source>
@@ -3346,8 +3312,6 @@ GTC使用了一个股权证明(PoS)一致系统算法，
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            &lt;ul&gt;
-                           &lt;li&gt;A decentralized governance (Proposal Voting)&lt;/li&gt;
-                           &lt;li&gt;A decentralized budgeting system (Treasury)&lt;/li&gt;
                            &lt;li&gt;Validation of transactions within each block&lt;/li&gt;
                            &lt;li&gt;Act as an additional full node in the network&lt;/li&gt;
                            &lt;/ul&gt;
@@ -3388,8 +3352,6 @@ GTC使用了一个股权证明(PoS)一致系统算法，
 &lt;/p&gt;&lt;p align="justify"&gt;
 
 &lt;ul&gt;
-&lt;li&gt;去中心化治理(提案投票)&lt;/li&gt;
-&lt;li&gt;去中心化预算系统(国库)&lt;/li&gt;
 &lt;li&gt;验证每个区块交易&lt;/li&gt;
 &lt;li&gt;充当网络中的另一个完整节点&lt;/li&gt;
 &lt;/ul&gt;
@@ -3533,8 +3495,8 @@ GTC使用了一个股权证明(PoS)一致系统算法，
         <translation>无法打开备份文件夹</translation>
     </message>
     <message>
-        <source>Unable to open gastrocoin.conf with default application</source>
-        <translation>无法使用默认应用程序打开gastrocoin.conf</translation>
+        <source>Unable to open gtc.conf with default application</source>
+        <translation>无法使用默认应用程序打开gtc.conf</translation>
     </message>
     <message>
         <source>In:</source>
@@ -4135,8 +4097,8 @@ Are you sure?
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Gastrocoin is shutting down...</source>
-        <translation>Gastrocoin 核心正在关闭...</translation>
+        <source>GastroCoin is shutting down...</source>
+        <translation>GastroCoin 核心正在关闭...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -4165,8 +4127,8 @@ Are you sure?
         <translation>正在下载…</translation>
     </message>
     <message>
-        <source>Gastrocoin</source>
-        <translation>Gastrocoin</translation>
+        <source>GastroCoin</source>
+        <translation>GastroCoin</translation>
     </message>
 </context>
 <context>
@@ -4234,7 +4196,7 @@ Are you sure?
         <translation>加注激活</translation>
     </message>
     <message>
-        <source>Staking not active</source>
+        <source>Staking inactive</source>
         <translation>加注没激活</translation>
     </message>
     <message>
@@ -4601,9 +4563,9 @@ backup will be created.
     </message>
     <message>
         <source>Welcome to
-Gastrocoin Wallet</source>
+GastroCoin Wallet</source>
         <translation>欢迎
-Gastrocoin心钱包</translation>
+GastroCoin心钱包</translation>
     </message>
     <message>
         <source>GTC is the world’s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</source>
@@ -4653,12 +4615,8 @@ Gastrocoin心钱包</translation>
         <translation>绑定到给定地址监听JSON-RPC连接。使用[主机]: IPv6的端口符号。可以多次指定此选项(默认:绑定到所有接口)</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. Gastrocoin is probably already running.</source>
-        <translation>无法获取数据目录%s锁。Gastrocoin心可能已经在运行了。</translation>
-    </message>
-    <message>
-        <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
-        <translation>改变自动完成的预算投票行为。模式=自动:只对与生成的预算完全匹配的最终预算进行投票。(字符串,默认:汽车)</translation>
+        <source>Cannot obtain a lock on data directory %s. GastroCoin is probably already running.</source>
+        <translation>无法获取数据目录%s锁。GastroCoin心可能已经在运行了。</translation>
     </message>
     <message>
         <source>Continuously rate-limit free transactions to &lt;n&gt;*1000 bytes per minute (default:%u)</source>
@@ -4671,10 +4629,6 @@ Gastrocoin心钱包</translation>
     <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
         <translation>删除所有钱包交易，只恢复那些部分的区块链-通过启动时进行重新扫描</translation>
-    </message>
-    <message>
-        <source>Delete all zerocoin spends and mints that have been recorded to the blockchain database and reindex them (0-1, default: %u)</source>
-        <translation>删除所有已记录到区块链数据库的零币花费和铸造，并重新索引它们(0-1，默认值:%u)</translation>
     </message>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
@@ -4813,8 +4767,8 @@ Gastrocoin心钱包</translation>
         <translation>网络版本字符串的总长度(%i)超过最大长度(%i)。减少任务的数量或大小。</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. Gastrocoin is probably already running.</source>
-        <translation>无法绑定到此计算机上的%s。Gastrocoin心可能已经在运行了。</translation>
+        <source>Unable to bind to %s on this computer. GastroCoin is probably already running.</source>
+        <translation>无法绑定到此计算机上的%s。GastroCoin心可能已经在运行了。</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
@@ -4829,8 +4783,8 @@ Gastrocoin心钱包</translation>
         <translation>警告:-支付tx费用设置的非常高!这是您发送交易时要支付的交易费。</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong Gastrocoin will not work properly.</source>
-        <translation>注意：请检查您的电脑的日期和时间是否正确！ 如果您的时间设置不正确，Gastrocoin将无法正常工作。</translation>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong GastroCoin will not work properly.</source>
+        <translation>注意：请检查您的电脑的日期和时间是否正确！ 如果您的时间设置不正确，GastroCoin将无法正常工作。</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -4969,10 +4923,6 @@ Gastrocoin心钱包</translation>
         <translation>数据库读取出错，正在关闭。</translation>
     </message>
     <message>
-        <source>Error writing zerocoinDB to disk</source>
-        <translation>零币编码写入磁盘出错</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>出错</translation>
     </message>
@@ -5037,8 +4987,8 @@ Gastrocoin心钱包</translation>
         <translation>信息</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. Gastrocoin is shutting down.</source>
-        <translation>初始化完整性检查失败。Gastrocoin心快要关闭了。</translation>
+        <source>Initialization sanity check failed. GastroCoin is shutting down.</source>
+        <translation>初始化完整性检查失败。GastroCoin心快要关闭了。</translation>
     </message>
     <message>
         <source>Insufficient funds</source>
@@ -5073,14 +5023,6 @@ Gastrocoin心钱包</translation>
         <translation>重新计算GTC供应量……</translation>
     </message>
     <message>
-        <source>Reindexing zerocoin database...</source>
-        <translation>重新索引零币数据库。</translation>
-    </message>
-    <message>
-        <source>Reindexing zerocoin failed</source>
-        <translation>重建索引零币失败</translation>
-    </message>
-    <message>
         <source>Selected coins value is less than payment target</source>
         <translation>所选择币价值低于支付目标金额</translation>
     </message>
@@ -5089,8 +5031,8 @@ Gastrocoin心钱包</translation>
         <translation>这是一个预发行测试版本 - 您自己承担风险 - 不要用于商业应用！</translation>
     </message>
     <message>
-        <source>Disable all GTC specific functionality (Masternodes, Zerocoin, Budgeting) (0-1, default: %u)</source>
-        <translation>禁用所有GTC特定功能(主节点, 零币, budget)(0-1，默认值:%u)</translation>
+        <source>Disable all GTC specific functionality (Masternodes) (0-1, default: %u)</source>
+        <translation>禁用所有GTC特定功能(主节点)(0-1，默认值:%u)</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -checklevel found. Checklevel must be level 4.</source>
@@ -5165,14 +5107,6 @@ Gastrocoin心钱包</translation>
         <translation>解析公共花费失败</translation>
     </message>
     <message>
-        <source>Failed to select a zerocoin</source>
-        <translation>选择零币失败</translation>
-    </message>
-    <message>
-        <source>Failed to wipe zerocoinDB</source>
-        <translation>擦写零币DB失败</translation>
-    </message>
-    <message>
         <source>Failed to write coin serial number into wallet</source>
         <translation>硬币序列号写入钱包失败</translation>
     </message>
@@ -5207,10 +5141,6 @@ Gastrocoin心钱包</translation>
     <message>
         <source>Loading block index...</source>
         <translation>正在下载区块索引...</translation>
-    </message>
-    <message>
-        <source>Loading budget cache...</source>
-        <translation>正在下载加载预算…</translation>
     </message>
     <message>
         <source>Loading masternode cache...</source>
@@ -5325,8 +5255,8 @@ Gastrocoin心钱包</translation>
         <translation>准备重新同步……</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong Gastrocoin will not work properly.</source>
-        <translation>请检查您的电脑的日期和时间是否正确!如果你的时间错误，Gastrocoin将无法正常工作。</translation>
+        <source>Please check that your computer's date and time are correct! If your clock is wrong GastroCoin will not work properly.</source>
+        <translation>请检查您的电脑的日期和时间是否正确!如果你的时间错误，GastroCoin将无法正常工作。</translation>
     </message>
     <message>
         <source>Specify location of debug log file: this can be an absolute path or a path relative to the data directory (default: %s)</source>
@@ -5493,10 +5423,6 @@ Gastrocoin心钱包</translation>
         <translation>同步已完成</translation>
     </message>
     <message>
-        <source>Synchronizing budgets...</source>
-        <translation>正在同步预算...</translation>
-    </message>
-    <message>
         <source>Synchronizing masternode winners...</source>
         <translation>正在同步主节点赢家...</translation>
     </message>
@@ -5507,10 +5433,6 @@ Gastrocoin心钱包</translation>
     <message>
         <source>Synchronizing sporks...</source>
         <translation>正在同步分叉...</translation>
-    </message>
-    <message>
-        <source>Syncing zGTC wallet...</source>
-        <translation>正在同步zGTC钱包……</translation>
     </message>
     <message>
         <source>This help message</source>
@@ -5613,10 +5535,6 @@ Gastrocoin心钱包</translation>
         <translation>JSON-RPC连接的用户名</translation>
     </message>
     <message>
-        <source>Value is below the smallest available denomination (= 1) of zGTC</source>
-        <translation>值小于zGTC的最小可用面额(= 1)</translation>
-    </message>
-    <message>
         <source>Verifying blocks...</source>
         <translation>正在验证区块……</translation>
     </message>
@@ -5629,8 +5547,8 @@ Gastrocoin心钱包</translation>
         <translation>钱包%s驻留在数据目录%s之外</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Gastrocoin to complete</source>
-        <translation>钱包需要重写:重新启动Gastrocoin心完成</translation>
+        <source>Wallet needed to be rewritten: restart GastroCoin to complete</source>
+        <translation>钱包需要重写:重新启动GastroCoin心完成</translation>
     </message>
     <message>
         <source>Wallet options:</source>
@@ -5657,10 +5575,6 @@ Gastrocoin心钱包</translation>
         <translation>警告:不支持的参数-debugnet被忽略，使用-debug=net。</translation>
     </message>
     <message>
-        <source>You don't have enough Zerocoins in your wallet</source>
-        <translation>你的钱包里没有足够的零币</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex to change -txindex</source>
         <translation>您需要使用-reindex来更改-txindex来重新构建数据库</translation>
     </message>
@@ -5671,14 +5585,6 @@ Gastrocoin心钱包</translation>
     <message>
         <source>ZeroMQ notification options:</source>
         <translation>ZeroMQ通知选项:</translation>
-    </message>
-    <message>
-        <source>Zerocoin minting available only on regtest</source>
-        <translation>零币铸造只能在regtest可用</translation>
-    </message>
-    <message>
-        <source>Zerocoin options:</source>
-        <translation>零币选项：</translation>
     </message>
     <message>
         <source>on startup</source>

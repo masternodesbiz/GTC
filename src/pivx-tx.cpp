@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2015-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2021-2023 The GastroCoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -47,7 +47,7 @@ static bool AppInitRawTx(int argc, char* argv[])
 
     if (argc < 2 || mapArgs.count("-?") || mapArgs.count("-help")) {
         // First part of help message is specific to this utility
-        std::string strUsage = _("Gastrocoin gtc-tx utility version") + " " + FormatFullVersion() + "\n\n" +
+        std::string strUsage = _("GastroCoin gtc-tx utility version") + " " + FormatFullVersion() + "\n\n" +
                                _("Usage:") + "\n" +
                                "  gtc-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded gtc transaction") + "\n" +
                                "  gtc-tx [options] -create [commands]   " + _("Create hex-encoded gtc transaction") + "\n" +

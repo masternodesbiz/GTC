@@ -16,8 +16,8 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Gastrocoin"
-            VALUE "FileDescription",    "gtc-tx (CLI Gastrocoin transaction editor utility)"
+            VALUE "CompanyName",        "GastroCoin"
+            VALUE "FileDescription",    "gtc-tx (CLI GastroCoin transaction editor utility)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "gtc-tx"
             VALUE "LegalCopyright",     COPYRIGHT_STR

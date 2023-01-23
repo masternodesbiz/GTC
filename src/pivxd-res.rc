@@ -16,8 +16,8 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Gastrocoin"
-            VALUE "FileDescription",    "gtcd (OSS daemon/client for Gastrocoin)"
+            VALUE "CompanyName",        "GastroCoin"
+            VALUE "FileDescription",    "gtcd (OSS daemon/client for GastroCoin)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "gtcd"
             VALUE "LegalCopyright",     COPYRIGHT_STR

@@ -19,14 +19,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Gastrocoin"
-            VALUE "FileDescription",    "Gastrocoin Core (OSS GUI client for Gastrocoin)"
+            VALUE "CompanyName",        "GastroCoin"
+            VALUE "FileDescription",    "GastroCoin Core (OSS GUI client for GastroCoin)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "gtc-qt"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
             VALUE "OriginalFilename",   "gtc-qt.exe"
-            VALUE "ProductName",        "Gastrocoin Core"
+            VALUE "ProductName",        "GastroCoin Core"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

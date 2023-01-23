@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2015 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2021-2023 The GastroCoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -79,6 +79,7 @@ static const uint64_t RANDOMIZER_ID_LOCALHOSTNONCE = 0xd93e69e2bbfa5735ULL; // S
 //
 bool fDiscover = true;
 bool fListen = true;
+CService sHostIp;
 RecursiveMutex cs_mapLocalHost;
 std::map<CNetAddr, LocalServiceInfo> mapLocalHost;
 static bool vfLimited[NET_MAX] = {};
@@ -413,10 +414,11 @@ CNode* CConnman::ConnectNode(CAddress addrConnect, const char* pszDest, bool fCo
         pszDest ? 0.0 : (double)(GetAdjustedTime() - addrConnect.nTime) / 3600.0);
 
     // Connect
-    SOCKET hSocket = INVALID_SOCKET;;
+    SOCKET hSocket = INVALID_SOCKET;
+
     bool proxyConnectionFailed = false;
-    if (pszDest ? ConnectSocketByName(addrConnect, hSocket, pszDest, Params().GetDefaultPort(), nConnectTimeout, &proxyConnectionFailed) :
-                  ConnectSocket(addrConnect, hSocket, nConnectTimeout, &proxyConnectionFailed)) {
+    if (pszDest ? ConnectSocketByName(addrConnect, hSocket, pszDest, Params().GetDefaultPort(), nConnectTimeout, &proxyConnectionFailed, sHostIp) :
+                  ConnectSocket(addrConnect, hSocket, nConnectTimeout, &proxyConnectionFailed, sHostIp)) {
         if (!IsSelectableSocket(hSocket)) {
             LogPrintf("Cannot create connection: non-selectable socket created (fd >= FD_SETSIZE ?)\n");
             CloseSocket(hSocket);
@@ -726,7 +728,7 @@ void CNode::copyStats(CNodeStats& stats)
         nPingUsecWait = GetTimeMicros() - nPingUsecStart;
     }
 
-    // Raw ping time is in microseconds, but show it to user as whole seconds (Gastrocoin users should be well used to small numbers with many decimal places by now :)
+    // Raw ping time is in microseconds, but show it to user as whole seconds (GastroCoin users should be well used to small numbers with many decimal places by now :)
     stats.dPingTime = (((double)nPingUsecTime) / 1e6);
     stats.dPingWait = (((double)nPingUsecWait) / 1e6);
 
@@ -932,16 +934,16 @@ void CheckOffsetDisconnectedPeers(const CNetAddr& ip)
         setOffsetDisconnectedPeers.clear();
         // Trigger the warning
         std::string strWarn1 = _("Peers are being disconnected due time differences.");
-        std::string strWarn2 = _("Please check that your computer's date and time are correct! If your clock is wrong Gastrocoin will not work properly.");
+        std::string strWarn2 = _("Please check that your computer's date and time are correct! If your clock is wrong GastroCoin will not work properly.");
 
         LogPrintf("*** Warning: %s %s\n", strWarn1, strWarn2);
 
-        static int64_t nLastGUINotif = 0;
-        int64_t now = GetTime();
-        if (nLastGUINotif + 40 < now) { // Notify the GUI if needed.
-            nLastGUINotif = now;
-            uiInterface.ThreadSafeMessageBox(strprintf("%s\n\n%s", strWarn1, strWarn2), _("Warning"), CClientUIInterface::MSG_ERROR);
-        }
+        // static int64_t nLastGUINotif = 0;
+        // int64_t now = GetTime();
+        // if (nLastGUINotif + 40 < now) { // Notify the GUI if needed.
+        //     nLastGUINotif = now;
+        //     uiInterface.ThreadSafeMessageBox(strprintf("%s\n\n%s", strWarn1, strWarn2), _("Warning"), CClientUIInterface::MSG_ERROR);
+        // }
     }
 }
 
@@ -1066,6 +1068,33 @@ void CConnman::AcceptConnection(const ListenSocket& hListenSocket) {
     int nMaxInbound = nMaxConnections - (nMaxOutbound + nMaxFeeler);
     assert(nMaxInbound > 0);
 
+    // close lagging nodes' connection
+    {
+        LOCK(cs_vNodes);
+        for (CNode* pnode : vNodes) {
+            int64_t nPingUsecWait = 0;
+            if ((pnode->nPingNonceSent != 0) && (pnode->nPingUsecStart != 0)) {
+                nPingUsecWait = GetTimeMicros() - pnode->nPingUsecStart;
+            }
+            if (pnode->nPingUsecTime > 5 * 1e6 || nPingUsecWait > 5 * 1e6) {
+                pnode->fDisconnect = true;
+                pnode->CloseSocketDisconnect();
+            }
+        }
+    }
+
+    // close obsolete nodes' connection
+    {
+        LOCK(cs_vNodes);
+        for (CNode* pnode : vNodes) {
+            if (pnode->nVersion > 0 && pnode->nVersion < ActiveProtocol()) {
+                pnode->fDisconnect = true;
+                pnode->CloseSocketDisconnect();
+            }
+        }
+    }
+
+
     if (hSocket != INVALID_SOCKET)
         if (!addr.SetSockAddr((const struct sockaddr*)&sockaddr))
             LogPrintf("Warning: Unknown socket family\n");
@@ -1074,7 +1103,7 @@ void CConnman::AcceptConnection(const ListenSocket& hListenSocket) {
     {
         LOCK(cs_vNodes);
         for (CNode* pnode : vNodes)
-            if (pnode->fInbound)
+            if (pnode->fInbound && !pnode->fDisconnect)
                 nInbound++;
     }
 
@@ -1097,9 +1126,17 @@ void CConnman::AcceptConnection(const ListenSocket& hListenSocket) {
         return;
     }
 
-    if (nInbound >= nMaxConnections - MAX_OUTBOUND_CONNECTIONS) {
+    CNode* dupnode = FindNode((CNetAddr)addr);
+    if (dupnode && !whitelisted) {
+        // drop nodes already connected
+        LogPrint(BCLog::NET, "dropped, %s already connected\n",addr.ToStringIP());
+        CloseSocket(hSocket);
+        return;
+    }
+
+    if (nInbound >= nMaxConnections - nMaxOutbound) {
         // try to evict 10% of the inbound connections
-        int n = std::max(1, (nMaxConnections - MAX_OUTBOUND_CONNECTIONS) / 10);
+        int n = std::max(1, (nMaxConnections - nMaxOutbound) / 10);
         int evicted = 0;
         for(int i = 0; i < n; i++) {
             if (!AttemptToEvictConnection(whitelisted) && evicted == 0) {
@@ -1139,6 +1176,21 @@ void CConnman::ThreadSocketHandler()
         //
         {
             LOCK(cs_vNodes);
+
+            // close lagging nodes' connection
+            {
+                LOCK(cs_vNodes);
+                for (CNode* pnode : vNodes) {
+                    int64_t nPingUsecWait = 0;
+                    if ((pnode->nPingNonceSent != 0) && (pnode->nPingUsecStart != 0)) {
+                        nPingUsecWait = GetTimeMicros() - pnode->nPingUsecStart;
+                    }
+                    if (pnode->nPingUsecTime > 5 * 1e6 || nPingUsecWait > 5 * 1e6) {
+                        pnode->fDisconnect = true;
+                    }
+                }
+            }
+
             // Disconnect unused nodes
             std::vector<CNode*> vNodesCopy = vNodes;
             for (CNode* pnode : vNodesCopy) {
@@ -1452,7 +1504,7 @@ void ThreadMapPort()
             }
         }
 
-        std::string strDesc = "Gastrocoin " + FormatFullVersion();
+        std::string strDesc = "GastroCoin " + FormatFullVersion();
 
         try {
             while (true) {
@@ -2015,7 +2067,7 @@ bool CConnman::BindListenPort(const CService& addrBind, std::string& strError, b
     if (::bind(hListenSocket, (struct sockaddr*)&sockaddr, len) == SOCKET_ERROR) {
         int nErr = WSAGetLastError();
         if (nErr == WSAEADDRINUSE)
-            strError = strprintf(_("Unable to bind to %s on this computer. Gastrocoin is probably already running."), addrBind.ToString());
+            strError = strprintf(_("Unable to bind to %s on this computer. GastroCoin is probably already running."), addrBind.ToString());
         else
             strError = strprintf(_("Unable to bind to %s on this computer (bind returned error %s)"), addrBind.ToString(), NetworkErrorString(nErr));
         LogPrintf("%s\n", strError);

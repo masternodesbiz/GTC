@@ -1,6 +1,6 @@
 // Copyright (c) 2014 The Bitcoin developers
 // Copyright (c) 2019-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2021-2023 The GastroCoin Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -86,5 +86,6 @@ void AddTimeData(const CNetAddr& ip, int64_t nTime, int nOffsetLimit);
 // Time Protocol V2
 int64_t GetTimeSlot(const int64_t nTime);
 int64_t GetCurrentTimeSlot();
+int64_t GetNextTimeSlot();
 
 #endif // BITCOIN_TIMEDATA_H

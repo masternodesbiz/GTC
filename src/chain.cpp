@@ -1,11 +1,13 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2016-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Gastrocoin Developers
+// Copyright (c) 2021-2023 The GastroCoin Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "chain.h"
+#include "masternode.h"
+#include "masternodeman.h"
 #include "legacy/stakemodifier.h"  // for ComputeNextStakeModifier
 
 
@@ -14,6 +16,8 @@
  */
 void CChain::SetTip(CBlockIndex* pindex)
 {
+    LOCK(cs);
+
     if (pindex == NULL) {
         vChain.clear();
         return;
@@ -240,6 +244,32 @@ uint256 CBlockIndex::GetStakeModifierV2() const
     return nStakeModifier;
 }
 
+bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex);
+
+CScript* CBlockIndex::GetPaidPayee()
+{
+    if(paidPayee == nullptr || paidPayee->empty()) {
+        CBlock block;
+        if (nHeight <= chainActive.Height() && ReadBlockFromDisk(block, this)) {
+            const auto& tx = block.vtx[block.IsProofOfWork() ? 0 : 1];
+            auto amount = CMasternode::GetMasternodePayment(nHeight);
+
+            for (const CTxOut& out : tx.vout) {
+                if (out.nValue == amount
+                ) {
+                    paidPayee = new CScript(out.scriptPubKey);
+                    auto pmn = mnodeman.Find(out.scriptPubKey);
+                    if(pmn) {
+                        pmn->lastPaid = GetBlockTime();
+                    }
+				}	
+            }
+        }
+    }
+
+    return paidPayee;
+}
+
 //! Check whether this block index entry is valid up to the passed validity level.
 bool CBlockIndex::IsValid(enum BlockStatus nUpTo) const
 {
@@ -263,8 +293,5 @@ bool CBlockIndex::RaiseValidity(enum BlockStatus nUpTo)
     return false;
 }
 
-/*
- * CBlockIndex - Legacy Zerocoin
- */
 
 
