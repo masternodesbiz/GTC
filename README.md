@@ -8,7 +8,7 @@ Gastrocoin Standard wallet repository
 - PoW Blocks: 1 - 200
 - PoS Blocks: Starting from 201
 - Block Time: 60 Seconds
-- Maturity: 101 Confirmations
+- Maturity: 100 Confirmations
 - Prefix: GTC adresses start with the capital letter "G"
 - Ports: 8887 (p2p) / 8888 (rpc)
 
