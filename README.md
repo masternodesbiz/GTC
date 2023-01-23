@@ -12,9 +12,9 @@ Gastrocoin Standard wallet repository
 - Prefix: GTC adresses start with the capital letter "G"
 - Ports: 8887 (p2p) / 8888 (rpc)
 
-- Explorer https://explorer.gastrocoin.net/
+- Explorer https://explorer.gastrocoin.net
 
-- Website [https://gastrocoin.net/)
+- Website https://gastrocoin.net
 
 ### Rewards Breakdown
 |Block  |Collateral|Block Reward|MN Reward %|Staking Reward %|MN Reward|Staker Reward|
