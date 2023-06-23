@@ -8,13 +8,13 @@ Gastrocoin Standard wallet repository
 - PoW Blocks: 1 - 200
 - PoS Blocks: Starting from 201
 - Block Time: 60 Seconds
-- Maturity: 100 Confirmations
+- Maturity: 101 Confirmations
 - Prefix: GTC adresses start with the capital letter "G"
 - Ports: 8887 (p2p) / 8888 (rpc)
 
-- Explorer https://explorer.gastrocoin.net
+- Explorer https://explorer.gastrocoin.net/
 
-- Website https://gastrocoin.net
+- Website [https://gastrocoin.net/)
 
 ### Rewards Breakdown
 |Block  |Collateral|Block Reward|MN Reward %|Staking Reward %|MN Reward|Staker Reward|
@@ -34,7 +34,7 @@ Gastrocoin Standard wallet repository
 |600001 |75000     |80.00       |65         |35              |52.00    |28.00        |
 |900001 |80000     |85.00       |65         |35              |55.25    |29.75        |
 |1200001|85000     |90.00       |65         |35              |58.50    |31.50        |
-|1500001|90000     |90.00       |65         |35              |58.50    |31.50        |
+|1500001|900000    |90.00       |65         |35              |58.50    |31.50        |
 |1900001|100000    |95.00       |65         |35              |61.75    |33.25        |
 |2300001|150000    |96.00       |65         |35              |62.40    |33.60        |
 |2500001|200000    |97.00       |65         |35              |63.05    |33.95        |

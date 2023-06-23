@@ -298,6 +298,7 @@ static const CRPCCommand vRPCCommands[] =
         {"network", "setban", &setban, true },
         {"network", "listbanned", &listbanned, true },
         {"network", "clearbanned", &clearbanned, true },
+		{"network", "checkconnection", &checkconnection, true },
 
         /* Block chain and UTXO */
         {"blockchain", "getblockindexstats", &getblockindexstats, true },
@@ -318,6 +319,7 @@ static const CRPCCommand vRPCCommands[] =
         {"blockchain", "reconsiderblock", &reconsiderblock, true },
         {"blockchain", "verifychain", &verifychain, true },
         {"blockchain", "getburnaddresses", &getburnaddresses, true },
+		{"blockchain", "rewindblockindex", &rewindblockindex, true },
 
         /* Mining */
         {"mining", "getblocktemplate", &getblocktemplate, true },
@@ -367,14 +369,17 @@ static const CRPCCommand vRPCCommands[] =
         {"gtc", "relaymasternodebroadcast", &relaymasternodebroadcast, true },
         {"gtc", "masternodecurrent", &masternodecurrent, true },
         {"gtc", "startmasternode", &startmasternode, true },
+        {"gtc", "reloadmasternodeconfig", &reloadmasternodeconfig, true },
         {"gtc", "createmasternodekey", &createmasternodekey, true },
         {"gtc", "getmasternodeoutputs", &getmasternodeoutputs, true },
         {"gtc", "listmasternodeconf", &listmasternodeconf, true },
+		{"gtc", "lgetactivemasternodecount", &getactivemasternodecount, true },
         {"gtc", "getmasternodestatus", &getmasternodestatus, true },
         {"gtc", "getmasternodewinners", &getmasternodewinners, true },
         {"gtc", "getmasternodescores", &getmasternodescores, true },
         {"gtc", "mnsync", &mnsync, true },
         {"gtc", "spork", &spork, true },
+        {"gtc", "mnping", &mnping, true },
 
 #ifdef ENABLE_WALLET
         /* Wallet */
