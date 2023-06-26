@@ -125,11 +125,12 @@ UniValue listmasternodes(const JSONRPCRequest& request)
         obj.push_back(Pair("pubkey", HexStr(mn.pubKeyMasternode)));
         obj.push_back(Pair("status", strStatus));
         obj.push_back(Pair("addr", EncodeDestination(mn.pubKeyCollateralAddress.GetID())));
-        obj.push_back(Pair("ip", mn.addr.ToString()));
         obj.push_back(Pair("version", mn.protocolVersion));
         obj.push_back(Pair("lastseen", (int64_t)mn.lastPing.sigTime));
         obj.push_back(Pair("activetime", (int64_t)(mn.lastPing.sigTime - mn.sigTime)));
         obj.push_back(Pair("lastpaid", (int64_t)mn.GetLastPaid(chainActive.Tip())));
+        obj.push_back(Pair("lastpaidblock", (int64_t)mn.GetLastPaidBlock()));
+		obj.push_back(Pair("netaddr", mn.addr.ToString()));
 
         ret.push_back(obj);
     }
